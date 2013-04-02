@@ -2,43 +2,103 @@
 title: Magento 2 Developer Documentation 
 ---
 
-# Magento 2 Developer Documentation
+Extensibility Overview
+======================
 
-This page contains the documentation of Magento 2 platform for developers. Content below is dummy content
 
 
-## Welcome to the Magento 2 repository!
- 
-### WHAT IS MAGENTO
+What's New
+----------
 
-[Magento](http://www.magentocommerce.com/) is an open source, enterprise-class eCommerce platform with 100,000+ merchants using it worldwide. More than a 1,000 Magento stores come online every day! These merchants depend heavily on the ecosystem of third-party developers, such as you, to build Magento implementations, customizations, and extensions. The successful developers in Magento’s vibrant ecosystem have a strong knowledge of the Magento platform as well as eCommerce. Check out [Magento](http://www.magentocommerce.com/) to learn more about the platform. 
+Here are the improvements we've made, or propose making.
 
-### WHAT IS MAGENTO 2
+-   Simplified workflow
 
-Magento 2 is an open source eCommerce R&D project facilitating the improvement of Magento Core products. With the new and improved features in Magento 2, developers will be able to offer more functionality to merchants and continue to grow with the platform. 
+-   Presentation, business logic, and data are distinctly separate
 
-### WHY CONTRIBUTE
+### What's New in the Presentation Layer
 
-By contributing to the Magento 2 open source project, you will:
+It's easier to use, and cleanly separated from business logic.
 
-* define the future of what the new and improved platform looks like
-* boost your existing skills and build new ones in the rapidly evolving eCommerce space
-* be ready with strong knowledge of the platform when it comes out
-* differentiate yourself as a developer  with deep platform expertise 
+-   Visual components can be edited by merchants using the Visual Design Editor
 
-### GET STARTED
+-   Templates now use Twig as a template engine
 
-We welcome your contributions and your feedback to this project is very valuable to us. We're rejoiced to have you join the Magento ecosystem and look forward to you contributions!
+-   Controller routing is simplified
 
-### WIKI PAGES
+-   Templates now access only public methods
 
-* [Contributor License Agreement](https://github.com/magento/magento2/wiki/Contributor-License-Agreement)
-* [Contribution Guide](https://github.com/magento/magento2/wiki/Contribution-Guide)
- 
-### USEFUL LINKS
- 
-* [Magento 2 Project](https://wiki.magento.com/display/MAGE2PROJECT/Magento+Project+Documentation)
-* [Magento 2 Product Documentation](https://wiki.magento.com/display/MAGE2DOC/Magento+2+Product+Documentation)
-* [Developer's Guide](https://wiki.magento.com/display/MAGE2DOC/Developer%27s+Guide)
- 
-> Disclaimer: Magento 2 is currently at development stage. The information contained herein is subject to change without notice and is not warranted to be error-free. The software and documentation provided WITHOUT ANY WARRANTY and it is NOT intended for commercial applications and may be used at your own risk. 
+-   `layout.xml` no longer includes actions
+
+-   Data dependencies among blocks: eliminated
+
+-   Block metadata supports the use of tools such as visual editors
+
+-   "Data sources"
+
+-   "Twig templating"
+
+What's New in Services
+----------------------
+
+-   Services are new.
+
+-   There used to be several ways of getting data into a block or extension. In
+    this model, you get your extension's data from a service. A service formally
+    defines data types in a schema. [etc. + more bullets]
+
+
+
+Architecture
+------------
+
+![](<ExtArch.jpg>)
+
+
+
+Workflow: Creating Blocks and Extensions
+----------------------------------------
+
+You create a service to provide your extension's data, a template to configure
+its appearance,
+
+Creating the Service That Serves Data to Your Extension
+-------------------------------------------------------
+
+You can modify an existing service, such as the product service. You could use
+the data returned by the product service to populate, say, a product detail
+page.
+
+[Link to ref doc, github source, of
+https://wiki.corp.x.com/display/MDS/Product+Service+Schema+Definitions]
+
+Creating the Template for Your Extension
+----------------------------------------
+
+As with the service, you can start by modifying an existing template. Here's an
+example [____]
+
+Here are some things you should know about using Twig.
+
+Thing one
+
+Thing two
+
+Thing three
+
+For full information, see [Twig][1]
+
+[1]: <http://twig.sensiolabs.org/>
+
+Creating the Visual Component
+-----------------------------
+
+The visual component takes its appearance from the the template, its data from
+the service, and other configuration from config.xml. Here's an example of a
+config.xml file.
+
+Modifying Your Extension's Configuration 
+-----------------------------------------
+
+You use a config.xml file to set your extensions preferences for, for example,
+static and dynamic option lists.
