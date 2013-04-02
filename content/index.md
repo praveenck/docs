@@ -52,7 +52,7 @@ What's New in Services
 Architecture
 ------------
 
-![](<ExtArch.jpg>)
+![](images/ExtArch.jpg)
 
 
 
