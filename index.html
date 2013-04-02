@@ -30,50 +30,108 @@
 
     <div id="wrapper">
       <div class="content">
-    <h1 id="magento-2-developer-documentation">Magento 2 Developer Documentation</h1>
+    <h1 id="extensibility-overview">Extensibility Overview</h1>
 
-<p>This page contains the documentation of Magento 2 platform for developers. Content below is dummy content</p>
+<h2 id="whats-new">What’s New</h2>
 
-<h2 id="welcome-to-the-magento-2-repository">Welcome to the Magento 2 repository!</h2>
-
-<h3 id="what-is-magento">WHAT IS MAGENTO</h3>
-
-<p><a href="http://www.magentocommerce.com/">Magento</a> is an open source, enterprise-class eCommerce platform with 100,000+ merchants using it worldwide. More than a 1,000 Magento stores come online every day! These merchants depend heavily on the ecosystem of third-party developers, such as you, to build Magento implementations, customizations, and extensions. The successful developers in Magento’s vibrant ecosystem have a strong knowledge of the Magento platform as well as eCommerce. Check out <a href="http://www.magentocommerce.com/">Magento</a> to learn more about the platform. </p>
-
-<h3 id="what-is-magento-2">WHAT IS MAGENTO 2</h3>
-
-<p>Magento 2 is an open source eCommerce R&amp;D project facilitating the improvement of Magento Core products. With the new and improved features in Magento 2, developers will be able to offer more functionality to merchants and continue to grow with the platform. </p>
-
-<h3 id="why-contribute">WHY CONTRIBUTE</h3>
-
-<p>By contributing to the Magento 2 open source project, you will:</p>
+<p>Here are the improvements we’ve made, or propose making.</p>
 
 <ul>
-<li>define the future of what the new and improved platform looks like</li>
-  <li>boost your existing skills and build new ones in the rapidly evolving eCommerce space</li>
-  <li>be ready with strong knowledge of the platform when it comes out</li>
-  <li>differentiate yourself as a developer  with deep platform expertise </li>
+<li>
+    <p>Simplified workflow</p>
+  </li>
+  <li>
+    <p>Presentation, business logic, and data are distinctly separate</p>
+  </li>
 </ul>
-<h3 id="get-started">GET STARTED</h3>
+<h3 id="whats-new-in-the-presentation-layer">What’s New in the Presentation Layer</h3>
 
-<p>We welcome your contributions and your feedback to this project is very valuable to us. We’re rejoiced to have you join the Magento ecosystem and look forward to you contributions!</p>
-
-<h3 id="wiki-pages">WIKI PAGES</h3>
+<p>It’s easier to use, and cleanly separated from business logic.</p>
 
 <ul>
-<li><a href="https://github.com/magento/magento2/wiki/Contributor-License-Agreement">Contributor License Agreement</a></li>
-  <li><a href="https://github.com/magento/magento2/wiki/Contribution-Guide">Contribution Guide</a></li>
+<li>
+    <p>Visual components can be edited by merchants using the Visual Design Editor</p>
+  </li>
+  <li>
+    <p>Templates now use Twig as a template engine</p>
+  </li>
+  <li>
+    <p>Controller routing is simplified</p>
+  </li>
+  <li>
+    <p>Templates now access only public methods</p>
+  </li>
+  <li>
+    <p><code>layout.xml</code> no longer includes actions</p>
+  </li>
+  <li>
+    <p>Data dependencies among blocks: eliminated</p>
+  </li>
+  <li>
+    <p>Block metadata supports the use of tools such as visual editors</p>
+  </li>
+  <li>
+    <p>“Data sources”</p>
+  </li>
+  <li>
+    <p>“Twig templating”</p>
+  </li>
 </ul>
-<h3 id="useful-links">USEFUL LINKS</h3>
+<h2 id="whats-new-in-services">What’s New in Services</h2>
 
 <ul>
-<li><a href="https://wiki.magento.com/display/MAGE2PROJECT/Magento+Project+Documentation">Magento 2 Project</a></li>
-  <li><a href="https://wiki.magento.com/display/MAGE2DOC/Magento+2+Product+Documentation">Magento 2 Product Documentation</a></li>
-  <li><a href="https://wiki.magento.com/display/MAGE2DOC/Developer%27s+Guide">Developer’s Guide</a></li>
+<li>
+    <p>Services are new.</p>
+  </li>
+  <li>
+    <p>There used to be several ways of getting data into a block or extension. In
+this model, you get your extension’s data from a service. A service formally
+defines data types in a schema. [etc. + more bullets]</p>
+  </li>
 </ul>
-<blockquote>
-  <p>Disclaimer: Magento 2 is currently at development stage. The information contained herein is subject to change without notice and is not warranted to be error-free. The software and documentation provided WITHOUT ANY WARRANTY and it is NOT intended for commercial applications and may be used at your own risk.</p>
-</blockquote>
+<h2 id="architecture">Architecture</h2>
+
+<p><img src="ExtArch.jpg" alt=""></p>
+
+<h2 id="workflow-creating-blocks-and-extensions">Workflow: Creating Blocks and Extensions</h2>
+
+<p>You create a service to provide your extension’s data, a template to configure
+its appearance,</p>
+
+<h2 id="creating-the-service-that-serves-data-to-your-extension">Creating the Service That Serves Data to Your Extension</h2>
+
+<p>You can modify an existing service, such as the product service. You could use
+the data returned by the product service to populate, say, a product detail
+page.</p>
+
+<p>[Link to ref doc, github source, of
+https://wiki.corp.x.com/display/MDS/Product+Service+Schema+Definitions]</p>
+
+<h2 id="creating-the-template-for-your-extension">Creating the Template for Your Extension</h2>
+
+<p>As with the service, you can start by modifying an existing template. Here’s an
+example [<em>__</em>]</p>
+
+<p>Here are some things you should know about using Twig.</p>
+
+<p>Thing one</p>
+
+<p>Thing two</p>
+
+<p>Thing three</p>
+
+<p>For full information, see <a href="http://twig.sensiolabs.org/">Twig</a></p>
+
+<h2 id="creating-the-visual-component">Creating the Visual Component</h2>
+
+<p>The visual component takes its appearance from the the template, its data from
+the service, and other configuration from config.xml. Here’s an example of a
+config.xml file.</p>
+
+<h2 id="modifying-your-extensions-configuration">Modifying Your Extension’s Configuration</h2>
+
+<p>You use a config.xml file to set your extensions preferences for, for example,
+static and dynamic option lists.</p>
       </div>
 
     <div id="js-sidebar" class="sidebar-shell">
