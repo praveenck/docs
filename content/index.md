@@ -2,7 +2,7 @@
 title: Magento 2 Developer Documentation 
 ---
 
-Extensibility Overview
+Magento 2 Extension Model Proposal Overview
 ======================
 
 
