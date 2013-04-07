@@ -172,20 +172,20 @@ you are looking at clean, easy-to-read, and easy-to-debug code.
 
 -   [Twig Templates][3]
 
-[3]: </>
+[3]: </twig>
 
 -   [Service IDL][4]
 
-[4]: <../service-idl/>
+[4]: </service-idl/>
 
 -   [Service Implementation][5]
 
-[5]: <../service-impl/>
+[5]: </service-impl/>
 
 -   [Creating Web APIs][6]
 
-[6]: <../web-api/>
+[6]: </web-api/>
 
 -   [Extension Configuration][7]
 
-[7]: <../option-list/>
+[7]: </option-list/>
