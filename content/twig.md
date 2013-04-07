@@ -170,22 +170,3 @@ to your development efforts on Magento. Our aim is to make development fun for
 you again by separating front-end design from back-end work and ensuring that
 you are looking at clean, easy-to-read, and easy-to-debug code.
 
--   [Twig Templates][3]
-
-[3]: </twig>
-
--   [Service IDL][4]
-
-[4]: </service-idl/>
-
--   [Service Implementation][5]
-
-[5]: </service-impl/>
-
--   [Creating Web APIs][6]
-
-[6]: </web-api/>
-
--   [Extension Configuration][7]
-
-[7]: </option-list/>
