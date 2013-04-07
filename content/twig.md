@@ -73,7 +73,7 @@ PHTML
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-```<?php if ($this->canEmailToFriend()): ?>
+<?php if ($this->canEmailToFriend()): ?>
   <p class="email-friend">
     <a href="<?php echo 
       $this->helper('Mage_Catalog_Helper_Product')
@@ -81,7 +81,7 @@ PHTML
       <?php echo $this->__('Email to a Friend') ?>
     </a>
   </p>
-<?php endif; ?>```
+<?php endif; ?>
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -90,14 +90,14 @@ PHTML
 Twig
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-```
+
 {% if product.canEmailToFriend %}
   <p class="email-friend">
     <a href="{{ links.emailToFriend }}">
     {{ 'Email to a Friend'|translate }}
     </a>
   </p>
-{% endif %}```
+{% endif %}
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -172,20 +172,20 @@ you are looking at clean, easy-to-read, and easy-to-debug code.
 
 -   [Twig Templates][3]
 
-[3]: <twig/>
+[3]: </>
 
 -   [Service IDL][4]
 
-[4]: <service-idl/>
+[4]: <../service-idl/>
 
 -   [Service Implementation][5]
 
-[5]: <service-impl/>
+[5]: <../service-impl/>
 
 -   [Creating Web APIs][6]
 
-[6]: <web-api/>
+[6]: <../web-api/>
 
 -   [Extension Configuration][7]
 
-[7]: <option-list/>
+[7]: <../option-list/>
