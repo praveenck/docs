@@ -115,7 +115,7 @@ code.</p>
 <p>PHTML</p>
 
 <pre><code>
-```&lt;?php if ($this-&gt;canEmailToFriend()): ?&gt;
+&lt;?php if ($this-&gt;canEmailToFriend()): ?&gt;
   &lt;p class="email-friend"&gt;
     &lt;a href="&lt;?php echo 
       $this-&gt;helper('Mage_Catalog_Helper_Product')
@@ -123,20 +123,20 @@ code.</p>
       &lt;?php echo $this-&gt;__('Email to a Friend') ?&gt;
     &lt;/a&gt;
   &lt;/p&gt;
-&lt;?php endif; ?&gt;```
+&lt;?php endif; ?&gt;
 
 </code></pre>
 
 <p>Twig</p>
 
-<pre><code>```
+<pre><code>
 {% if product.canEmailToFriend %}
   &lt;p class="email-friend"&gt;
     &lt;a href="{{ links.emailToFriend }}"&gt;
     {{ 'Email to a Friend'|translate }}
     &lt;/a&gt;
   &lt;/p&gt;
-{% endif %}```
+{% endif %}
 
 </code></pre>
 
@@ -216,19 +216,19 @@ you again by separating front-end design from back-end work and ensuring that
 you are looking at clean, easy-to-read, and easy-to-debug code.</p>
 
 <ul>
-<li><a href="twig/">Twig Templates</a></li>
+<li><a href="../">Twig Templates</a></li>
 </ul>
 <ul>
-<li><a href="service-idl/">Service IDL</a></li>
+<li><a href="../service-idl/">Service IDL</a></li>
 </ul>
 <ul>
-<li><a href="service-impl/">Service Implementation</a></li>
+<li><a href="../service-impl/">Service Implementation</a></li>
 </ul>
 <ul>
-<li><a href="web-api/">Creating Web APIs</a></li>
+<li><a href="../web-api/">Creating Web APIs</a></li>
 </ul>
 <ul>
-<li><a href="option-list/">Extension Configuration</a></li>
+<li><a href="../option-list/">Extension Configuration</a></li>
 </ul>
 </div>
 
