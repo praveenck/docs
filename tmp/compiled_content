@@ -1496,7 +1496,7 @@ what follows.</p>
 <td style="border:1px solid black;"> Identifies the location of the XSD that defines the structure of output parameters and the root element of the data structure. </td>
 </tr>
 </table>
-<h3 id="service-calls">Service Calls</h3>
+<h2 id="service-calls">Service Calls</h2>
 
 <p>A service operation is implemented as a class method. The class maps to the
 service via the requirement that operations from a service be grouped into a
@@ -1831,7 +1831,8 @@ PHP Annotations
 
 
 
-### Service Calls
+Service Calls
+---
 
 A service operation is implemented as a class method. The class maps to the
 service via the requirement that operations from a service be grouped into a
@@ -2071,7 +2072,7 @@ what follows.</p>
 <td style="border:1px solid black;"> X </td>
 <td style="border:1px solid black;"> Identifies the location of the XSD that defines the structure of output parameters and the root element of the data structure. </td>
 </tr>
-</table><h3 id="service-calls">Service Calls</h3>
+</table><h2 id="service-calls">Service Calls</h2>
 
 <p>A service operation is implemented as a class method. The class maps to the
 service via the requirement that operations from a service be grouped into a

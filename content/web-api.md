@@ -1,26 +1,25 @@
 Creating Web APIs
 =================
 
-[[*steal and summarize from service IDL and service implementation summaries*]]
+Once you've created a service, you can expose its functionality over the web to
+REST and SOAP interfaces by making simple web API declarations in the form of
+annotations to a configuration file.
 
-    You can expose your service over the web to REST and SOAP interfaces by
-    making simple web API declarations in the form of annotations to a
-    configuration file.
+Note that in the current Alpha-1 release, this is a proposal only, and not yet
+implemented. Please leave comments on this proposal on https://getsatisfaction.com/magento-2-prerelease/topics
 
-Highlights
-----------
+To find out about creating a service, see [Service Implementation][1].
 
-[[*maybe the first point below is rather generic, and the second is already
-explicit in the introductory sentences above--for the second thing, possibly
-break up the info by reducing the intro sentences to a teaser with some
-generalizations about what a service is. For the first thing, maybe sharpen the
-statement with details--e.g., what type of auth n auth?  ]]*
+[1]: <http://praveenck.github.io/docs/service-impl/>
 
--   Authentication and Authorization functionality is handled by the API
-    framework, allowing for developers to focus on building business logic
+Some advantages of converting your service into a web API:
 
--   Your service's business logic can be available to both the Magento web
-    application and other native applications (iOS, Android, etc. apps)
+-   Authentication and authorization will be handled by the API framework,
+    allowing you to focus on building business logic
+
+-   Your service's business logic becomes available to the Magento web
+    application and also to other native applications (e.g., iOS and Android
+    apps).
 
 Web API Declaration
 -------------------
@@ -47,51 +46,29 @@ method to the PHP method (e.g., getCarriers).
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-[[*do we also use the declaration in webapi.xml for REST? does the declaration
-or where it's made differ for REST?]*
+To expose your service as a REST API, there is an additional step. Because REST
+doesn't pass all inputs in its payload, its payload does not reflect the
+description in the XSD. Some inputs are passed as part of the path and query
+parameters, and are thus missing from the payload. Deserializing the payload
+would not result in the expected input associative array.
 
-Since REST doesn't pass all inputs in its payload, its payload does not reflect
-the description in the XSD. Some inputs are passed as part of the path and query
-parameters. These inputs are then missing from the payload. Deserializing the
-payload would not result in the expected input associative array.
-
-To work around this problem, after deserialization, we insert those inputs into
-the input array. To map query-params and path-params, we use the parameter name
-(e.g., shipment-id, filter) for a matching key in the associative array. We use
-dotted notation to indicate levels in the array.
+To form the expected array, after deserialization, we insert the missing inputs
+into the array. We use the parameter name (e.g., shipment-id, filter) as a
+matching key to map to query-params and path-params in the array, and we use
+dotted notation to indicate levels in the array, as follows:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 level1.level2.sort
+
 ('level1' => array (
+
     'level2' => array(
+
         'sort' => ....
+
     )
+
 ))
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-How to Add a New Service
-------------------------
-
-1.  Put the business logic PHP code into a class that extends MageService.
-    [[*example*?]]
-
-2.  Annotate the new class with @Service and @Version (explained at [Service
-    IDL][1].
-
-[1]: <http://praveenck.github.io/docs/service-idl/>
-
-1.  For each method, make sure it takes a single param as an associative array
-    and returns another array
-
-2.  Create a new XSD file under the module /etc directory and describe the
-    structure of the arrays.
-
-3.  To expose the service through the Web API, add or edit the webapi.xml under
-    the module /etc directory and provide REST routing info.
-
-[[*these steps are very high level and would be way better with examples.
-without examples, the sequence is not clear enough to me that I can improve
-it]]*
-
