@@ -33,33 +33,77 @@ Be sure to edit your local hosts file to add an entry for this vm as shown below
 Login details
 --------
 
-The ip address of the VM is <b>192.168.56.101</b> and below logins will work via ssh.
+The ip address of the VM is <b>192.168.56.101</b> and below logins will work via ssh
 
 ### Linux User Accounts
 
-| Username | Password | Has Root Access | Login via GUI |
-|:--------|:-------|:--------|:--------|
-| mage | 123456 | via sudo | yes |
-| root | 123456 | yes | no |
+Following are the user accounts for linux login via GUI and ssh.
 
-
+<table>
+<table style="border:1px solid black;border-collapse:collapse;">
+<tr>
+<th style="border:1px solid black;"> Username </th>
+<th style="border:1px solid black;"> Password </th>
+<th style="border:1px solid black;"> Has Root Access </th>
+<th style="border:1px solid black;"> Login via GUI </th>
+</tr>
+<tr>
+<td style="border:1px solid black;"> mage </td>
+<td style="border:1px solid black;"> 123456 </td>
+<td style="border:1px solid black;"> via sudo </td>
+<td style="border:1px solid black;"> yes </td>
+</tr>
+<tr>
+<td style="border:1px solid black;"> root </td>
+<td style="border:1px solid black;"> 123456 </td>
+<td style="border:1px solid black;"> yes </td>
+<td style="border:1px solid black;"> no </td>
+</tr>
+</table>
 
 ### Mysql Accounts
 
-You can use mysql workbench to connect to the mysql server, just specify the ip address of the vm and one of the below accounts.
+You can use mysql workbench to connect to the mysql server, just specify the ip address of the vm and one of the below accounts
 
-| Username | Password | Remote Login | Database |
-|:--------|:-------|:--------:|:--------|
-| magento2 | magento2 | yes | magento2 |
-| root | 123456 | yes | All Dbs |
+<table>
+<table style="border:1px solid black;border-collapse:collapse;">
+<tr>
+<th style="border:1px solid black;"> Username </th>
+<th style="border:1px solid black;"> Password </th>
+<th style="border:1px solid black;"> Remote Login </th>
+<th style="border:1px solid black;"> Database </th>
+</tr>
+<tr>
+<td style="border:1px solid black;"> magento2 </td>
+<td style="border:1px solid black;"> magento2 </td>
+<td style="border:1px solid black;"> yes </td>
+<td style="border:1px solid black;"> magento2 </td>
+</tr>
+<tr>
+<td style="border:1px solid black;"> root </td>
+<td style="border:1px solid black;"> 123456 </td>
+<td style="border:1px solid black;"> yes </td>
+<td style="border:1px solid black;"> All Dbs </td>
+</tr>
+</table>
 
 
 
 ### Magento Admin Account
 
-| Username | Password |
-|:--------|:-------|
-| magento2 | magento2 |
+Following are the admin accounts for accessing Magento admin (backend)
+
+<table>
+<table style="border:1px solid black;border-collapse:collapse;">
+<tr>
+<th style="border:1px solid black;"> Username </th>
+<th style="border:1px solid black;"> Password </th>
+</tr>
+<tr>
+<td style="border:1px solid black;"> magento2 </td>
+<td style="border:1px solid black;"> magento2 </td>
+</tr>
+</table>
 
 Magento2 install
 --------
