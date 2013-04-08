@@ -254,7 +254,7 @@ static and dynamic option lists.</p>
     </script>
 </body>
 </html>
-;T:rawI"DMagento 2 Extension Model Proposal: Alpha 1
+;T:rawI"EMagento 2 Extension Model Proposal: Alpha 1
 ===========================================
 
 As part of the overall push in Magento 2 for better modularity, we're
@@ -263,7 +263,7 @@ repository. Â  A major theme of these changes is the separation of
 responsibilities, primarily between business logic on one side and presentation
 logic and user experience on the other.
 
-![](<images/archExtensibility.jpg>)
+![](</images/archExtensibility.jpg>)
 
 The diagram above attempts to describe the ideas behind these changes visually.
 Business logic is confined to the service layer and encapsulated in service
@@ -395,7 +395,7 @@ static and dynamic option lists.
 
 [3]: <http://praveenck.github.io/docs/option-list/>
 
-;T:preI"ˆ<h1 id="magento-2-extension-model-proposal-alpha-1">Magento 2 Extension Model Proposal: Alpha 1</h1>
+;T:preI"‰<h1 id="magento-2-extension-model-proposal-alpha-1">Magento 2 Extension Model Proposal: Alpha 1</h1>
 
 <p>As part of the overall push in Magento 2 for better modularity, weâ€™re
 introducing support for a few new ideas in the last push to the Github
@@ -403,7 +403,7 @@ repository. Â  A major theme of these changes is the separation of
 responsibilities, primarily between business logic on one side and presentation
 logic and user experience on the other.</p>
 
-<p><img src="images/archExtensibility.jpg" alt=""></p>
+<p><img src="/images/archExtensibility.jpg" alt=""></p>
 
 <p>The diagram above attempts to describe the ideas behind these changes visually.
 Business logic is confined to the service layer and encapsulated in service

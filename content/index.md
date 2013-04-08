@@ -7,7 +7,7 @@ repository.   A major theme of these changes is the separation of
 responsibilities, primarily between business logic on one side and presentation
 logic and user experience on the other.
 
-![](</images/archExtensibility.jpg>)
+![](</images/archExtensibility.png>)
 
 The diagram above attempts to describe the ideas behind these changes visually.
 Business logic is confined to the service layer and encapsulated in service
