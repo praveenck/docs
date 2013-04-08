@@ -3030,7 +3030,7 @@ bytecache scheme.</p>
 <p>We hope you can see some of the flexibility and power the use of Twig will bring
 to your development efforts on Magento. Our aim is to make development fun for
 you again by separating front-end design from back-end work and ensuring that
-you are looking at clean, easy-to-read, and easy-to-debug code.</p>;T;@"I"/web-api/;T{;{	;I"�"<!DOCTYPE html>
+you are looking at clean, easy-to-read, and easy-to-debug code.</p>;T;@"I"/web-api/;T{;{	;I",<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -3064,29 +3064,26 @@ you are looking at clean, easy-to-read, and easy-to-debug code.</p>;T;@"I"/w
       <div class="content">
     <h1 id="creating-web-apis">Creating Web APIs</h1>
 
-<p>[[<em>steal and summarize from service IDL and service implementation summaries</em>]]</p>
+<p>Once you’ve created a service, you can expose its functionality over the web to
+REST and SOAP interfaces by making simple web API declarations in the form of
+annotations to a configuration file.</p>
 
-<pre><code>You can expose your service over the web to REST and SOAP interfaces by
-making simple web API declarations in the form of annotations to a
-configuration file.
-</code></pre>
+<p>Note that in the current Alpha-1 release, this is a proposal only, and not yet
+implemented. Please leave comments on this proposal on https://getsatisfaction.com/magento-2-prerelease/topics</p>
 
-<h2 id="highlights">Highlights</h2>
+<p>To find out about creating a service, see <a href="http://praveenck.github.io/docs/service-impl/">Service Implementation</a>.</p>
 
-<p>[[<em>maybe the first point below is rather generic, and the second is already
-explicit in the introductory sentences above–for the second thing, possibly
-break up the info by reducing the intro sentences to a teaser with some
-generalizations about what a service is. For the first thing, maybe sharpen the
-statement with details–e.g., what type of auth n auth?  ]]</em></p>
+<p>Some advantages of converting your service into a web API:</p>
 
 <ul>
 <li>
-    <p>Authentication and Authorization functionality is handled by the API
-framework, allowing for developers to focus on building business logic</p>
+    <p>Authentication and authorization will be handled by the API framework,
+allowing you to focus on building business logic</p>
   </li>
   <li>
-    <p>Your service’s business logic can be available to both the Magento web
-application and other native applications (iOS, Android, etc. apps)</p>
+    <p>Your service’s business logic becomes available to the Magento web
+application and also to other native applications (e.g., iOS and Android
+apps).</p>
   </li>
 </ul>
 <h2 id="web-api-declaration">Web API Declaration</h2>
@@ -3112,58 +3109,31 @@ method to the PHP method (e.g., getCarriers).</p>
 
 </code></pre>
 
-<p>[[<em>do we also use the declaration in webapi.xml for REST? does the declaration
-or where it’s made differ for REST?]</em></p>
+<p>To expose your service as a REST API, there is an additional step. Because REST
+doesn’t pass all inputs in its payload, its payload does not reflect the
+description in the XSD. Some inputs are passed as part of the path and query
+parameters, and are thus missing from the payload. Deserializing the payload
+would not result in the expected input associative array.</p>
 
-<p>Since REST doesn’t pass all inputs in its payload, its payload does not reflect
-the description in the XSD. Some inputs are passed as part of the path and query
-parameters. These inputs are then missing from the payload. Deserializing the
-payload would not result in the expected input associative array.</p>
-
-<p>To work around this problem, after deserialization, we insert those inputs into
-the input array. To map query-params and path-params, we use the parameter name
-(e.g., shipment-id, filter) for a matching key in the associative array. We use
-dotted notation to indicate levels in the array.</p>
+<p>To form the expected array, after deserialization, we insert the missing inputs
+into the array. We use the parameter name (e.g., shipment-id, filter) as a
+matching key to map to query-params and path-params in the array, and we use
+dotted notation to indicate levels in the array, as follows:</p>
 
 <pre><code>
 level1.level2.sort
+
 ('level1' =&gt; array (
+
     'level2' =&gt; array(
+
         'sort' =&gt; ....
+
     )
+
 ))
 
 </code></pre>
-
-<h2 id="how-to-add-a-new-service">How to Add a New Service</h2>
-
-<ol>
-<li>
-    <p>Put the business logic PHP code into a class that extends MageService.
-[[<em>example</em>?]]</p>
-  </li>
-  <li>
-    <p>Annotate the new class with @Service and @Version (explained at <a href="http://praveenck.github.io/docs/service-idl/">Service
-IDL</a>.</p>
-  </li>
-</ol>
-<ol>
-<li>
-    <p>For each method, make sure it takes a single param as an associative array
-and returns another array</p>
-  </li>
-  <li>
-    <p>Create a new XSD file under the module /etc directory and describe the
-structure of the arrays.</p>
-  </li>
-  <li>
-    <p>To expose the service through the Web API, add or edit the webapi.xml under
-the module /etc directory and provide REST routing info.</p>
-  </li>
-</ol>
-<p>[[<em>these steps are very high level and would be way better with examples.
-without examples, the sequence is not clear enough to me that I can improve
-it]]</em></p>
       </div>
 
     <div id="js-sidebar" class="sidebar-shell">
@@ -3258,29 +3228,29 @@ it]]</em></p>
     </script>
 </body>
 </html>
-;T;	I"ICreating Web APIs
+;T;	I"�
+Creating Web APIs
 =================
 
-[[*steal and summarize from service IDL and service implementation summaries*]]
+Once you've created a service, you can expose its functionality over the web to
+REST and SOAP interfaces by making simple web API declarations in the form of
+annotations to a configuration file.
 
-    You can expose your service over the web to REST and SOAP interfaces by
-    making simple web API declarations in the form of annotations to a
-    configuration file.
+Note that in the current Alpha-1 release, this is a proposal only, and not yet
+implemented. Please leave comments on this proposal on https://getsatisfaction.com/magento-2-prerelease/topics
 
-Highlights
-----------
+To find out about creating a service, see [Service Implementation][1].
 
-[[*maybe the first point below is rather generic, and the second is already
-explicit in the introductory sentences above--for the second thing, possibly
-break up the info by reducing the intro sentences to a teaser with some
-generalizations about what a service is. For the first thing, maybe sharpen the
-statement with details--e.g., what type of auth n auth?  ]]*
+[1]: <http://praveenck.github.io/docs/service-impl/>
 
--   Authentication and Authorization functionality is handled by the API
-    framework, allowing for developers to focus on building business logic
+Some advantages of converting your service into a web API:
 
--   Your service's business logic can be available to both the Magento web
-    application and other native applications (iOS, Android, etc. apps)
+-   Authentication and authorization will be handled by the API framework,
+    allowing you to focus on building business logic
+
+-   Your service's business logic becomes available to the Magento web
+    application and also to other native applications (e.g., iOS and Android
+    apps).
 
 Web API Declaration
 -------------------
@@ -3307,80 +3277,56 @@ method to the PHP method (e.g., getCarriers).
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-[[*do we also use the declaration in webapi.xml for REST? does the declaration
-or where it's made differ for REST?]*
+To expose your service as a REST API, there is an additional step. Because REST
+doesn't pass all inputs in its payload, its payload does not reflect the
+description in the XSD. Some inputs are passed as part of the path and query
+parameters, and are thus missing from the payload. Deserializing the payload
+would not result in the expected input associative array.
 
-Since REST doesn't pass all inputs in its payload, its payload does not reflect
-the description in the XSD. Some inputs are passed as part of the path and query
-parameters. These inputs are then missing from the payload. Deserializing the
-payload would not result in the expected input associative array.
-
-To work around this problem, after deserialization, we insert those inputs into
-the input array. To map query-params and path-params, we use the parameter name
-(e.g., shipment-id, filter) for a matching key in the associative array. We use
-dotted notation to indicate levels in the array.
+To form the expected array, after deserialization, we insert the missing inputs
+into the array. We use the parameter name (e.g., shipment-id, filter) as a
+matching key to map to query-params and path-params in the array, and we use
+dotted notation to indicate levels in the array, as follows:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 level1.level2.sort
+
 ('level1' => array (
+
     'level2' => array(
+
         'sort' => ....
+
     )
+
 ))
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-How to Add a New Service
-------------------------
-
-1.  Put the business logic PHP code into a class that extends MageService.
-    [[*example*?]]
-
-2.  Annotate the new class with @Service and @Version (explained at [Service
-    IDL][1].
-
-[1]: <http://praveenck.github.io/docs/service-idl/>
-
-1.  For each method, make sure it takes a single param as an associative array
-    and returns another array
-
-2.  Create a new XSD file under the module /etc directory and describe the
-    structure of the arrays.
-
-3.  To expose the service through the Web API, add or edit the webapi.xml under
-    the module /etc directory and provide REST routing info.
-
-[[*these steps are very high level and would be way better with examples.
-without examples, the sequence is not clear enough to me that I can improve
-it]]*
-
 ;T;
-I"�<h1 id="creating-web-apis">Creating Web APIs</h1>
+I"`
+<h1 id="creating-web-apis">Creating Web APIs</h1>
 
-<p>[[<em>steal and summarize from service IDL and service implementation summaries</em>]]</p>
+<p>Once you’ve created a service, you can expose its functionality over the web to
+REST and SOAP interfaces by making simple web API declarations in the form of
+annotations to a configuration file.</p>
 
-<pre><code>You can expose your service over the web to REST and SOAP interfaces by
-making simple web API declarations in the form of annotations to a
-configuration file.
-</code></pre>
+<p>Note that in the current Alpha-1 release, this is a proposal only, and not yet
+implemented. Please leave comments on this proposal on https://getsatisfaction.com/magento-2-prerelease/topics</p>
 
-<h2 id="highlights">Highlights</h2>
+<p>To find out about creating a service, see <a href="http://praveenck.github.io/docs/service-impl/">Service Implementation</a>.</p>
 
-<p>[[<em>maybe the first point below is rather generic, and the second is already
-explicit in the introductory sentences above–for the second thing, possibly
-break up the info by reducing the intro sentences to a teaser with some
-generalizations about what a service is. For the first thing, maybe sharpen the
-statement with details–e.g., what type of auth n auth?  ]]</em></p>
+<p>Some advantages of converting your service into a web API:</p>
 
 <ul>
 <li>
-    <p>Authentication and Authorization functionality is handled by the API
-framework, allowing for developers to focus on building business logic</p>
+    <p>Authentication and authorization will be handled by the API framework,
+allowing you to focus on building business logic</p>
   </li>
   <li>
-    <p>Your service’s business logic can be available to both the Magento web
-application and other native applications (iOS, Android, etc. apps)</p>
+    <p>Your service’s business logic becomes available to the Magento web
+application and also to other native applications (e.g., iOS and Android
+apps).</p>
   </li>
 </ul><h2 id="web-api-declaration">Web API Declaration</h2>
 
@@ -3405,53 +3351,28 @@ method to the PHP method (e.g., getCarriers).</p>
 
 </code></pre>
 
-<p>[[<em>do we also use the declaration in webapi.xml for REST? does the declaration
-or where it’s made differ for REST?]</em></p>
+<p>To expose your service as a REST API, there is an additional step. Because REST
+doesn’t pass all inputs in its payload, its payload does not reflect the
+description in the XSD. Some inputs are passed as part of the path and query
+parameters, and are thus missing from the payload. Deserializing the payload
+would not result in the expected input associative array.</p>
 
-<p>Since REST doesn’t pass all inputs in its payload, its payload does not reflect
-the description in the XSD. Some inputs are passed as part of the path and query
-parameters. These inputs are then missing from the payload. Deserializing the
-payload would not result in the expected input associative array.</p>
-
-<p>To work around this problem, after deserialization, we insert those inputs into
-the input array. To map query-params and path-params, we use the parameter name
-(e.g., shipment-id, filter) for a matching key in the associative array. We use
-dotted notation to indicate levels in the array.</p>
+<p>To form the expected array, after deserialization, we insert the missing inputs
+into the array. We use the parameter name (e.g., shipment-id, filter) as a
+matching key to map to query-params and path-params in the array, and we use
+dotted notation to indicate levels in the array, as follows:</p>
 
 <pre><code>
 level1.level2.sort
+
 ('level1' =&gt; array (
+
     'level2' =&gt; array(
+
         'sort' =&gt; ....
+
     )
+
 ))
 
-</code></pre>
-
-<h2 id="how-to-add-a-new-service">How to Add a New Service</h2>
-
-<ol>
-<li>
-    <p>Put the business logic PHP code into a class that extends MageService.
-[[<em>example</em>?]]</p>
-  </li>
-  <li>
-    <p>Annotate the new class with @Service and @Version (explained at <a href="http://praveenck.github.io/docs/service-idl/">Service
-IDL</a>.</p>
-  </li>
-</ol><ol>
-<li>
-    <p>For each method, make sure it takes a single param as an associative array
-and returns another array</p>
-  </li>
-  <li>
-    <p>Create a new XSD file under the module /etc directory and describe the
-structure of the arrays.</p>
-  </li>
-  <li>
-    <p>To expose the service through the Web API, add or edit the webapi.xml under
-the module /etc directory and provide REST routing info.</p>
-  </li>
-</ol><p>[[<em>these steps are very high level and would be way better with examples.
-without examples, the sequence is not clear enough to me that I can improve
-it]]</em></p>;T;@(I"/static/css/960.css/;T{;{ I"/static/css/reset.css/;T{;{ I"!/static/css/uv_active4d.css/;T{;{ I"/static/favicon.ico/;T{;{ I"&/static/images/background-v2.png/;T{;{ I")/static/images/background-white.png/;T{;{ I"'/static/images/logo_developer.png/;T{;{ I"!/static/images/nav-rule.png/;T{;{ I"*/static/shared/css/documentation.css/;T{;{ I"%/static/shared/css/pygments.css/;T{;{ I",/static/shared/images/active-arrow.png/;T{;{ I"-/static/shared/images/background-v2.png/;T{;{ I"0/static/shared/images/background-white.png/;T{;{ I""/static/shared/images/bg.png/;T{;{ I"0/static/shared/images/bg_footer_bottom.png/;T{;{ I"-/static/shared/images/bg_footer_top.png/;T{;{ I"*/static/shared/images/blacktocat.png/;T{;{ I"*/static/shared/images/blacktocat.svg/;T{;{ I"+/static/shared/images/crud-sprite.png/;T{;{ I"0/static/shared/images/dropdown_sprites.jpg/;T{;{ I"-/static/shared/images/expand-arrows.png/;T{;{ I"+/static/shared/images/footer-logo.png/;T{;{ I"+/static/shared/images/footer-logo.svg/;T{;{ I"+/static/shared/images/footer_logo.png/;T{;{ I"(/static/shared/images/nav-rule.png/;T{;{ I"//static/shared/images/next_step_arrow.gif/;T{;{ I"%/static/shared/images/qmark.png/;T{;{ I"./static/shared/images/rackspace_logo.png/;T{;{ I"(/static/shared/js/documentation.js/;T{;{ I"!/static/shared/js/jquery.js/;T{;{ I" /static/images/ExtArch.jpg/;T{;{ I"4/static/shared/images/background-white-old.png/;T{;{ I" /static/images/ExtArch.png/;T{;{ I"*/static/images/archExtensibility.png/;T{;{ :versioni
+</code></pre>;T;@(I"/static/css/960.css/;T{;{ I"/static/css/reset.css/;T{;{ I"!/static/css/uv_active4d.css/;T{;{ I"/static/favicon.ico/;T{;{ I"&/static/images/background-v2.png/;T{;{ I")/static/images/background-white.png/;T{;{ I"'/static/images/logo_developer.png/;T{;{ I"!/static/images/nav-rule.png/;T{;{ I"*/static/shared/css/documentation.css/;T{;{ I"%/static/shared/css/pygments.css/;T{;{ I",/static/shared/images/active-arrow.png/;T{;{ I"-/static/shared/images/background-v2.png/;T{;{ I"0/static/shared/images/background-white.png/;T{;{ I""/static/shared/images/bg.png/;T{;{ I"0/static/shared/images/bg_footer_bottom.png/;T{;{ I"-/static/shared/images/bg_footer_top.png/;T{;{ I"*/static/shared/images/blacktocat.png/;T{;{ I"*/static/shared/images/blacktocat.svg/;T{;{ I"+/static/shared/images/crud-sprite.png/;T{;{ I"0/static/shared/images/dropdown_sprites.jpg/;T{;{ I"-/static/shared/images/expand-arrows.png/;T{;{ I"+/static/shared/images/footer-logo.png/;T{;{ I"+/static/shared/images/footer-logo.svg/;T{;{ I"+/static/shared/images/footer_logo.png/;T{;{ I"(/static/shared/images/nav-rule.png/;T{;{ I"//static/shared/images/next_step_arrow.gif/;T{;{ I"%/static/shared/images/qmark.png/;T{;{ I"./static/shared/images/rackspace_logo.png/;T{;{ I"(/static/shared/js/documentation.js/;T{;{ I"!/static/shared/js/jquery.js/;T{;{ I" /static/images/ExtArch.jpg/;T{;{ I"4/static/shared/images/background-white-old.png/;T{;{ I" /static/images/ExtArch.png/;T{;{ I"*/static/images/archExtensibility.png/;T{;{ :versioni
