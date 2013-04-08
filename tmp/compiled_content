@@ -3605,7 +3605,7 @@ I"A<h1 id="webhooks---coming-soon">Webhooks - Coming Soon!</h1>;T;@èI"/vmim
     </script>
 </body>
 </html>
-;T;	I"Î
+;T;	I"Ï
 Setting up Magento 2 Extension Model Alpha 1 VM Image
 =====================================================
 
@@ -3645,7 +3645,7 @@ The ip address of the VM is <b>192.168.56.101</b> and below logins will work via
 
 ### Linux User Accounts
 
-| Username | Password | Has Root Access | Login via GUI|
+| Username | Password | Has Root Access | Login via GUI |
 |:--------|:-------|:--------|:--------|
 | mage | 123456 | via sudo | yes |
 | root | 123456 | yes | no |

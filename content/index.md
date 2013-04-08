@@ -85,7 +85,7 @@ Here's an outline of how to create an extension that includes some business logi
 
 -   Create a template that renders the visual aspects
 
--   Associate the template's reuired data to one or more service calls via configuration in layout.xml
+-   Associate the template's required data to one or more service calls via configuration in layout.xml
 
--   Optionally, accept configuration for your extension using option lists.
+-   Optionally, accept configuration for your extension using option lists
 
