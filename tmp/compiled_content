@@ -1,4 +1,4 @@
-{:	data{.I"/:ET{:default{	:	lastI"™&<!DOCTYPE html>
+{:	data{.I"/:ET{:default{	:	lastI"á&<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -124,7 +124,8 @@ Magento itself.</p>
     <div id="js-sidebar" class="sidebar-shell">
       <div class="js-toggle-list sidebar-module expandable">
         <ul>
-<li class="js-guides"><h3><a href="twig/">Twig Templates</a></h3></li>
+<li class="js-guides"><h3><a href="./">Overview</a></h3></li>
+          <li class="js-guides"><h3><a href="twig/">Twig Templates</a></h3></li>
           <li class="js-guides"><h3><a href="service-idl/">Service IDL</a></h3></li>
           <li class="js-guides"><h3><a href="service-impl/">Service Implementation</a></h3></li>
           <li class="js-guides"><h3><a href="webhooks/">Webhooks</a></h3></li>
@@ -392,7 +393,7 @@ Magento itself.</p>
     <p>Optionally, accept configuration for your extension using option lists.</p>
   </li>
 </ul>;T:	post@
-I"/option-list/;T{;{	;I"ª1<!DOCTYPE html>
+I"/option-list/;T{;{	;I"ó1<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -672,7 +673,8 @@ groups: {
     <div id="js-sidebar" class="sidebar-shell">
       <div class="js-toggle-list sidebar-module expandable">
         <ul>
-<li class="js-guides"><h3><a href="../twig/">Twig Templates</a></h3></li>
+<li class="js-guides"><h3><a href="../">Overview</a></h3></li>
+          <li class="js-guides"><h3><a href="../twig/">Twig Templates</a></h3></li>
           <li class="js-guides"><h3><a href="../service-idl/">Service IDL</a></h3></li>
           <li class="js-guides"><h3><a href="../service-impl/">Service Implementation</a></h3></li>
           <li class="js-guides"><h3><a href="../webhooks/">Webhooks</a></h3></li>
@@ -1261,7 +1263,7 @@ groups: {
 &lt;option value="2"&gt;Wholesale&lt;/option&gt;
 &lt;option value="3"&gt;Retailer&lt;/option&gt;
 
-</code></pre>;T;@I"/service-idl/;T{;{	;I"<B<!DOCTYPE html>
+</code></pre>;T;@I"/service-idl/;T{;{	;I"…B<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -1535,7 +1537,8 @@ array.</p>
     <div id="js-sidebar" class="sidebar-shell">
       <div class="js-toggle-list sidebar-module expandable">
         <ul>
-<li class="js-guides"><h3><a href="../twig/">Twig Templates</a></h3></li>
+<li class="js-guides"><h3><a href="../">Overview</a></h3></li>
+          <li class="js-guides"><h3><a href="../twig/">Twig Templates</a></h3></li>
           <li class="js-guides"><h3><a href="./">Service IDL</a></h3></li>
           <li class="js-guides"><h3><a href="../service-impl/">Service Implementation</a></h3></li>
           <li class="js-guides"><h3><a href="../webhooks/">Webhooks</a></h3></li>
@@ -2106,7 +2109,7 @@ array.</p>
 Â Â Â Â &lt;/xs:element&gt;
 &lt;/xs:schema&gt;
 
-</code></pre>;T;@I"/service-impl/;T{;{	;I"†<!DOCTYPE html>
+</code></pre>;T;@I"/service-impl/;T{;{	;I"Ï<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -2144,7 +2147,8 @@ array.</p>
     <div id="js-sidebar" class="sidebar-shell">
       <div class="js-toggle-list sidebar-module expandable">
         <ul>
-<li class="js-guides"><h3><a href="../twig/">Twig Templates</a></h3></li>
+<li class="js-guides"><h3><a href="../">Overview</a></h3></li>
+          <li class="js-guides"><h3><a href="../twig/">Twig Templates</a></h3></li>
           <li class="js-guides"><h3><a href="../service-idl/">Service IDL</a></h3></li>
           <li class="js-guides"><h3><a href="./">Service Implementation</a></h3></li>
           <li class="js-guides"><h3><a href="../webhooks/">Webhooks</a></h3></li>
@@ -2235,7 +2239,7 @@ array.</p>
 </body>
 </html>
 ;T;	I",# Service Implementation - Coming Soon!;T;
-I"]<h1 id="service-implementation---coming-soon">Service Implementation - Coming Soon!</h1>;T;@I"/twig/;T{;{	;I"I0<!DOCTYPE html>
+I"]<h1 id="service-implementation---coming-soon">Service Implementation - Coming Soon!</h1>;T;@I"/twig/;T{;{	;I"’0<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -2456,7 +2460,8 @@ you are looking at clean, easy-to-read, and easy-to-debug code.</p>
     <div id="js-sidebar" class="sidebar-shell">
       <div class="js-toggle-list sidebar-module expandable">
         <ul>
-<li class="js-guides"><h3><a href="./">Twig Templates</a></h3></li>
+<li class="js-guides"><h3><a href="../">Overview</a></h3></li>
+          <li class="js-guides"><h3><a href="./">Twig Templates</a></h3></li>
           <li class="js-guides"><h3><a href="../service-idl/">Service IDL</a></h3></li>
           <li class="js-guides"><h3><a href="../service-impl/">Service Implementation</a></h3></li>
           <li class="js-guides"><h3><a href="../webhooks/">Webhooks</a></h3></li>
@@ -2896,7 +2901,7 @@ bytecache scheme.</p>
 <p>We hope you can see some of the flexibility and power the use of Twig will bring
 to your development efforts on Magento. Our aim is to make development fun for
 you again by separating front-end design from back-end work and ensuring that
-you are looking at clean, easy-to-read, and easy-to-debug code.</p>;T;@"I"/web-api/;T{;{	;I"~<!DOCTYPE html>
+you are looking at clean, easy-to-read, and easy-to-debug code.</p>;T;@"I"/web-api/;T{;{	;I"Ç<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -3005,7 +3010,8 @@ level1.level2.sort
     <div id="js-sidebar" class="sidebar-shell">
       <div class="js-toggle-list sidebar-module expandable">
         <ul>
-<li class="js-guides"><h3><a href="../twig/">Twig Templates</a></h3></li>
+<li class="js-guides"><h3><a href="../">Overview</a></h3></li>
+          <li class="js-guides"><h3><a href="../twig/">Twig Templates</a></h3></li>
           <li class="js-guides"><h3><a href="../service-idl/">Service IDL</a></h3></li>
           <li class="js-guides"><h3><a href="../service-impl/">Service Implementation</a></h3></li>
           <li class="js-guides"><h3><a href="../webhooks/">Webhooks</a></h3></li>
@@ -3242,7 +3248,7 @@ level1.level2.sort
 
 ))
 
-</code></pre>;T;@(I"/static/css/960.css/;T{;{ I"/static/css/reset.css/;T{;{ I"!/static/css/uv_active4d.css/;T{;{ I"/static/favicon.ico/;T{;{ I"&/static/images/background-v2.png/;T{;{ I")/static/images/background-white.png/;T{;{ I"'/static/images/logo_developer.png/;T{;{ I"!/static/images/nav-rule.png/;T{;{ I"*/static/shared/css/documentation.css/;T{;{ I"%/static/shared/css/pygments.css/;T{;{ I",/static/shared/images/active-arrow.png/;T{;{ I"-/static/shared/images/background-v2.png/;T{;{ I"0/static/shared/images/background-white.png/;T{;{ I""/static/shared/images/bg.png/;T{;{ I"0/static/shared/images/bg_footer_bottom.png/;T{;{ I"-/static/shared/images/bg_footer_top.png/;T{;{ I"*/static/shared/images/blacktocat.png/;T{;{ I"*/static/shared/images/blacktocat.svg/;T{;{ I"+/static/shared/images/crud-sprite.png/;T{;{ I"0/static/shared/images/dropdown_sprites.jpg/;T{;{ I"-/static/shared/images/expand-arrows.png/;T{;{ I"+/static/shared/images/footer-logo.png/;T{;{ I"+/static/shared/images/footer-logo.svg/;T{;{ I"+/static/shared/images/footer_logo.png/;T{;{ I"(/static/shared/images/nav-rule.png/;T{;{ I"//static/shared/images/next_step_arrow.gif/;T{;{ I"%/static/shared/images/qmark.png/;T{;{ I"./static/shared/images/rackspace_logo.png/;T{;{ I"(/static/shared/js/documentation.js/;T{;{ I"!/static/shared/js/jquery.js/;T{;{ I" /static/images/ExtArch.jpg/;T{;{ I"4/static/shared/images/background-white-old.png/;T{;{ I" /static/images/ExtArch.png/;T{;{ I"*/static/images/archExtensibility.png/;T{;{ I"/webhooks/;T{;{	;I"`<!DOCTYPE html>
+</code></pre>;T;@(I"/static/css/960.css/;T{;{ I"/static/css/reset.css/;T{;{ I"!/static/css/uv_active4d.css/;T{;{ I"/static/favicon.ico/;T{;{ I"&/static/images/background-v2.png/;T{;{ I")/static/images/background-white.png/;T{;{ I"'/static/images/logo_developer.png/;T{;{ I"!/static/images/nav-rule.png/;T{;{ I"*/static/shared/css/documentation.css/;T{;{ I"%/static/shared/css/pygments.css/;T{;{ I",/static/shared/images/active-arrow.png/;T{;{ I"-/static/shared/images/background-v2.png/;T{;{ I"0/static/shared/images/background-white.png/;T{;{ I""/static/shared/images/bg.png/;T{;{ I"0/static/shared/images/bg_footer_bottom.png/;T{;{ I"-/static/shared/images/bg_footer_top.png/;T{;{ I"*/static/shared/images/blacktocat.png/;T{;{ I"*/static/shared/images/blacktocat.svg/;T{;{ I"+/static/shared/images/crud-sprite.png/;T{;{ I"0/static/shared/images/dropdown_sprites.jpg/;T{;{ I"-/static/shared/images/expand-arrows.png/;T{;{ I"+/static/shared/images/footer-logo.png/;T{;{ I"+/static/shared/images/footer-logo.svg/;T{;{ I"+/static/shared/images/footer_logo.png/;T{;{ I"(/static/shared/images/nav-rule.png/;T{;{ I"//static/shared/images/next_step_arrow.gif/;T{;{ I"%/static/shared/images/qmark.png/;T{;{ I"./static/shared/images/rackspace_logo.png/;T{;{ I"(/static/shared/js/documentation.js/;T{;{ I"!/static/shared/js/jquery.js/;T{;{ I" /static/images/ExtArch.jpg/;T{;{ I"4/static/shared/images/background-white-old.png/;T{;{ I" /static/images/ExtArch.png/;T{;{ I"*/static/images/archExtensibility.png/;T{;{ I"/webhooks/;T{;{	;I"©<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -3280,7 +3286,8 @@ level1.level2.sort
     <div id="js-sidebar" class="sidebar-shell">
       <div class="js-toggle-list sidebar-module expandable">
         <ul>
-<li class="js-guides"><h3><a href="../twig/">Twig Templates</a></h3></li>
+<li class="js-guides"><h3><a href="../">Overview</a></h3></li>
+          <li class="js-guides"><h3><a href="../twig/">Twig Templates</a></h3></li>
           <li class="js-guides"><h3><a href="../service-idl/">Service IDL</a></h3></li>
           <li class="js-guides"><h3><a href="../service-impl/">Service Implementation</a></h3></li>
           <li class="js-guides"><h3><a href="./">Webhooks</a></h3></li>

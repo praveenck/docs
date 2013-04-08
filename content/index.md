@@ -2,16 +2,18 @@ Magento 2 Extension Model Proposal: Alpha 1
 ===========================================
 
 As part of the overall push in Magento 2 for better modularity, we're
-introducing support for a few new ideas in the last push to the Github
+introducing support for a few new ideas in the recent push to the Github
 repository.   A major theme of these changes is the separation of
 responsibilities, primarily between business logic on one side and presentation
 logic and user experience on the other.
 
 ![](</images/archExtensibility.png>)
 
-The diagram above attempts to describe the ideas behind these changes visually.
-Business logic is confined to the service layer and encapsulated in service
-classes.
+The diagram above attempts to describe the ideas behind these changes visually. The source code for the proposed changes can be found in the recent github push [here][1]. There is also a VirtualBox image that contains the installation of recent Magento-2 code base [here][2]. The instructions for using the virtualbox image can be found [here][3]
+
+[1]: <https://github.com/magento/magento2>
+[2]: <https://ebay.box.com/s/a2k6twcsoappu4zv5lsq>
+[3]: <http://praveenck.github.io/docs/vmimage/>
 
 Services
 --------
