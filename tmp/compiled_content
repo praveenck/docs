@@ -1,0 +1,3478 @@
+{:	data{,I"/:ET{:default{	:	lastI"4-<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="imagetoolbar" content="false">
+<meta name="MSSmartTagsPreventParsing" content="true">
+<title></title>
+<link href="css/reset.css" rel="stylesheet" type="text/css">
+<link href="css/960.css" rel="stylesheet" type="text/css">
+<link href="css/uv_active4d.css" rel="stylesheet" type="text/css">
+<link href="shared/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
+<link href="shared/css/pygments.css" media="screen" rel="stylesheet" type="text/css">
+<script src="shared/js/jquery.js" type="text/javascript"></script><script src="shared/js/documentation.js" type="text/javascript"></script>
+</head>
+<body class="api">
+    <div id="header-wrapper">
+      <div id="header">
+        <div>
+          <a class="logo" href="./"><img src="images/logo_developer.png" width="161" height="47" alt="GitHub:Developer"></a>
+          <ul class="nav">
+<li><a href="./">Home</a></li>
+            <li><a href="https://getsatisfaction.com/magento-2-prerelease">Feedback</a></li>
+          </ul>
+</div>
+      </div>
+<!-- #header -->
+    </div>
+<!-- #header-wrapper -->
+
+    <div id="wrapper">
+      <div class="content">
+    <h1 id="magento-2-extension-model-proposal-alpha-1">Magento 2 Extension Model Proposal: Alpha 1</h1>
+
+<p>As part of the overall push in Magento 2 for better modularity, we’re
+introducing support for a few new ideas in the last push to the Github
+repository.   A major theme of these changes is the separation of
+responsibilities, primarily between business logic on one side and presentation
+logic and user experience on the other.</p>
+
+<p><img src="images/archExtensibility.jpg" alt=""></p>
+
+<p>The diagram above attempts to describe the ideas behind these changes visually.
+Business logic is confined to the service layer and encapsulated in service
+classes.</p>
+
+<h2 id="services">Services</h2>
+
+<p>Services provide a single, common entry point for all interaction between different UIs,
+including Blocks, Controllers and web services; and it can even serve as an
+interface for business logic for other modules.</p>
+
+<p>Services have well defined interfaces described using a service IDL. Service IDL
+documents the list of public methods available to templates, blocks, controllers
+and web services. For each method, the input and output data types are defined
+using XSDs.</p>
+
+<h2 id="webhooks-and-callbacks">Webhooks and Callbacks</h2>
+
+<p>As a nod to the desire to support better remote integrations with Magento, as
+well, we’re not only working on automatically exposing these Services as web
+services to external clients, but with this release, we’re also introducing
+support for real-time integrations with remote system using webhooks and
+callbacks.</p>
+
+<p>Webhooks provide Event Observer-like behavior over HTTP and allow you to be
+notified when certain events occur with Magento and even get real-time data from
+the system.  Callbacks also support communication from your Magento installation
+out to a remote system, but callbacks trigger synchronously and use the response
+from the remote integration in the rest of the user request processing.  As an
+example, in this release we’re supporting the ability to define remote shipping
+carriers where the shipping rates and retrieved over an HTTP call.</p>
+
+<h2 id="better-templating">Better Templating</h2>
+
+<p>On the presentation tier, we’re introducing support for Twig templating.  Theme
+development has always been a big part of Magento store customization, but
+templates written in PHP meant that business logic occasionally was written into
+the .phtml files.  This meant that the business logic was either lost or had to
+be duplicated from theme to theme.  With a templating language like Twig, which
+uses a restricted syntax, it is easier to ensure that your template files will
+only be concerned with the logic needed to render your data.</p>
+
+<p>Since templates need data to render and Services are designed to provide a
+well-managed, consistent view of the data a module can provide, we’ve introduced
+a syntax for binding templates to a service call directly from the layout file.</p>
+
+<h2 id="extension-configuration-improvement">Extension Configuration Improvement</h2>
+
+<p>There’s another small improvement that we’ve made to System Configuration that
+we hope will make your life a little easier.  For most of the configuration
+fields you define, you can describe everything you need in XML – except for the
+values of a select box.  We’ve introduced a syntax with this push that will
+allow you to describe static select options inline, and dynamic options can be
+extracted from the result of a service call.</p>
+
+<p>These concepts have been introduced in isolated parts of the Magento application
+so far in the hopes that you will comment on their value and help direct and
+refine how they work.  This is the first set of many ideas that we’re looking at
+to help improve the modularity of Magento, which should improve not only the
+compatibility of extensions within Magento, but also the upgradability of
+Magento itself.</p>
+
+<h2 id="new-approach-for-creating-extensionscustomizations">New Approach for Creating Extensions/Customizations</h2>
+
+<p>Here’s an outline of how to create an extension that includes some business logic and associated presentation logic:</p>
+
+<ul>
+<li>
+    <p>Create a service that encapsulates the extensions business logic. As part of the service creation, define the service interface using the service IDL. List all methods whose output is need in the presentation tier. Define the method input and output using XSDs</p>
+  </li>
+  <li>
+    <p>Create a template that renders the visual aspects</p>
+  </li>
+  <li>
+    <p>Associate the template’s reuired data to one or more service calls via configuration in layout.xml</p>
+  </li>
+  <li>
+    <p>Optionally, accept configuration for your extension using option lists.</p>
+  </li>
+</ul>
+<p>The sections below describe the steps.</p>
+
+<h3 id="create-the-service-that-serves-data-to-your-extension">1. Create the Service That Serves Data to Your Extension</h3>
+
+<p>You can modify an existing service, such as the Product service. You could use
+the data returned by the product service to populate, say, a product detail
+page.</p>
+
+<p>A service can be shared</p>
+
+<p>Link to <a href="http://praveenck.github.io/docs/service-impl/">Service Implementations</a></p>
+
+<h3 id="create-the-template-for-your-extension">2. Create the Template for Your Extension</h3>
+
+<p>As with the service, you can start by modifying an existing template. Here’s an
+example [<em>__</em>]</p>
+
+<p>Here are some things you should know about using Twig.</p>
+
+<p><a href="http://praveenck.github.io/docs/twig/">Twig templates</a></p>
+
+<h3 id="create-the-visual-component">3. Create the Visual Component</h3>
+
+<p>The visual component takes its appearance from the the template, its data from
+the service, and other configuration from layout.xml. Here’s an example of a
+layout.xml file.</p>
+
+<p>[[* this is a mere definition. what files do you create/modify to have a visual
+component? and do we need a sub-document that discusses visual components more,
+with example? This is the only step without such a sub-document]]*</p>
+
+<h3 id="configure-your-extension">4. Configure Your Extension</h3>
+
+<p>In this step, you’re setting up options for a merchant to select. [*example
+options? what is the extent–what are the possibilities–for this option
+setting?] *</p>
+
+<p>You edit a system.xml file to set your extensions preferences for, for example,
+static and dynamic option lists.</p>
+
+<p><a href="http://praveenck.github.io/docs/option-list/">Extension Configuration</a></p>
+      </div>
+
+    <div id="js-sidebar" class="sidebar-shell">
+      <div class="js-toggle-list sidebar-module expandable">
+        <ul>
+<li class="js-guides"><h3><a href="twig/">Twig Templates</a></h3></li>
+          <li class="js-guides"><h3><a href="service-idl/">Service IDL</a></h3></li>
+          <li class="js-guides"><h3><a href="service-impl/">Service Implementation</a></h3></li>
+          <li class="js-guides"><h3><a href="web-api/">Creating Web APIs</a></h3></li>
+          <li class="js-guides"><h3><a href="option-list/">Extension Configuration</a></h3></li>
+        </ul>
+</div> <!-- /sidebar-module -->
+    </div>
+<!-- /sidebar-shell -->
+
+    </div>
+<!-- #wrapper -->
+
+    <div id="footer">
+      <div class="upper_footer">
+        <div class="footer_inner clearfix">
+
+        <!--[if IE]><h4 id="blacktocat_ie">GitHub Links</h4><![endif]-->
+        <h4 id="blacktocat">GitHub Links</h4>
+
+        <ul class="footer_nav">
+<h4>GitHub</h4>
+          <li><a href="https://github.com/about">About</a></li>
+          <li><a href="https://github.com/blog">Blog</a></li>
+          <li><a href="https://github.com/features">Features</a></li>
+          <li><a href="https://github.com/contact">Contact &amp; Support</a></li>
+          <li><a href="https://github.com/training">Training</a></li>
+          <li><a href="http://status.github.com/">Site Status</a></li>
+        </ul>
+<ul class="footer_nav">
+<h4>Tools</h4>
+          <li><a href="http://mac.github.com/">GitHub for Mac</a></li>
+          <li><a href="http://mobile.github.com/">Issues for iPhone</a></li>
+          <li><a href="https://gist.github.com">Gist: Code Snippets</a></li>
+          <li><a href="http://enterprise.github.com/">GitHub Enterprise</a></li>
+          <li><a href="http://jobs.github.com/">Job Board</a></li>
+        </ul>
+<ul class="footer_nav">
+<h4>Extras</h4>
+          <li><a href="http://shop.github.com/">GitHub Shop</a></li>
+          <li><a href="http://octodex.github.com/">The Octodex</a></li>
+        </ul>
+<ul class="footer_nav">
+<h4>Documentation</h4>
+          <li><a href="http://help.github.com/">GitHub Help</a></li>
+          <li><a href="http://developer.github.com/">Developer API</a></li>
+          <li><a href="http://github.github.com/github-flavored-markdown/">GitHub Flavored Markdown</a></li>
+          <li><a href="http://pages.github.com/">GitHub Pages</a></li>
+        </ul>
+</div>
+<!-- /.site -->
+      </div>
+<!-- /.upper_footer -->
+
+      <div class="lower_footer">
+        <div class="footer_inner clearfix">
+            <div id="legal">
+              <!--[if IE]><a class="home_ie" href="http://github.com">Home</a><![endif]-->
+              <a class="home" href="http://github.com">Home</a>
+
+              <ul id="legal_links">
+<li><a href="http://help.github.com/terms-of-service/">Terms of Service</a></li>
+                <li><a href="http://help.github.com/privacy-policy/">Privacy</a></li>
+                <li><a href="http://help.github.com/security/">Security</a></li>
+              </ul>
+<p>© <span id="year">year</span> GitHub Inc. All rights reserved.</p>
+            </div>
+<!-- /#legal or /#legal_ie-->
+        </div>
+<!-- /.site -->
+      </div>
+<!-- /.lower_footer -->
+    </div>
+<!-- /#footer -->
+    <script type="text/javascript">
+      var _gauges = _gauges || [];
+      (function() {
+        var t   = document.createElement('script');
+        t.type  = 'text/javascript';
+        t.async = true;
+        t.id    = 'gauges-tracker';
+        t.setAttribute('data-site-id', '4f2038e0cb25bc1b55000003');
+        t.src = '//secure.gaug.es/track.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(t, s);
+      })();
+    </script>
+</body>
+</html>
+;T:rawI"DMagento 2 Extension Model Proposal: Alpha 1
+===========================================
+
+As part of the overall push in Magento 2 for better modularity, we're
+introducing support for a few new ideas in the last push to the Github
+repository.   A major theme of these changes is the separation of
+responsibilities, primarily between business logic on one side and presentation
+logic and user experience on the other.
+
+![](<images/archExtensibility.jpg>)
+
+The diagram above attempts to describe the ideas behind these changes visually.
+Business logic is confined to the service layer and encapsulated in service
+classes.
+
+Services
+--------
+
+Services provide a single, common entry point for all interaction between different UIs,
+including Blocks, Controllers and web services; and it can even serve as an
+interface for business logic for other modules.
+
+Services have well defined interfaces described using a service IDL. Service IDL
+documents the list of public methods available to templates, blocks, controllers
+and web services. For each method, the input and output data types are defined
+using XSDs.
+
+Webhooks and Callbacks
+----------------------
+
+As a nod to the desire to support better remote integrations with Magento, as
+well, we're not only working on automatically exposing these Services as web
+services to external clients, but with this release, we're also introducing
+support for real-time integrations with remote system using webhooks and
+callbacks.
+
+Webhooks provide Event Observer-like behavior over HTTP and allow you to be
+notified when certain events occur with Magento and even get real-time data from
+the system.  Callbacks also support communication from your Magento installation
+out to a remote system, but callbacks trigger synchronously and use the response
+from the remote integration in the rest of the user request processing.  As an
+example, in this release we're supporting the ability to define remote shipping
+carriers where the shipping rates and retrieved over an HTTP call.
+
+Better Templating
+-----------------
+
+On the presentation tier, we're introducing support for Twig templating.  Theme
+development has always been a big part of Magento store customization, but
+templates written in PHP meant that business logic occasionally was written into
+the .phtml files.  This meant that the business logic was either lost or had to
+be duplicated from theme to theme.  With a templating language like Twig, which
+uses a restricted syntax, it is easier to ensure that your template files will
+only be concerned with the logic needed to render your data.
+
+Since templates need data to render and Services are designed to provide a
+well-managed, consistent view of the data a module can provide, we've introduced
+a syntax for binding templates to a service call directly from the layout file.
+
+Extension Configuration Improvement
+-----------------------------------
+
+There's another small improvement that we've made to System Configuration that
+we hope will make your life a little easier.  For most of the configuration
+fields you define, you can describe everything you need in XML -- except for the
+values of a select box.  We've introduced a syntax with this push that will
+allow you to describe static select options inline, and dynamic options can be
+extracted from the result of a service call.
+
+These concepts have been introduced in isolated parts of the Magento application
+so far in the hopes that you will comment on their value and help direct and
+refine how they work.  This is the first set of many ideas that we're looking at
+to help improve the modularity of Magento, which should improve not only the
+compatibility of extensions within Magento, but also the upgradability of
+Magento itself.
+
+New Approach for Creating Extensions/Customizations
+-----------------------------------------------
+
+Here's an outline of how to create an extension that includes some business logic and associated presentation logic:
+
+-   Create a service that encapsulates the extensions business logic. As part of the service creation, define the service interface using the service IDL. List all methods whose output is need in the presentation tier. Define the method input and output using XSDs
+
+-   Create a template that renders the visual aspects
+
+-   Associate the template's reuired data to one or more service calls via configuration in layout.xml
+
+-   Optionally, accept configuration for your extension using option lists.
+
+The sections below describe the steps.
+
+### 1. Create the Service That Serves Data to Your Extension
+
+You can modify an existing service, such as the Product service. You could use
+the data returned by the product service to populate, say, a product detail
+page.
+
+A service can be shared
+
+
+
+Link to [Service Implementations][1]
+
+[1]: <http://praveenck.github.io/docs/service-impl/>
+
+### 2. Create the Template for Your Extension
+
+As with the service, you can start by modifying an existing template. Here's an
+example [____]
+
+Here are some things you should know about using Twig.
+
+[Twig templates][2]
+
+[2]: <http://praveenck.github.io/docs/twig/>
+
+### 3. Create the Visual Component
+
+The visual component takes its appearance from the the template, its data from
+the service, and other configuration from layout.xml. Here's an example of a
+layout.xml file.
+
+[[* this is a mere definition. what files do you create/modify to have a visual
+component? and do we need a sub-document that discusses visual components more,
+with example? This is the only step without such a sub-document]]*
+
+
+
+### 4. Configure Your Extension 
+
+In this step, you're setting up options for a merchant to select. [*example
+options? what is the extent--what are the possibilities--for this option
+setting?] *
+
+You edit a system.xml file to set your extensions preferences for, for example,
+static and dynamic option lists.
+
+[Extension Configuration][3]
+
+[3]: <http://praveenck.github.io/docs/option-list/>
+
+;T:preI"�<h1 id="magento-2-extension-model-proposal-alpha-1">Magento 2 Extension Model Proposal: Alpha 1</h1>
+
+<p>As part of the overall push in Magento 2 for better modularity, we’re
+introducing support for a few new ideas in the last push to the Github
+repository.   A major theme of these changes is the separation of
+responsibilities, primarily between business logic on one side and presentation
+logic and user experience on the other.</p>
+
+<p><img src="images/archExtensibility.jpg" alt=""></p>
+
+<p>The diagram above attempts to describe the ideas behind these changes visually.
+Business logic is confined to the service layer and encapsulated in service
+classes.</p>
+
+<h2 id="services">Services</h2>
+
+<p>Services provide a single, common entry point for all interaction between different UIs,
+including Blocks, Controllers and web services; and it can even serve as an
+interface for business logic for other modules.</p>
+
+<p>Services have well defined interfaces described using a service IDL. Service IDL
+documents the list of public methods available to templates, blocks, controllers
+and web services. For each method, the input and output data types are defined
+using XSDs.</p>
+
+<h2 id="webhooks-and-callbacks">Webhooks and Callbacks</h2>
+
+<p>As a nod to the desire to support better remote integrations with Magento, as
+well, we’re not only working on automatically exposing these Services as web
+services to external clients, but with this release, we’re also introducing
+support for real-time integrations with remote system using webhooks and
+callbacks.</p>
+
+<p>Webhooks provide Event Observer-like behavior over HTTP and allow you to be
+notified when certain events occur with Magento and even get real-time data from
+the system.  Callbacks also support communication from your Magento installation
+out to a remote system, but callbacks trigger synchronously and use the response
+from the remote integration in the rest of the user request processing.  As an
+example, in this release we’re supporting the ability to define remote shipping
+carriers where the shipping rates and retrieved over an HTTP call.</p>
+
+<h2 id="better-templating">Better Templating</h2>
+
+<p>On the presentation tier, we’re introducing support for Twig templating.  Theme
+development has always been a big part of Magento store customization, but
+templates written in PHP meant that business logic occasionally was written into
+the .phtml files.  This meant that the business logic was either lost or had to
+be duplicated from theme to theme.  With a templating language like Twig, which
+uses a restricted syntax, it is easier to ensure that your template files will
+only be concerned with the logic needed to render your data.</p>
+
+<p>Since templates need data to render and Services are designed to provide a
+well-managed, consistent view of the data a module can provide, we’ve introduced
+a syntax for binding templates to a service call directly from the layout file.</p>
+
+<h2 id="extension-configuration-improvement">Extension Configuration Improvement</h2>
+
+<p>There’s another small improvement that we’ve made to System Configuration that
+we hope will make your life a little easier.  For most of the configuration
+fields you define, you can describe everything you need in XML – except for the
+values of a select box.  We’ve introduced a syntax with this push that will
+allow you to describe static select options inline, and dynamic options can be
+extracted from the result of a service call.</p>
+
+<p>These concepts have been introduced in isolated parts of the Magento application
+so far in the hopes that you will comment on their value and help direct and
+refine how they work.  This is the first set of many ideas that we’re looking at
+to help improve the modularity of Magento, which should improve not only the
+compatibility of extensions within Magento, but also the upgradability of
+Magento itself.</p>
+
+<h2 id="new-approach-for-creating-extensionscustomizations">New Approach for Creating Extensions/Customizations</h2>
+
+<p>Here’s an outline of how to create an extension that includes some business logic and associated presentation logic:</p>
+
+<ul>
+<li>
+    <p>Create a service that encapsulates the extensions business logic. As part of the service creation, define the service interface using the service IDL. List all methods whose output is need in the presentation tier. Define the method input and output using XSDs</p>
+  </li>
+  <li>
+    <p>Create a template that renders the visual aspects</p>
+  </li>
+  <li>
+    <p>Associate the template’s reuired data to one or more service calls via configuration in layout.xml</p>
+  </li>
+  <li>
+    <p>Optionally, accept configuration for your extension using option lists.</p>
+  </li>
+</ul><p>The sections below describe the steps.</p>
+
+<h3 id="create-the-service-that-serves-data-to-your-extension">1. Create the Service That Serves Data to Your Extension</h3>
+
+<p>You can modify an existing service, such as the Product service. You could use
+the data returned by the product service to populate, say, a product detail
+page.</p>
+
+<p>A service can be shared</p>
+
+<p>Link to <a href="http://praveenck.github.io/docs/service-impl/">Service Implementations</a></p>
+
+<h3 id="create-the-template-for-your-extension">2. Create the Template for Your Extension</h3>
+
+<p>As with the service, you can start by modifying an existing template. Here’s an
+example [<em>__</em>]</p>
+
+<p>Here are some things you should know about using Twig.</p>
+
+<p><a href="http://praveenck.github.io/docs/twig/">Twig templates</a></p>
+
+<h3 id="create-the-visual-component">3. Create the Visual Component</h3>
+
+<p>The visual component takes its appearance from the the template, its data from
+the service, and other configuration from layout.xml. Here’s an example of a
+layout.xml file.</p>
+
+<p>[[* this is a mere definition. what files do you create/modify to have a visual
+component? and do we need a sub-document that discusses visual components more,
+with example? This is the only step without such a sub-document]]*</p>
+
+<h3 id="configure-your-extension">4. Configure Your Extension</h3>
+
+<p>In this step, you’re setting up options for a merchant to select. [*example
+options? what is the extent–what are the possibilities–for this option
+setting?] *</p>
+
+<p>You edit a system.xml file to set your extensions preferences for, for example,
+static and dynamic option lists.</p>
+
+<p><a href="http://praveenck.github.io/docs/option-list/">Extension Configuration</a></p>;T:	post@
+I"/option-list/;T{;{	;I"X1<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="imagetoolbar" content="false">
+<meta name="MSSmartTagsPreventParsing" content="true">
+<title></title>
+<link href="../css/reset.css" rel="stylesheet" type="text/css">
+<link href="../css/960.css" rel="stylesheet" type="text/css">
+<link href="../css/uv_active4d.css" rel="stylesheet" type="text/css">
+<link href="../shared/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
+<link href="../shared/css/pygments.css" media="screen" rel="stylesheet" type="text/css">
+<script src="../shared/js/jquery.js" type="text/javascript"></script><script src="../shared/js/documentation.js" type="text/javascript"></script>
+</head>
+<body class="api">
+    <div id="header-wrapper">
+      <div id="header">
+        <div>
+          <a class="logo" href="../"><img src="../images/logo_developer.png" width="161" height="47" alt="GitHub:Developer"></a>
+          <ul class="nav">
+<li><a href="../">Home</a></li>
+            <li><a href="https://getsatisfaction.com/magento-2-prerelease">Feedback</a></li>
+          </ul>
+</div>
+      </div>
+<!-- #header -->
+    </div>
+<!-- #header-wrapper -->
+
+    <div id="wrapper">
+      <div class="content">
+    <h1 id="extension-configuration">Extension Configuration</h1>
+
+<p>This documents the proposal for defining system configuration options for an
+extension.</p>
+
+<p>In the old model, to provide a drop-down selection box with values for the
+merchant to select from, you had to write a PHP class source model to return the
+array. Now, you can define static option lists in system.xml directly.</p>
+
+<h2 id="configurable-static-option-lists">Configurable Static Option Lists</h2>
+
+<p>Here are a couple of side-by-side comparisons of the old configuration model and
+the new. We’ll look at an example in which we get a customer to show up in a
+group, and set up whether the VAT number appears in the frontend.</p>
+
+<h3 id="options--option-with-string-value">&lt;options&gt; + &lt;option&gt; with string value</h3>
+
+<p>In the old old model, you configure the source model and the source_model class
+(in this example,  Mage_Backend_Model_Config_Source_Yesno).</p>
+
+<pre><code>
+1.  In system.xml:
+
+&lt;field id="auto_group_assign" translate="label comment"
+type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
+showInStore="1"&gt;
+    &lt;label&gt;Enable Automatic Assignment to Customer Group&lt;/label&gt;
+    &lt;comment&gt;To show VAT number on frontend, set Show VAT Number on
+            Frontend option to Yes.&lt;/comment&gt;
+    &lt;source_model&gt;Mage_Backend_Model_Config_Source_Yesno&lt;/source_model&gt;
+&lt;/field&gt;
+
+2.  Create Yesno.php:
+
+class Mage_Backend_Model_Config_Source_Yesno implements
+ Mage_Core_Model_Option_ArrayInterface
+{
+	/**
+	* Options getter
+	*
+	* @return array
+	*/
+	public function toOptionArray()
+    {
+		return array(
+			array('value' =&gt; 1,
+            'label'=&gt;Mage::helper('Mage_Backend_Helper_Data')-&gt;__('Yes')),
+
+			array('value' =&gt; 0,
+            'label'=&gt;Mage::helper('Mage_Backend_Helper_Data')-&gt;__('No')),
+		);
+	}
+	/**
+	* Get options in "key-value" format
+	*
+	* @return array
+	*/
+
+	public function toArray()
+	{
+		return array(
+			0 =&gt;
+            Mage::helper('Mage_Backend_Helper_Data')-&gt;__('No'),
+			1 =&gt;
+            Mage::helper('Mage_Backend_Helper_Data')-&gt;__('Yes'),
+		);
+	}
+}
+            
+</code></pre>
+
+<p>Using the new model, all you have to do is configure options in system.xml.</p>
+
+<pre><code>
+1.  In system.xml:
+
+&lt;field id="auto_group_assign" translate="label comment"
+type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
+showInStore="1"&gt;
+	&lt;label&gt;Enable Automatic Assignment to Customer Group&lt;/label&gt;
+	&lt;comment&gt;To show VAT number on frontend, set Show VAT Number on
+		Frontend option to Yes.&lt;/comment&gt;
+	&lt;options&gt;
+		&lt;option label="Yes"&gt;1&lt;/option&gt;
+		&lt;option label="No"&gt;0&lt;/option&gt;
+	&lt;/options&gt;
+&lt;/field&gt;
+
+</code></pre>
+
+<h3 id="options--option-with-constant-value--classconstant">&lt;options&gt; + &lt;option&gt; with constant value - class::constant</h3>
+
+<p>In this example, we’re setting up tax calculations based on customer location.</p>
+
+<p>Using the old configuration model, it was necessary to configure the source
+model and the source_model class (in this example the class is called
+Mage_Customer_Model_Config_Source_Address_Type)</p>
+
+<pre><code>
+1.  In system.xml:
+
+&lt;field id="tax_calculation_address_type" translate="label"
+type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
+showInStore="1"&gt;
+	&lt;label&gt;Tax Calculation Based On&lt;/label&gt;
+	&lt;source_model&gt;Mage_Customer_Model_Config_Source_Address_Type&lt;/source_model&gt;
+	&lt;depends&gt;
+		&lt;field id="auto_group_assign"&gt;1&lt;/field&gt;
+	&lt;/depends&gt;
+&lt;/field&gt;
+
+2.  Type.php:
+
+	class Mage_Customer_Model_Config_Source_Address_Type implements
+    Mage_Core_Model_Option_ArrayInterface
+	{
+		/**
+		* Retrieve possible customer address types
+		*
+		* @return array
+		*/
+		public function toOptionArray()
+		{
+			return array(
+
+				Mage_Customer_Model_Address_Abstract::TYPE_BILLING =&gt;
+            		Mage::helper('Mage_Customer_Helper_Data')-&gt;__('Billing Address'),
+
+				Mage_Customer_Model_Address_Abstract::TYPE_SHIPPING =&gt;
+				Mage::helper('Mage_Customer_Helper_Data')-&gt;__('Shipping Address')
+			);
+		}
+	}
+
+</code></pre>
+
+<p>Using the new model, all that’s necessary is to configure options in system.xml.</p>
+
+<pre><code>
+1.  system.xml
+
+&lt;field id="tax_calculation_address_type" translate="label"
+type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
+showInStore="1"&gt;
+	&lt;label&gt;Tax Calculation Based On&lt;/label&gt;
+	&lt;options&gt;
+		&lt;option label="Billing
+        Address"&gt;{{Mage_Customer_Model_Address_Abstract::TYPE_BILLING}}&lt;/option&gt;
+        &lt;option label="Shipping
+        Address"&gt;{{Mage_Customer_Model_Address_Abstract::TYPE_SHIPPING}}&lt;/option&gt;
+	&lt;/options&gt;
+	&lt;depends&gt;
+		&lt;field id="auto_group_assign"&gt;1&lt;/field&gt;
+	&lt;/depends&gt;
+&lt;/field&gt;
+
+</code></pre>
+
+<h2 id="configurable-dynamic-option-lists">Configurable Dynamic Option Lists</h2>
+
+<h3 id="options-with-service-call-attribute">&lt;options&gt; with service-call attribute</h3>
+
+<p>Using the old model, you had to configure both the source_model and the
+source_model class (in this example,  Mage_Customer_Model_Config_Source_Group)</p>
+
+<pre><code>
+1.  In system.xml:
+
+&lt;field id="default_group" translate="label" type="select"
+sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1"&gt;
+	&lt;label&gt;Default Group&lt;/label&gt;
+	&lt;source_model&gt;Mage_Customer_Model_Config_Source_Group&lt;/source_model&gt;
+&lt;/field&gt;
+
+2.  Group.php:
+
+class Mage_Customer_Model_Config_Source_Group implements
+Mage_Core_Model_Option_ArrayInterface
+{
+	protected $_options;
+	public function toOptionArray()
+	{
+		if (!$this-&gt;_options) {
+			$this-&gt;_options =
+			Mage::getResourceModel('Mage_Customer_Model_Resource_Group_Collection')
+			-&gt;setRealGroupsFilter()
+			-&gt;loadData()-&gt;toOptionArray();
+	
+			array_unshift($this-&gt;_options, array('value'=&gt; '',
+	            'label'=&gt; Mage::helper('Mage_Customer_Helper_Data')-&gt;__('-- Please
+	            Select --')));
+		}
+		return $this-&gt;_options;
+	}
+}
+
+</code></pre>
+
+<p>Using the new model, you only have to configure options for service-call attributes idField and labelField in system.xml.</p>
+
+<pre><code>
+1.  In system.xml:
+
+&lt;field id="default_group" translate="label" type="select"
+sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1"&gt;
+	&lt;label&gt;Default Group&lt;/label&gt;
+	&lt;options service-call="customerGroup"
+	idField="customer_group_id" labelField="customer_group_code"/&gt;
+&lt;/field&gt;
+
+</code></pre>
+
+<p>Note: The service specified by the service-call attribute returns a list of objects, each containing data in key-value pairs. In the example above, the customerGroup service returns the following list of objects:</p>
+
+<pre><code>
+groups: {
+	object0: {
+		customer_group_id: 1
+		customer_group_code: General
+		tax_class_id: 3
+	}
+	object1: {
+		customer_group_id: 2
+		customer_group_code: Wholesale
+		tax_class_id: 3
+	}
+	object2: {
+		customer_group_id: 3
+		customer_group_code: Retailer
+		tax_class_id: 3
+	}
+}
+
+</code></pre>
+
+<p>The idField identifies the option, in this case the customer_group_id, and the labelField identifies the value, in this case the customer_group_code. In the current example, rendering will result in the following html:</p>
+
+<pre><code>
+&lt;option value="1"&gt;General&lt;/option&gt;
+&lt;option value="2"&gt;Wholesale&lt;/option&gt;
+&lt;option value="3"&gt;Retailer&lt;/option&gt;
+
+</code></pre>
+      </div>
+
+    <div id="js-sidebar" class="sidebar-shell">
+      <div class="js-toggle-list sidebar-module expandable">
+        <ul>
+<li class="js-guides"><h3><a href="../twig/">Twig Templates</a></h3></li>
+          <li class="js-guides"><h3><a href="../service-idl/">Service IDL</a></h3></li>
+          <li class="js-guides"><h3><a href="../service-impl/">Service Implementation</a></h3></li>
+          <li class="js-guides"><h3><a href="../web-api/">Creating Web APIs</a></h3></li>
+          <li class="js-guides"><h3><a href="./">Extension Configuration</a></h3></li>
+        </ul>
+</div> <!-- /sidebar-module -->
+    </div>
+<!-- /sidebar-shell -->
+
+    </div>
+<!-- #wrapper -->
+
+    <div id="footer">
+      <div class="upper_footer">
+        <div class="footer_inner clearfix">
+
+        <!--[if IE]><h4 id="blacktocat_ie">GitHub Links</h4><![endif]-->
+        <h4 id="blacktocat">GitHub Links</h4>
+
+        <ul class="footer_nav">
+<h4>GitHub</h4>
+          <li><a href="https://github.com/about">About</a></li>
+          <li><a href="https://github.com/blog">Blog</a></li>
+          <li><a href="https://github.com/features">Features</a></li>
+          <li><a href="https://github.com/contact">Contact &amp; Support</a></li>
+          <li><a href="https://github.com/training">Training</a></li>
+          <li><a href="http://status.github.com/">Site Status</a></li>
+        </ul>
+<ul class="footer_nav">
+<h4>Tools</h4>
+          <li><a href="http://mac.github.com/">GitHub for Mac</a></li>
+          <li><a href="http://mobile.github.com/">Issues for iPhone</a></li>
+          <li><a href="https://gist.github.com">Gist: Code Snippets</a></li>
+          <li><a href="http://enterprise.github.com/">GitHub Enterprise</a></li>
+          <li><a href="http://jobs.github.com/">Job Board</a></li>
+        </ul>
+<ul class="footer_nav">
+<h4>Extras</h4>
+          <li><a href="http://shop.github.com/">GitHub Shop</a></li>
+          <li><a href="http://octodex.github.com/">The Octodex</a></li>
+        </ul>
+<ul class="footer_nav">
+<h4>Documentation</h4>
+          <li><a href="http://help.github.com/">GitHub Help</a></li>
+          <li><a href="http://developer.github.com/">Developer API</a></li>
+          <li><a href="http://github.github.com/github-flavored-markdown/">GitHub Flavored Markdown</a></li>
+          <li><a href="http://pages.github.com/">GitHub Pages</a></li>
+        </ul>
+</div>
+<!-- /.site -->
+      </div>
+<!-- /.upper_footer -->
+
+      <div class="lower_footer">
+        <div class="footer_inner clearfix">
+            <div id="legal">
+              <!--[if IE]><a class="home_ie" href="http://github.com">Home</a><![endif]-->
+              <a class="home" href="http://github.com">Home</a>
+
+              <ul id="legal_links">
+<li><a href="http://help.github.com/terms-of-service/">Terms of Service</a></li>
+                <li><a href="http://help.github.com/privacy-policy/">Privacy</a></li>
+                <li><a href="http://help.github.com/security/">Security</a></li>
+              </ul>
+<p>© <span id="year">year</span> GitHub Inc. All rights reserved.</p>
+            </div>
+<!-- /#legal or /#legal_ie-->
+        </div>
+<!-- /.site -->
+      </div>
+<!-- /.lower_footer -->
+    </div>
+<!-- /#footer -->
+    <script type="text/javascript">
+      var _gauges = _gauges || [];
+      (function() {
+        var t   = document.createElement('script');
+        t.type  = 'text/javascript';
+        t.async = true;
+        t.id    = 'gauges-tracker';
+        t.setAttribute('data-site-id', '4f2038e0cb25bc1b55000003');
+        t.src = '//secure.gaug.es/track.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(t, s);
+      })();
+    </script>
+</body>
+</html>
+;T;	I"�Extension Configuration
+=======================
+
+This documents the proposal for defining system configuration options for an
+extension.
+
+In the old model, to provide a drop-down selection box with values for the
+merchant to select from, you had to write a PHP class source model to return the
+array. Now, you can define static option lists in system.xml directly.
+
+Configurable Static Option Lists
+--------------------------------
+
+Here are a couple of side-by-side comparisons of the old configuration model and
+the new. We'll look at an example in which we get a customer to show up in a
+group, and set up whether the VAT number appears in the frontend.
+
+### <options\> + <option\> with string value
+
+In the old old model, you configure the source model and the source_model class
+(in this example,  Mage_Backend_Model_Config_Source_Yesno).
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1.  In system.xml:
+
+<field id="auto_group_assign" translate="label comment"
+type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
+showInStore="1">
+    <label>Enable Automatic Assignment to Customer Group</label>
+    <comment>To show VAT number on frontend, set Show VAT Number on
+            Frontend option to Yes.</comment>
+    <source_model>Mage_Backend_Model_Config_Source_Yesno</source_model>
+</field>
+
+2.  Create Yesno.php:
+
+class Mage_Backend_Model_Config_Source_Yesno implements
+ Mage_Core_Model_Option_ArrayInterface
+{
+	/**
+	* Options getter
+	*
+	* @return array
+	*/
+	public function toOptionArray()
+    {
+		return array(
+			array('value' => 1,
+            'label'=>Mage::helper('Mage_Backend_Helper_Data')->__('Yes')),
+
+			array('value' => 0,
+            'label'=>Mage::helper('Mage_Backend_Helper_Data')->__('No')),
+		);
+	}
+	/**
+	* Get options in "key-value" format
+	*
+	* @return array
+	*/
+
+	public function toArray()
+	{
+		return array(
+			0 =>
+            Mage::helper('Mage_Backend_Helper_Data')->__('No'),
+			1 =>
+            Mage::helper('Mage_Backend_Helper_Data')->__('Yes'),
+		);
+	}
+}
+            
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Using the new model, all you have to do is configure options in system.xml.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1.  In system.xml:
+
+<field id="auto_group_assign" translate="label comment"
+type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
+showInStore="1">
+	<label>Enable Automatic Assignment to Customer Group</label>
+	<comment>To show VAT number on frontend, set Show VAT Number on
+		Frontend option to Yes.</comment>
+	<options>
+		<option label="Yes">1</option>
+		<option label="No">0</option>
+	</options>
+</field>
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+### <options\> + <option\> with constant value - class::constant
+
+In this example, we're setting up tax calculations based on customer location.
+
+Using the old configuration model, it was necessary to configure the source
+model and the source_model class (in this example the class is called
+Mage_Customer_Model_Config_Source_Address_Type)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1.  In system.xml:
+
+<field id="tax_calculation_address_type" translate="label"
+type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
+showInStore="1">
+	<label>Tax Calculation Based On</label>
+	<source_model>Mage_Customer_Model_Config_Source_Address_Type</source_model>
+	<depends>
+		<field id="auto_group_assign">1</field>
+	</depends>
+</field>
+
+2.  Type.php:
+
+	class Mage_Customer_Model_Config_Source_Address_Type implements
+    Mage_Core_Model_Option_ArrayInterface
+	{
+		/**
+		* Retrieve possible customer address types
+		*
+		* @return array
+		*/
+		public function toOptionArray()
+		{
+			return array(
+
+				Mage_Customer_Model_Address_Abstract::TYPE_BILLING =>
+            		Mage::helper('Mage_Customer_Helper_Data')->__('Billing Address'),
+
+				Mage_Customer_Model_Address_Abstract::TYPE_SHIPPING =>
+				Mage::helper('Mage_Customer_Helper_Data')->__('Shipping Address')
+			);
+		}
+	}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Using the new model, all that's necessary is to configure options in system.xml.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1.  system.xml
+
+<field id="tax_calculation_address_type" translate="label"
+type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
+showInStore="1">
+	<label>Tax Calculation Based On</label>
+	<options>
+		<option label="Billing
+        Address">{{Mage_Customer_Model_Address_Abstract::TYPE_BILLING}}</option>
+        <option label="Shipping
+        Address">{{Mage_Customer_Model_Address_Abstract::TYPE_SHIPPING}}</option>
+	</options>
+	<depends>
+		<field id="auto_group_assign">1</field>
+	</depends>
+</field>
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Configurable Dynamic Option Lists
+---------------------------------
+
+### <options\> with service-call attribute
+
+Using the old model, you had to configure both the source_model and the
+source_model class (in this example,  Mage_Customer_Model_Config_Source_Group)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1.  In system.xml:
+
+<field id="default_group" translate="label" type="select"
+sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+	<label>Default Group</label>
+	<source_model>Mage_Customer_Model_Config_Source_Group</source_model>
+</field>
+
+2.  Group.php:
+
+class Mage_Customer_Model_Config_Source_Group implements
+Mage_Core_Model_Option_ArrayInterface
+{
+	protected $_options;
+	public function toOptionArray()
+	{
+		if (!$this->_options) {
+			$this->_options =
+			Mage::getResourceModel('Mage_Customer_Model_Resource_Group_Collection')
+			->setRealGroupsFilter()
+			->loadData()->toOptionArray();
+	
+			array_unshift($this->_options, array('value'=> '',
+	            'label'=> Mage::helper('Mage_Customer_Helper_Data')->__('-- Please
+	            Select --')));
+		}
+		return $this->_options;
+	}
+}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Using the new model, you only have to configure options for service-call attributes idField and labelField in system.xml.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1.  In system.xml:
+
+<field id="default_group" translate="label" type="select"
+sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+	<label>Default Group</label>
+	<options service-call="customerGroup"
+	idField="customer_group_id" labelField="customer_group_code"/>
+</field>
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Note: The service specified by the service-call attribute returns a list of objects, each containing data in key-value pairs. In the example above, the customerGroup service returns the following list of objects:
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+groups: {
+	object0: {
+		customer_group_id: 1
+		customer_group_code: General
+		tax_class_id: 3
+	}
+	object1: {
+		customer_group_id: 2
+		customer_group_code: Wholesale
+		tax_class_id: 3
+	}
+	object2: {
+		customer_group_id: 3
+		customer_group_code: Retailer
+		tax_class_id: 3
+	}
+}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The idField identifies the option, in this case the customer_group_id, and the labelField identifies the value, in this case the customer_group_code. In the current example, rendering will result in the following html:
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+<option value="1">General</option>
+<option value="2">Wholesale</option>
+<option value="3">Retailer</option>
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+;T;
+I"�<h1 id="extension-configuration">Extension Configuration</h1>
+
+<p>This documents the proposal for defining system configuration options for an
+extension.</p>
+
+<p>In the old model, to provide a drop-down selection box with values for the
+merchant to select from, you had to write a PHP class source model to return the
+array. Now, you can define static option lists in system.xml directly.</p>
+
+<h2 id="configurable-static-option-lists">Configurable Static Option Lists</h2>
+
+<p>Here are a couple of side-by-side comparisons of the old configuration model and
+the new. We’ll look at an example in which we get a customer to show up in a
+group, and set up whether the VAT number appears in the frontend.</p>
+
+<h3 id="options--option-with-string-value">&lt;options&gt; + &lt;option&gt; with string value</h3>
+
+<p>In the old old model, you configure the source model and the source_model class
+(in this example,  Mage_Backend_Model_Config_Source_Yesno).</p>
+
+<pre><code>
+1.  In system.xml:
+
+&lt;field id="auto_group_assign" translate="label comment"
+type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
+showInStore="1"&gt;
+    &lt;label&gt;Enable Automatic Assignment to Customer Group&lt;/label&gt;
+    &lt;comment&gt;To show VAT number on frontend, set Show VAT Number on
+            Frontend option to Yes.&lt;/comment&gt;
+    &lt;source_model&gt;Mage_Backend_Model_Config_Source_Yesno&lt;/source_model&gt;
+&lt;/field&gt;
+
+2.  Create Yesno.php:
+
+class Mage_Backend_Model_Config_Source_Yesno implements
+ Mage_Core_Model_Option_ArrayInterface
+{
+	/**
+	* Options getter
+	*
+	* @return array
+	*/
+	public function toOptionArray()
+    {
+		return array(
+			array('value' =&gt; 1,
+            'label'=&gt;Mage::helper('Mage_Backend_Helper_Data')-&gt;__('Yes')),
+
+			array('value' =&gt; 0,
+            'label'=&gt;Mage::helper('Mage_Backend_Helper_Data')-&gt;__('No')),
+		);
+	}
+	/**
+	* Get options in "key-value" format
+	*
+	* @return array
+	*/
+
+	public function toArray()
+	{
+		return array(
+			0 =&gt;
+            Mage::helper('Mage_Backend_Helper_Data')-&gt;__('No'),
+			1 =&gt;
+            Mage::helper('Mage_Backend_Helper_Data')-&gt;__('Yes'),
+		);
+	}
+}
+            
+</code></pre>
+
+<p>Using the new model, all you have to do is configure options in system.xml.</p>
+
+<pre><code>
+1.  In system.xml:
+
+&lt;field id="auto_group_assign" translate="label comment"
+type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
+showInStore="1"&gt;
+	&lt;label&gt;Enable Automatic Assignment to Customer Group&lt;/label&gt;
+	&lt;comment&gt;To show VAT number on frontend, set Show VAT Number on
+		Frontend option to Yes.&lt;/comment&gt;
+	&lt;options&gt;
+		&lt;option label="Yes"&gt;1&lt;/option&gt;
+		&lt;option label="No"&gt;0&lt;/option&gt;
+	&lt;/options&gt;
+&lt;/field&gt;
+
+</code></pre>
+
+<h3 id="options--option-with-constant-value--classconstant">&lt;options&gt; + &lt;option&gt; with constant value - class::constant</h3>
+
+<p>In this example, we’re setting up tax calculations based on customer location.</p>
+
+<p>Using the old configuration model, it was necessary to configure the source
+model and the source_model class (in this example the class is called
+Mage_Customer_Model_Config_Source_Address_Type)</p>
+
+<pre><code>
+1.  In system.xml:
+
+&lt;field id="tax_calculation_address_type" translate="label"
+type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
+showInStore="1"&gt;
+	&lt;label&gt;Tax Calculation Based On&lt;/label&gt;
+	&lt;source_model&gt;Mage_Customer_Model_Config_Source_Address_Type&lt;/source_model&gt;
+	&lt;depends&gt;
+		&lt;field id="auto_group_assign"&gt;1&lt;/field&gt;
+	&lt;/depends&gt;
+&lt;/field&gt;
+
+2.  Type.php:
+
+	class Mage_Customer_Model_Config_Source_Address_Type implements
+    Mage_Core_Model_Option_ArrayInterface
+	{
+		/**
+		* Retrieve possible customer address types
+		*
+		* @return array
+		*/
+		public function toOptionArray()
+		{
+			return array(
+
+				Mage_Customer_Model_Address_Abstract::TYPE_BILLING =&gt;
+            		Mage::helper('Mage_Customer_Helper_Data')-&gt;__('Billing Address'),
+
+				Mage_Customer_Model_Address_Abstract::TYPE_SHIPPING =&gt;
+				Mage::helper('Mage_Customer_Helper_Data')-&gt;__('Shipping Address')
+			);
+		}
+	}
+
+</code></pre>
+
+<p>Using the new model, all that’s necessary is to configure options in system.xml.</p>
+
+<pre><code>
+1.  system.xml
+
+&lt;field id="tax_calculation_address_type" translate="label"
+type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
+showInStore="1"&gt;
+	&lt;label&gt;Tax Calculation Based On&lt;/label&gt;
+	&lt;options&gt;
+		&lt;option label="Billing
+        Address"&gt;{{Mage_Customer_Model_Address_Abstract::TYPE_BILLING}}&lt;/option&gt;
+        &lt;option label="Shipping
+        Address"&gt;{{Mage_Customer_Model_Address_Abstract::TYPE_SHIPPING}}&lt;/option&gt;
+	&lt;/options&gt;
+	&lt;depends&gt;
+		&lt;field id="auto_group_assign"&gt;1&lt;/field&gt;
+	&lt;/depends&gt;
+&lt;/field&gt;
+
+</code></pre>
+
+<h2 id="configurable-dynamic-option-lists">Configurable Dynamic Option Lists</h2>
+
+<h3 id="options-with-service-call-attribute">&lt;options&gt; with service-call attribute</h3>
+
+<p>Using the old model, you had to configure both the source_model and the
+source_model class (in this example,  Mage_Customer_Model_Config_Source_Group)</p>
+
+<pre><code>
+1.  In system.xml:
+
+&lt;field id="default_group" translate="label" type="select"
+sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1"&gt;
+	&lt;label&gt;Default Group&lt;/label&gt;
+	&lt;source_model&gt;Mage_Customer_Model_Config_Source_Group&lt;/source_model&gt;
+&lt;/field&gt;
+
+2.  Group.php:
+
+class Mage_Customer_Model_Config_Source_Group implements
+Mage_Core_Model_Option_ArrayInterface
+{
+	protected $_options;
+	public function toOptionArray()
+	{
+		if (!$this-&gt;_options) {
+			$this-&gt;_options =
+			Mage::getResourceModel('Mage_Customer_Model_Resource_Group_Collection')
+			-&gt;setRealGroupsFilter()
+			-&gt;loadData()-&gt;toOptionArray();
+	
+			array_unshift($this-&gt;_options, array('value'=&gt; '',
+	            'label'=&gt; Mage::helper('Mage_Customer_Helper_Data')-&gt;__('-- Please
+	            Select --')));
+		}
+		return $this-&gt;_options;
+	}
+}
+
+</code></pre>
+
+<p>Using the new model, you only have to configure options for service-call attributes idField and labelField in system.xml.</p>
+
+<pre><code>
+1.  In system.xml:
+
+&lt;field id="default_group" translate="label" type="select"
+sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1"&gt;
+	&lt;label&gt;Default Group&lt;/label&gt;
+	&lt;options service-call="customerGroup"
+	idField="customer_group_id" labelField="customer_group_code"/&gt;
+&lt;/field&gt;
+
+</code></pre>
+
+<p>Note: The service specified by the service-call attribute returns a list of objects, each containing data in key-value pairs. In the example above, the customerGroup service returns the following list of objects:</p>
+
+<pre><code>
+groups: {
+	object0: {
+		customer_group_id: 1
+		customer_group_code: General
+		tax_class_id: 3
+	}
+	object1: {
+		customer_group_id: 2
+		customer_group_code: Wholesale
+		tax_class_id: 3
+	}
+	object2: {
+		customer_group_id: 3
+		customer_group_code: Retailer
+		tax_class_id: 3
+	}
+}
+
+</code></pre>
+
+<p>The idField identifies the option, in this case the customer_group_id, and the labelField identifies the value, in this case the customer_group_code. In the current example, rendering will result in the following html:</p>
+
+<pre><code>
+&lt;option value="1"&gt;General&lt;/option&gt;
+&lt;option value="2"&gt;Wholesale&lt;/option&gt;
+&lt;option value="3"&gt;Retailer&lt;/option&gt;
+
+</code></pre>;T;@I"/service-idl/;T{;{	;I"W@<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="imagetoolbar" content="false">
+<meta name="MSSmartTagsPreventParsing" content="true">
+<title></title>
+<link href="../css/reset.css" rel="stylesheet" type="text/css">
+<link href="../css/960.css" rel="stylesheet" type="text/css">
+<link href="../css/uv_active4d.css" rel="stylesheet" type="text/css">
+<link href="../shared/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
+<link href="../shared/css/pygments.css" media="screen" rel="stylesheet" type="text/css">
+<script src="../shared/js/jquery.js" type="text/javascript"></script><script src="../shared/js/documentation.js" type="text/javascript"></script>
+</head>
+<body class="api">
+    <div id="header-wrapper">
+      <div id="header">
+        <div>
+          <a class="logo" href="../"><img src="../images/logo_developer.png" width="161" height="47" alt="GitHub:Developer"></a>
+          <ul class="nav">
+<li><a href="../">Home</a></li>
+            <li><a href="https://getsatisfaction.com/magento-2-prerelease">Feedback</a></li>
+          </ul>
+</div>
+      </div>
+<!-- #header -->
+    </div>
+<!-- #header-wrapper -->
+
+    <div id="wrapper">
+      <div class="content">
+    <h1 id="service-idl">Service IDL</h1>
+
+<p>The proposed new architecture consolidates all of an extension’s business into a
+service layer. Presented here is an Interface Definition Language specification
+that describes the services exposed through the service layer. An IDL formally
+describes the functionality a service provides (methods, inputs and outputs of
+methods) without exposing the details of how that functionality is implemented.</p>
+
+<p>Some advantages of using an IDL:</p>
+
+<ul>
+<li>
+    <p>Allows for well-defined and versioned interfaces that the services and
+visual components depend on. This makes it simpler to control compatibility
+issues during upgrades.</p>
+  </li>
+  <li>
+    <p>An IDL can support more than one version of the domain/business logic
+running in the Magento instance at the same time, increasing backward
+compatibility.</p>
+  </li>
+</ul>
+<h2 id="overview">Overview</h2>
+
+<p>This document specifies the Interface Definition Language (IDL) that describes
+the operations permitted by the Service layer. To support REST and SOAP Web
+APIs, WADL and WSDL will be auto-generated from the IDL.</p>
+
+<p>The data structure used in the payloads is defined in an XSD. The metadata about
+a service call, such as version, required permissions, and locations of XSDs,
+are carried by PHP annotations. Data structure and metadata are described in
+what follows.</p>
+
+<h2 id="php-annotations">PHP Annotations</h2>
+
+<h3 id="section"></h3>
+
+<table>
+<table style="border:1px solid black;border-collapse:collapse;">
+<tr>
+<th style="border:1px solid black;"> Annotation </th>
+<th style="border:1px solid black;"> Scope </th>
+<th style="border:1px solid black;"> Values </th>
+<th style="border:1px solid black;"> Required </th>
+<th style="border:1px solid black;"> Definition </th>
+</tr>
+<tr>
+<td style="border:1px solid black;"> @Service </td>
+<td style="border:1px solid black;"> service </td>
+<td style="border:1px solid black;"> string </td>
+<td style="border:1px solid black;"> X </td>
+<td style="border:1px solid black;"> Identifies the service being implemented </td>
+</tr>
+<tr>
+<td style="border:1px solid black;"> @Version </td>
+<td style="border:1px solid black;"> service </td>
+<td style="border:1px solid black;"> N.M. </td>
+<td style="border:1px solid black;"> X </td>
+<td style="border:1px solid black;"> Service interface version </td>
+</tr>
+<tr>
+<td style="border:1px solid black;"> @Consumes </td>
+<td style="border:1px solid black;"> Call </td>
+<td style="border:1px solid black;"> String </td>
+<td style="border:1px solid black;"> X </td>
+<td style="border:1px solid black;"> Identifies the location of the XSD that defines the structure of input parameters and the root element of the data structure. </td>
+</tr>
+<tr>
+<td style="border:1px solid black;"> @Produces </td>
+<td style="border:1px solid black;"> Call </td>
+<td style="border:1px solid black;"> String </td>
+<td style="border:1px solid black;"> X </td>
+<td style="border:1px solid black;"> Identifies the location of the XSD that defines the structure of output parameters and the root element of the data structure. </td>
+</tr>
+</table>
+
+### 
+
+### Service Calls
+
+A service operation is implemented as a class method. The class maps to the
+service via the requirement that operations from a service be grouped into a
+single class.
+
+**Example of a service call**
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+/**
+@Service shipping
+ * @Version 2
+*/
+
+class ShippingService extends MageService 
+{
+
+    /**
+     * @Permissions [shipping, inventory]
+     * @Consumes (schema="shipping.xsd", element="getCarriersRequest")
+     * @Produces (schema="shipping.xsd", element="getCarriersResponse")
+     */
+
+    public function getCarriers ($params)
+    {
+
+    ...
+
+    }
+}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Here, the input data structure is identified in the @Consumes annotation as
+belonging to the <getcarriersrequest> element in shipping/consumerux.xsd, and the
+output data structure is identified in the @Produces annotation as belonging to
+the <getcarriersresponse> element in shipping/consumerux.xsd. The shipping/consumerux.xsd file is
+shown below.
+
+The PHP function receives an associative array ($params function parameter)
+reflecting the structure described by the element <getcarriersrequest>. It returns
+another associative array reflecting the structure described by the element
+<getcarriersresponse>.
+
+XSD
+---
+
+The XSD is used to describe the data structure passed in during the API call as
+well as the returned data. During runtime data is stored into a associative
+array.
+
+**shipping/consumerux.xsd**
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+<?xml version="1.0"?><schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <complextype name="address_type">
+        <sequence>
+            <element name="street" type="xs:string"></element>
+            <element name="city" type="xs:string"></element>
+            <element name="region_id" type="xs:integer"></element>
+            <element name="country_id" type="xs:string"></element>
+            <element name="postcode" type="xs:integer"></element>
+            <element name="meta_data" minoccurs="0">
+                <complextype>
+                    <sequence>
+                        <element name="lift_gate_required" type="xs:boolean" minoccurs="0"></element>
+                    </sequence>
+                </complextype>
+            </element>
+        </sequence>
+    </complextype>
+
+    <complextype name="item_type">
+        <sequence>
+            <element name="sku" type="xs:integer"></element>
+            <element name="name" type="xs:string"></element>
+            <element name="value" type="xs:string"></element>
+            <element name="weight" type="xs:string"></element>
+            <element name="height" type="xs:string"></element>
+            <element name="width" type="xs:string"></element>
+            <element name="depth" type="xs:string"></element>
+            <element name="qty" type="xs:integer"></element>
+            <element name="free_shipping" type="xs:boolean"></element>
+            <element name="meta_data">
+                <complextype>
+                    <sequence>
+                        <element name="hazard" type="xs:boolean" minoccurs="0"></element>
+                    </sequence>
+                </complextype>
+            </element>
+            <element name="parent" minoccurs="0">
+                <complextype>
+                    <sequence>
+                        <element name="item" type="item_type"></element>
+                    </sequence>
+                </complextype>
+            </element>
+            <element name="children" minoccurs="0">
+                <complextype>
+                    <sequence>
+                        <element name="item" type="item_type"></element>
+                    </sequence>
+                </complextype>
+            </element>
+        </sequence>
+    </complextype>
+
+    <element name="getCarriersRequest">
+        <complextype>
+            <sequence>
+                <element name="rate_request">
+                    <complextype>
+                        <sequence>
+                            <element name="orig" type="address_type"></element>
+                            <element name="dest" type="address_type"></element>
+                            <element name="list_of_items">
+                                <complextype>
+                                    <sequence maxoccurs="unbounded">
+                                        <element name="item" type="item_type"></element>
+                                    </sequence>
+                                </complextype>
+                            </element>
+                            <element name="carrier_configuration" maxoccurs="1">
+                                <complextype>
+                                    <sequence>
+                                        <element name="insurance" type="xs:boolean"></element>
+                                        <element name="handling" type="xs:string"></element>
+                                        <element name="pickup" type="xs:string"></element>
+                                    </sequence>
+                                </complextype>
+                            </element>
+                        </sequence>
+                    </complextype>
+                </element>
+            </sequence>
+        </complextype>
+    </element>
+
+    <complextype name="method_type">
+        <sequence>
+            <element name="carrier" type="xs:string"></element>
+            <element name="carrier_title" type="xs:string"></element>
+            <element name="method" type="xs:string"></element>
+            <element name="method_title" type="xs:string"></element>
+            <element name="price" type="xs:string"></element>
+        </sequence>
+    </complextype>
+
+    <element name="getCarriersResponse">
+        <complextype>
+            <sequence>
+                <element name="shipping_methods">
+                    <complextype>
+                        <sequence maxoccurs="unbounded">
+                            <element name="method" type="method_type"></element>
+                        </sequence>
+                    </complextype>
+                </element>
+            </sequence>
+        </complextype>
+    </element></schema>
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+</getcarriersresponse></getcarriersrequest></getcarriersresponse></getcarriersrequest>
+</table>
+</div>
+
+    <div id="js-sidebar" class="sidebar-shell">
+      <div class="js-toggle-list sidebar-module expandable">
+        <ul>
+<li class="js-guides"><h3><a href="../twig/">Twig Templates</a></h3></li>
+          <li class="js-guides"><h3><a href="./">Service IDL</a></h3></li>
+          <li class="js-guides"><h3><a href="../service-impl/">Service Implementation</a></h3></li>
+          <li class="js-guides"><h3><a href="../web-api/">Creating Web APIs</a></h3></li>
+          <li class="js-guides"><h3><a href="../option-list/">Extension Configuration</a></h3></li>
+        </ul>
+</div> <!-- /sidebar-module -->
+    </div>
+<!-- /sidebar-shell -->
+
+    </div>
+<!-- #wrapper -->
+
+    <div id="footer">
+      <div class="upper_footer">
+        <div class="footer_inner clearfix">
+
+        <!--[if IE]><h4 id="blacktocat_ie">GitHub Links</h4><![endif]-->
+        <h4 id="blacktocat">GitHub Links</h4>
+
+        <ul class="footer_nav">
+<h4>GitHub</h4>
+          <li><a href="https://github.com/about">About</a></li>
+          <li><a href="https://github.com/blog">Blog</a></li>
+          <li><a href="https://github.com/features">Features</a></li>
+          <li><a href="https://github.com/contact">Contact &amp; Support</a></li>
+          <li><a href="https://github.com/training">Training</a></li>
+          <li><a href="http://status.github.com/">Site Status</a></li>
+        </ul>
+<ul class="footer_nav">
+<h4>Tools</h4>
+          <li><a href="http://mac.github.com/">GitHub for Mac</a></li>
+          <li><a href="http://mobile.github.com/">Issues for iPhone</a></li>
+          <li><a href="https://gist.github.com">Gist: Code Snippets</a></li>
+          <li><a href="http://enterprise.github.com/">GitHub Enterprise</a></li>
+          <li><a href="http://jobs.github.com/">Job Board</a></li>
+        </ul>
+<ul class="footer_nav">
+<h4>Extras</h4>
+          <li><a href="http://shop.github.com/">GitHub Shop</a></li>
+          <li><a href="http://octodex.github.com/">The Octodex</a></li>
+        </ul>
+<ul class="footer_nav">
+<h4>Documentation</h4>
+          <li><a href="http://help.github.com/">GitHub Help</a></li>
+          <li><a href="http://developer.github.com/">Developer API</a></li>
+          <li><a href="http://github.github.com/github-flavored-markdown/">GitHub Flavored Markdown</a></li>
+          <li><a href="http://pages.github.com/">GitHub Pages</a></li>
+        </ul>
+</div>
+<!-- /.site -->
+      </div>
+<!-- /.upper_footer -->
+
+      <div class="lower_footer">
+        <div class="footer_inner clearfix">
+            <div id="legal">
+              <!--[if IE]><a class="home_ie" href="http://github.com">Home</a><![endif]-->
+              <a class="home" href="http://github.com">Home</a>
+
+              <ul id="legal_links">
+<li><a href="http://help.github.com/terms-of-service/">Terms of Service</a></li>
+                <li><a href="http://help.github.com/privacy-policy/">Privacy</a></li>
+                <li><a href="http://help.github.com/security/">Security</a></li>
+              </ul>
+<p>© <span id="year">year</span> GitHub Inc. All rights reserved.</p>
+            </div>
+<!-- /#legal or /#legal_ie-->
+        </div>
+<!-- /.site -->
+      </div>
+<!-- /.lower_footer -->
+    </div>
+<!-- /#footer -->
+    <script type="text/javascript">
+      var _gauges = _gauges || [];
+      (function() {
+        var t   = document.createElement('script');
+        t.type  = 'text/javascript';
+        t.async = true;
+        t.id    = 'gauges-tracker';
+        t.setAttribute('data-site-id', '4f2038e0cb25bc1b55000003');
+        t.src = '//secure.gaug.es/track.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(t, s);
+      })();
+    </script>
+</body>
+</html>
+;T;	I"�+Service IDL
+===========
+
+The proposed new architecture consolidates all of an extension's business into a
+service layer. Presented here is an Interface Definition Language specification
+that describes the services exposed through the service layer. An IDL formally
+describes the functionality a service provides (methods, inputs and outputs of
+methods) without exposing the details of how that functionality is implemented.
+
+Some advantages of using an IDL:
+
+-   Allows for well-defined and versioned interfaces that the services and
+    visual components depend on. This makes it simpler to control compatibility
+    issues during upgrades.
+
+-   An IDL can support more than one version of the domain/business logic
+    running in the Magento instance at the same time, increasing backward
+    compatibility.
+
+Overview
+--------
+
+This document specifies the Interface Definition Language (IDL) that describes
+the operations permitted by the Service layer. To support REST and SOAP Web
+APIs, WADL and WSDL will be auto-generated from the IDL.
+
+The data structure used in the payloads is defined in an XSD. The metadata about
+a service call, such as version, required permissions, and locations of XSDs,
+are carried by PHP annotations. Data structure and metadata are described in
+what follows.
+
+PHP Annotations
+---------------
+
+### 
+
+<table>
+<table style="border:1px solid black;border-collapse:collapse;">
+<tr>
+<th style="border:1px solid black;"> Annotation </th>
+<th style="border:1px solid black;"> Scope </th>
+<th style="border:1px solid black;"> Values </th>
+<th style="border:1px solid black;"> Required </th>
+<th style="border:1px solid black;"> Definition </th>
+</tr>
+<tr>
+<td style="border:1px solid black;"> @Service </td>
+<td style="border:1px solid black;"> service </td>
+<td style="border:1px solid black;"> string </td>
+<td style="border:1px solid black;"> X </td>
+<td style="border:1px solid black;"> Identifies the service being implemented </td>
+</tr>
+<tr>
+<td style="border:1px solid black;"> @Version </td>
+<td style="border:1px solid black;"> service </td>
+<td style="border:1px solid black;"> N.M. </td>
+<td style="border:1px solid black;"> X </td>
+<td style="border:1px solid black;"> Service interface version </td>
+</tr>
+<tr>
+<td style="border:1px solid black;"> @Consumes </td>
+<td style="border:1px solid black;"> Call </td>
+<td style="border:1px solid black;"> String </td>
+<td style="border:1px solid black;"> X </td>
+<td style="border:1px solid black;"> Identifies the location of the XSD that defines the structure of input parameters and the root element of the data structure. </td>
+</tr>
+<tr>
+<td style="border:1px solid black;"> @Produces </td>
+<td style="border:1px solid black;"> Call </td>
+<td style="border:1px solid black;"> String </td>
+<td style="border:1px solid black;"> X </td>
+<td style="border:1px solid black;"> Identifies the location of the XSD that defines the structure of output parameters and the root element of the data structure. </td>
+</tr>
+</table>
+
+### 
+
+### Service Calls
+
+A service operation is implemented as a class method. The class maps to the
+service via the requirement that operations from a service be grouped into a
+single class.
+
+**Example of a service call**
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+/**
+@Service shipping
+ * @Version 2
+*/
+
+class ShippingService extends MageService 
+{
+
+    /**
+     * @Permissions [shipping, inventory]
+     * @Consumes (schema="shipping.xsd", element="getCarriersRequest")
+     * @Produces (schema="shipping.xsd", element="getCarriersResponse")
+     */
+
+    public function getCarriers ($params)
+    {
+
+    ...
+
+    }
+}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Here, the input data structure is identified in the @Consumes annotation as
+belonging to the <getCarriersRequest> element in shipping/consumerux.xsd, and the
+output data structure is identified in the @Produces annotation as belonging to
+the <getCarriersResponse> element in shipping/consumerux.xsd. The shipping/consumerux.xsd file is
+shown below.
+
+The PHP function receives an associative array ($params function parameter)
+reflecting the structure described by the element <getCarriersRequest>. It returns
+another associative array reflecting the structure described by the element
+<getCarriersResponse>.
+
+XSD
+---
+
+The XSD is used to describe the data structure passed in during the API call as
+well as the returned data. During runtime data is stored into a associative
+array.
+
+**shipping/consumerux.xsd**
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:complexType name="address_type">
+        <xs:sequence>
+            <xs:element name="street" type="xs:string"/>
+            <xs:element name="city" type="xs:string"/>
+            <xs:element name="region_id" type="xs:integer"/>
+            <xs:element name="country_id" type="xs:string"/>
+            <xs:element name="postcode" type="xs:integer"/>
+            <xs:element name="meta_data" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="lift_gate_required" type="xs:boolean" minOccurs="0"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="item_type">
+        <xs:sequence>
+            <xs:element name="sku" type="xs:integer"/>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="value" type="xs:string"/>
+            <xs:element name="weight" type="xs:string"/>
+            <xs:element name="height" type="xs:string"/>
+            <xs:element name="width" type="xs:string"/>
+            <xs:element name="depth" type="xs:string"/>
+            <xs:element name="qty" type="xs:integer"/>
+            <xs:element name="free_shipping" type="xs:boolean"/>
+            <xs:element name="meta_data">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="hazard" type="xs:boolean" minOccurs="0"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="parent" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="item" type="item_type"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="children" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="item" type="item_type" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="getCarriersRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="rate_request">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="orig" type="address_type"/>
+                            <xs:element name="dest" type="address_type"/>
+                            <xs:element name="list_of_items">
+                                <xs:complexType>
+                                    <xs:sequence maxOccurs="unbounded">
+                                        <xs:element name="item" type="item_type" />
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="carrier_configuration" maxOccurs="1">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="insurance" type="xs:boolean"/>
+                                        <xs:element name="handling" type="xs:string"/>
+                                        <xs:element name="pickup" type="xs:string"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="method_type">
+        <xs:sequence>
+            <xs:element name="carrier" type="xs:string"/>
+            <xs:element name="carrier_title" type="xs:string"/>
+            <xs:element name="method" type="xs:string"/>
+            <xs:element name="method_title" type="xs:string"/>
+            <xs:element name="price" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="getCarriersResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="shipping_methods">
+                    <xs:complexType>
+                        <xs:sequence maxOccurs="unbounded">
+                            <xs:element name="method" type="method_type" />
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+;T;
+I"�,<h1 id="service-idl">Service IDL</h1>
+
+<p>The proposed new architecture consolidates all of an extension’s business into a
+service layer. Presented here is an Interface Definition Language specification
+that describes the services exposed through the service layer. An IDL formally
+describes the functionality a service provides (methods, inputs and outputs of
+methods) without exposing the details of how that functionality is implemented.</p>
+
+<p>Some advantages of using an IDL:</p>
+
+<ul>
+<li>
+    <p>Allows for well-defined and versioned interfaces that the services and
+visual components depend on. This makes it simpler to control compatibility
+issues during upgrades.</p>
+  </li>
+  <li>
+    <p>An IDL can support more than one version of the domain/business logic
+running in the Magento instance at the same time, increasing backward
+compatibility.</p>
+  </li>
+</ul><h2 id="overview">Overview</h2>
+
+<p>This document specifies the Interface Definition Language (IDL) that describes
+the operations permitted by the Service layer. To support REST and SOAP Web
+APIs, WADL and WSDL will be auto-generated from the IDL.</p>
+
+<p>The data structure used in the payloads is defined in an XSD. The metadata about
+a service call, such as version, required permissions, and locations of XSDs,
+are carried by PHP annotations. Data structure and metadata are described in
+what follows.</p>
+
+<h2 id="php-annotations">PHP Annotations</h2>
+
+<h3 id="section"></h3>
+
+<table>
+<table style="border:1px solid black;border-collapse:collapse;">
+<tr>
+<th style="border:1px solid black;"> Annotation </th>
+<th style="border:1px solid black;"> Scope </th>
+<th style="border:1px solid black;"> Values </th>
+<th style="border:1px solid black;"> Required </th>
+<th style="border:1px solid black;"> Definition </th>
+</tr>
+<tr>
+<td style="border:1px solid black;"> @Service </td>
+<td style="border:1px solid black;"> service </td>
+<td style="border:1px solid black;"> string </td>
+<td style="border:1px solid black;"> X </td>
+<td style="border:1px solid black;"> Identifies the service being implemented </td>
+</tr>
+<tr>
+<td style="border:1px solid black;"> @Version </td>
+<td style="border:1px solid black;"> service </td>
+<td style="border:1px solid black;"> N.M. </td>
+<td style="border:1px solid black;"> X </td>
+<td style="border:1px solid black;"> Service interface version </td>
+</tr>
+<tr>
+<td style="border:1px solid black;"> @Consumes </td>
+<td style="border:1px solid black;"> Call </td>
+<td style="border:1px solid black;"> String </td>
+<td style="border:1px solid black;"> X </td>
+<td style="border:1px solid black;"> Identifies the location of the XSD that defines the structure of input parameters and the root element of the data structure. </td>
+</tr>
+<tr>
+<td style="border:1px solid black;"> @Produces </td>
+<td style="border:1px solid black;"> Call </td>
+<td style="border:1px solid black;"> String </td>
+<td style="border:1px solid black;"> X </td>
+<td style="border:1px solid black;"> Identifies the location of the XSD that defines the structure of output parameters and the root element of the data structure. </td>
+</tr>
+</table>
+
+### 
+
+### Service Calls
+
+A service operation is implemented as a class method. The class maps to the
+service via the requirement that operations from a service be grouped into a
+single class.
+
+**Example of a service call**
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+/**
+@Service shipping
+ * @Version 2
+*/
+
+class ShippingService extends MageService 
+{
+
+    /**
+     * @Permissions [shipping, inventory]
+     * @Consumes (schema="shipping.xsd", element="getCarriersRequest")
+     * @Produces (schema="shipping.xsd", element="getCarriersResponse")
+     */
+
+    public function getCarriers ($params)
+    {
+
+    ...
+
+    }
+}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Here, the input data structure is identified in the @Consumes annotation as
+belonging to the <getcarriersrequest> element in shipping/consumerux.xsd, and the
+output data structure is identified in the @Produces annotation as belonging to
+the <getcarriersresponse> element in shipping/consumerux.xsd. The shipping/consumerux.xsd file is
+shown below.
+
+The PHP function receives an associative array ($params function parameter)
+reflecting the structure described by the element <getcarriersrequest>. It returns
+another associative array reflecting the structure described by the element
+<getcarriersresponse>.
+
+XSD
+---
+
+The XSD is used to describe the data structure passed in during the API call as
+well as the returned data. During runtime data is stored into a associative
+array.
+
+**shipping/consumerux.xsd**
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+<?xml version="1.0"?><schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <complextype name="address_type">
+        <sequence>
+            <element name="street" type="xs:string"></element>
+            <element name="city" type="xs:string"></element>
+            <element name="region_id" type="xs:integer"></element>
+            <element name="country_id" type="xs:string"></element>
+            <element name="postcode" type="xs:integer"></element>
+            <element name="meta_data" minoccurs="0">
+                <complextype>
+                    <sequence>
+                        <element name="lift_gate_required" type="xs:boolean" minoccurs="0"></element>
+                    </sequence>
+                </complextype>
+            </element>
+        </sequence>
+    </complextype>
+
+    <complextype name="item_type">
+        <sequence>
+            <element name="sku" type="xs:integer"></element>
+            <element name="name" type="xs:string"></element>
+            <element name="value" type="xs:string"></element>
+            <element name="weight" type="xs:string"></element>
+            <element name="height" type="xs:string"></element>
+            <element name="width" type="xs:string"></element>
+            <element name="depth" type="xs:string"></element>
+            <element name="qty" type="xs:integer"></element>
+            <element name="free_shipping" type="xs:boolean"></element>
+            <element name="meta_data">
+                <complextype>
+                    <sequence>
+                        <element name="hazard" type="xs:boolean" minoccurs="0"></element>
+                    </sequence>
+                </complextype>
+            </element>
+            <element name="parent" minoccurs="0">
+                <complextype>
+                    <sequence>
+                        <element name="item" type="item_type"></element>
+                    </sequence>
+                </complextype>
+            </element>
+            <element name="children" minoccurs="0">
+                <complextype>
+                    <sequence>
+                        <element name="item" type="item_type"></element>
+                    </sequence>
+                </complextype>
+            </element>
+        </sequence>
+    </complextype>
+
+    <element name="getCarriersRequest">
+        <complextype>
+            <sequence>
+                <element name="rate_request">
+                    <complextype>
+                        <sequence>
+                            <element name="orig" type="address_type"></element>
+                            <element name="dest" type="address_type"></element>
+                            <element name="list_of_items">
+                                <complextype>
+                                    <sequence maxoccurs="unbounded">
+                                        <element name="item" type="item_type"></element>
+                                    </sequence>
+                                </complextype>
+                            </element>
+                            <element name="carrier_configuration" maxoccurs="1">
+                                <complextype>
+                                    <sequence>
+                                        <element name="insurance" type="xs:boolean"></element>
+                                        <element name="handling" type="xs:string"></element>
+                                        <element name="pickup" type="xs:string"></element>
+                                    </sequence>
+                                </complextype>
+                            </element>
+                        </sequence>
+                    </complextype>
+                </element>
+            </sequence>
+        </complextype>
+    </element>
+
+    <complextype name="method_type">
+        <sequence>
+            <element name="carrier" type="xs:string"></element>
+            <element name="carrier_title" type="xs:string"></element>
+            <element name="method" type="xs:string"></element>
+            <element name="method_title" type="xs:string"></element>
+            <element name="price" type="xs:string"></element>
+        </sequence>
+    </complextype>
+
+    <element name="getCarriersResponse">
+        <complextype>
+            <sequence>
+                <element name="shipping_methods">
+                    <complextype>
+                        <sequence maxoccurs="unbounded">
+                            <element name="method" type="method_type"></element>
+                        </sequence>
+                    </complextype>
+                </element>
+            </sequence>
+        </complextype>
+    </element></schema>
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+</getcarriersresponse></getcarriersrequest></getcarriersresponse></getcarriersrequest>
+</table>;T;@I"/service-impl/;T{;{	;I"^<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="imagetoolbar" content="false">
+<meta name="MSSmartTagsPreventParsing" content="true">
+<title>Service Implementation</title>
+<link href="../css/reset.css" rel="stylesheet" type="text/css">
+<link href="../css/960.css" rel="stylesheet" type="text/css">
+<link href="../css/uv_active4d.css" rel="stylesheet" type="text/css">
+<link href="../shared/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
+<link href="../shared/css/pygments.css" media="screen" rel="stylesheet" type="text/css">
+<script src="../shared/js/jquery.js" type="text/javascript"></script><script src="../shared/js/documentation.js" type="text/javascript"></script>
+</head>
+<body class="api">
+    <div id="header-wrapper">
+      <div id="header">
+        <div>
+          <a class="logo" href="../"><img src="../images/logo_developer.png" width="161" height="47" alt="GitHub:Developer"></a>
+          <ul class="nav">
+<li><a href="../">Home</a></li>
+            <li><a href="https://getsatisfaction.com/magento-2-prerelease">Feedback</a></li>
+          </ul>
+</div>
+      </div>
+<!-- #header -->
+    </div>
+<!-- #header-wrapper -->
+
+    <div id="wrapper">
+      <div class="content">
+    <h1 id="service-implementation">Service Implementation</h1>
+
+<p>This page contains the documentation of Service Implementation</p>
+      </div>
+
+    <div id="js-sidebar" class="sidebar-shell">
+      <div class="js-toggle-list sidebar-module expandable">
+        <ul>
+<li class="js-guides"><h3><a href="../twig/">Twig Templates</a></h3></li>
+          <li class="js-guides"><h3><a href="../service-idl/">Service IDL</a></h3></li>
+          <li class="js-guides"><h3><a href="./">Service Implementation</a></h3></li>
+          <li class="js-guides"><h3><a href="../web-api/">Creating Web APIs</a></h3></li>
+          <li class="js-guides"><h3><a href="../option-list/">Extension Configuration</a></h3></li>
+        </ul>
+</div> <!-- /sidebar-module -->
+    </div>
+<!-- /sidebar-shell -->
+
+    </div>
+<!-- #wrapper -->
+
+    <div id="footer">
+      <div class="upper_footer">
+        <div class="footer_inner clearfix">
+
+        <!--[if IE]><h4 id="blacktocat_ie">GitHub Links</h4><![endif]-->
+        <h4 id="blacktocat">GitHub Links</h4>
+
+        <ul class="footer_nav">
+<h4>GitHub</h4>
+          <li><a href="https://github.com/about">About</a></li>
+          <li><a href="https://github.com/blog">Blog</a></li>
+          <li><a href="https://github.com/features">Features</a></li>
+          <li><a href="https://github.com/contact">Contact &amp; Support</a></li>
+          <li><a href="https://github.com/training">Training</a></li>
+          <li><a href="http://status.github.com/">Site Status</a></li>
+        </ul>
+<ul class="footer_nav">
+<h4>Tools</h4>
+          <li><a href="http://mac.github.com/">GitHub for Mac</a></li>
+          <li><a href="http://mobile.github.com/">Issues for iPhone</a></li>
+          <li><a href="https://gist.github.com">Gist: Code Snippets</a></li>
+          <li><a href="http://enterprise.github.com/">GitHub Enterprise</a></li>
+          <li><a href="http://jobs.github.com/">Job Board</a></li>
+        </ul>
+<ul class="footer_nav">
+<h4>Extras</h4>
+          <li><a href="http://shop.github.com/">GitHub Shop</a></li>
+          <li><a href="http://octodex.github.com/">The Octodex</a></li>
+        </ul>
+<ul class="footer_nav">
+<h4>Documentation</h4>
+          <li><a href="http://help.github.com/">GitHub Help</a></li>
+          <li><a href="http://developer.github.com/">Developer API</a></li>
+          <li><a href="http://github.github.com/github-flavored-markdown/">GitHub Flavored Markdown</a></li>
+          <li><a href="http://pages.github.com/">GitHub Pages</a></li>
+        </ul>
+</div>
+<!-- /.site -->
+      </div>
+<!-- /.upper_footer -->
+
+      <div class="lower_footer">
+        <div class="footer_inner clearfix">
+            <div id="legal">
+              <!--[if IE]><a class="home_ie" href="http://github.com">Home</a><![endif]-->
+              <a class="home" href="http://github.com">Home</a>
+
+              <ul id="legal_links">
+<li><a href="http://help.github.com/terms-of-service/">Terms of Service</a></li>
+                <li><a href="http://help.github.com/privacy-policy/">Privacy</a></li>
+                <li><a href="http://help.github.com/security/">Security</a></li>
+              </ul>
+<p>© <span id="year">year</span> GitHub Inc. All rights reserved.</p>
+            </div>
+<!-- /#legal or /#legal_ie-->
+        </div>
+<!-- /.site -->
+      </div>
+<!-- /.lower_footer -->
+    </div>
+<!-- /#footer -->
+    <script type="text/javascript">
+      var _gauges = _gauges || [];
+      (function() {
+        var t   = document.createElement('script');
+        t.type  = 'text/javascript';
+        t.async = true;
+        t.id    = 'gauges-tracker';
+        t.setAttribute('data-site-id', '4f2038e0cb25bc1b55000003');
+        t.src = '//secure.gaug.es/track.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(t, s);
+      })();
+    </script>
+</body>
+</html>
+;T;	I"]# Service Implementation
+
+This page contains the documentation of Service Implementation;T;
+I"�<h1 id="service-implementation">Service Implementation</h1>
+
+<p>This page contains the documentation of Service Implementation</p>;T;@I"/twig/;T{;{	;I"�/<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="imagetoolbar" content="false">
+<meta name="MSSmartTagsPreventParsing" content="true">
+<title></title>
+<link href="../css/reset.css" rel="stylesheet" type="text/css">
+<link href="../css/960.css" rel="stylesheet" type="text/css">
+<link href="../css/uv_active4d.css" rel="stylesheet" type="text/css">
+<link href="../shared/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
+<link href="../shared/css/pygments.css" media="screen" rel="stylesheet" type="text/css">
+<script src="../shared/js/jquery.js" type="text/javascript"></script><script src="../shared/js/documentation.js" type="text/javascript"></script>
+</head>
+<body class="api">
+    <div id="header-wrapper">
+      <div id="header">
+        <div>
+          <a class="logo" href="../"><img src="../images/logo_developer.png" width="161" height="47" alt="GitHub:Developer"></a>
+          <ul class="nav">
+<li><a href="../">Home</a></li>
+            <li><a href="https://getsatisfaction.com/magento-2-prerelease">Feedback</a></li>
+          </ul>
+</div>
+      </div>
+<!-- #header -->
+    </div>
+<!-- #header-wrapper -->
+
+    <div id="wrapper">
+      <div class="content">
+    <h1 id="twig-templates">Twig Templates</h1>
+
+<p>Here are the main advantages that draw us towards replacing the .phtml templates
+used for earlier Magento extensions with a templating engine called Twig.</p>
+
+<p>The move helps enforce a desirable isolation of the presentation layer from
+domain and business logic and data, which is a fundamental goal of our new
+extension approach. Current .phtml templates allow inclusion of business logic
+and SQL queries within the presentation layer, which  can create serious
+challenges for maintenance and upgrades. We see the following additional
+benefits from separating the presentation logic:</p>
+
+<ul>
+<li>
+    <p>Theme switching becomes much easier and more predictable, because themes are
+confined to presentation logic and won’t need to be disentangled from domain
+and business logic.</p>
+  </li>
+  <li>
+    <p>Theme and template security issues are much reduced, for the same reason.</p>
+  </li>
+  <li>
+    <p>Designers can change templates with more confidence–again, for the same
+reason.</p>
+  </li>
+</ul>
+<h2 id="about-twig">About Twig</h2>
+
+<p>We chose Twig because integrating it into Magento will give you the following
+features and benefits:</p>
+
+<ul>
+<li>
+    <p>Twig is concise. Gone are the days of the unavoidably messy .phtml files,
+since the page html is separate from the code that populates the page. See
+the <a href="#before-after">before and after comparison</a> below to check out the difference.</p>
+  </li>
+  <li>
+    <p>The separation of front-end concerns from implementation concerns enables
+you to hire the best front-end designers while ensuring that your PHP
+developers work on what they do best.</p>
+  </li>
+  <li>
+    <p>Twig autoescapes by default, ensuring that your pages will avoid
+embarrassing mistakes that can happen if you forget to wrap output
+in <em>htmlspecialchars</em>.</p>
+  </li>
+  <li>
+    <p>We haven’t created extra work for you. Your existing PHP templates will
+continue working as expected but we hope the improvements offered by Twig
+will encourage you to switch soon.</p>
+  </li>
+</ul>
+<p>Learn more about <a href="http://twig.sensiolabs.org/">Twig</a>.</p>
+
+<h2 id="twig-vs-phtml">Twig vs. PHTML</h2>
+
+<ul>
+<li>
+    <p>Twig has cleaner code: you can focus on what your page does without needing
+to also parse the business logic embedded in the .phtml code</p>
+  </li>
+  <li>
+    <p>With the separation of font-end concerns, your front-end developer can focus
+completely on the page look-and-feel.</p>
+  </li>
+  <li>
+    <p>Twig is integrated with IDEs. Twig files are handled cleanly by IDEs,
+ensuring that your front-end developer is able to spot mistakes in this file
+with the help of the IDE instead of repeatedly running to code to see if
+anything is wrong. This will result in more productivity.</p>
+  </li>
+  <li>
+    <p>Code that intuitively makes sense: compare the line “$this-&gt;__..” with
+“..|translate”. Both of them do the same thing but the latter instantly
+tells you what is going on whereas the former will require a few lookups in
+code.</p>
+  </li>
+</ul>
+<h3 id="a-idbefore-afterabefore-and-after">
+<a id="before-after"></a>Before and After</h3>
+
+<p>PHTML</p>
+
+<pre><code>
+&lt;?php if ($this-&gt;canEmailToFriend()): ?&gt;
+  &lt;p class="email-friend"&gt;
+    &lt;a href="&lt;?php echo 
+      $this-&gt;helper('Mage_Catalog_Helper_Product')
+        -&gt;getEmailToFriendUrl($_product) ?&gt;"&gt;
+      &lt;?php echo $this-&gt;__('Email to a Friend') ?&gt;
+    &lt;/a&gt;
+  &lt;/p&gt;
+&lt;?php endif; ?&gt;
+
+</code></pre>
+
+<p>Twig</p>
+
+<pre><code>
+{% if product.canEmailToFriend %}
+  &lt;p class="email-friend"&gt;
+    &lt;a href="{{ links.emailToFriend }}"&gt;
+    {{ 'Email to a Friend'|translate }}
+    &lt;/a&gt;
+  &lt;/p&gt;
+{% endif %}
+
+</code></pre>
+
+<h2 id="how-to-get-started">How to Get Started</h2>
+
+<p>This section describes how to begin using Twig in your existing Magento
+extension or to build your new Magento extension with Twig. Our reference
+implementation is in the Mage/Catalog extension.</p>
+
+<ul>
+<li>
+    <p>Start by looking at our sample implementation in Mage/Catalog. You will see
+the changes that we made to layout.xml to use the new datasources and twig
+templates in place of the previous .phtml and model files.</p>
+  </li>
+  <li>
+    <p>Switching from an existing .phtml template to a twig file is as simple as
+taking the contents of the phtml file, pasting the contents to a twig file
+that you create in the same directory, and then removing the PHP code from
+this file. You end up with just html markup in your new twig file.</p>
+  </li>
+  <li>
+    <p>Using the original phtml file as a reference and the Service document
+available in this repo, ensure that the data needed by the phtml file is
+available in the necessary service. You might need to define a new service
+as defined in the Service IDL write-up, <a href="http://praveenck.github.io/docs/service-idl/">here</a>.</p>
+  </li>
+</ul>
+<h3 id="concrete-example">Concrete Example</h3>
+
+<p>The Twig half of the above <a href="#before-after">before and after comparison</a> shows the contents
+of <code>app/code/Mage/Catalog/view/frontend/product/view/options/type/date.twig</code>.
+You might ask yourself how the various variables used in this template are made
+available to it. This section will try to show you how.</p>
+
+<ul>
+<li>
+    <p>*option* (instance of Mage_Catalog_Model_Product_Option): This is
+available to the block class associated with this template, i.e.
+Mage_Catalog_Block_Product_View_Options_Type_Date. Any methods accessible to
+the “option” instance are callable within the template, such as
+*isRequired*.</p>
+  </li>
+  <li>
+    <p>*createBlock / getSelectFromToHtml / viewFileUrl*: These are defined as a
+Twig function in Mage_Core_Block_Template_Engine_TwigExtension; the latter
+is part of the template engine subsystem included with Magento 2.
+Incidentally, this template engine subsystem is responsible for ensuring
+that you can include a .phtml block as part of your twig template. This
+makes it easy to gradually convert over to using Twig.</p>
+  </li>
+</ul>
+<h3 id="warnings-and-gotchas">Warnings and Gotchas</h3>
+
+<ul>
+<li>
+    <p>Twig uses its own cache, which currently is stored in the same directory as
+the other Magento Twig caches. To manually clear, do the following: <code>rm -rf
+var/cache/??</code> while in the Magento base directory.</p>
+  </li>
+  <li>
+    <p>Twig’s cache is controlled by the BLOCK_HTML cache setting in Magento Admin.
+Thus, disabling the “Blocks HTML Output” cache in Admin-&gt;Cache Management
+also disables the Twig cache. As you are most likely already aware, it is
+always best to keep Magento caches turned off during development.</p>
+  </li>
+  <li>
+    <p>Twig’s performance is further improved if you use APC or some other PHP
+bytecache scheme.</p>
+  </li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+
+<p>We hope you can see some of the flexibility and power the use of Twig will bring
+to your development efforts on Magento. Our aim is to make development fun for
+you again by separating front-end design from back-end work and ensuring that
+you are looking at clean, easy-to-read, and easy-to-debug code.</p>
+      </div>
+
+    <div id="js-sidebar" class="sidebar-shell">
+      <div class="js-toggle-list sidebar-module expandable">
+        <ul>
+<li class="js-guides"><h3><a href="./">Twig Templates</a></h3></li>
+          <li class="js-guides"><h3><a href="../service-idl/">Service IDL</a></h3></li>
+          <li class="js-guides"><h3><a href="../service-impl/">Service Implementation</a></h3></li>
+          <li class="js-guides"><h3><a href="../web-api/">Creating Web APIs</a></h3></li>
+          <li class="js-guides"><h3><a href="../option-list/">Extension Configuration</a></h3></li>
+        </ul>
+</div> <!-- /sidebar-module -->
+    </div>
+<!-- /sidebar-shell -->
+
+    </div>
+<!-- #wrapper -->
+
+    <div id="footer">
+      <div class="upper_footer">
+        <div class="footer_inner clearfix">
+
+        <!--[if IE]><h4 id="blacktocat_ie">GitHub Links</h4><![endif]-->
+        <h4 id="blacktocat">GitHub Links</h4>
+
+        <ul class="footer_nav">
+<h4>GitHub</h4>
+          <li><a href="https://github.com/about">About</a></li>
+          <li><a href="https://github.com/blog">Blog</a></li>
+          <li><a href="https://github.com/features">Features</a></li>
+          <li><a href="https://github.com/contact">Contact &amp; Support</a></li>
+          <li><a href="https://github.com/training">Training</a></li>
+          <li><a href="http://status.github.com/">Site Status</a></li>
+        </ul>
+<ul class="footer_nav">
+<h4>Tools</h4>
+          <li><a href="http://mac.github.com/">GitHub for Mac</a></li>
+          <li><a href="http://mobile.github.com/">Issues for iPhone</a></li>
+          <li><a href="https://gist.github.com">Gist: Code Snippets</a></li>
+          <li><a href="http://enterprise.github.com/">GitHub Enterprise</a></li>
+          <li><a href="http://jobs.github.com/">Job Board</a></li>
+        </ul>
+<ul class="footer_nav">
+<h4>Extras</h4>
+          <li><a href="http://shop.github.com/">GitHub Shop</a></li>
+          <li><a href="http://octodex.github.com/">The Octodex</a></li>
+        </ul>
+<ul class="footer_nav">
+<h4>Documentation</h4>
+          <li><a href="http://help.github.com/">GitHub Help</a></li>
+          <li><a href="http://developer.github.com/">Developer API</a></li>
+          <li><a href="http://github.github.com/github-flavored-markdown/">GitHub Flavored Markdown</a></li>
+          <li><a href="http://pages.github.com/">GitHub Pages</a></li>
+        </ul>
+</div>
+<!-- /.site -->
+      </div>
+<!-- /.upper_footer -->
+
+      <div class="lower_footer">
+        <div class="footer_inner clearfix">
+            <div id="legal">
+              <!--[if IE]><a class="home_ie" href="http://github.com">Home</a><![endif]-->
+              <a class="home" href="http://github.com">Home</a>
+
+              <ul id="legal_links">
+<li><a href="http://help.github.com/terms-of-service/">Terms of Service</a></li>
+                <li><a href="http://help.github.com/privacy-policy/">Privacy</a></li>
+                <li><a href="http://help.github.com/security/">Security</a></li>
+              </ul>
+<p>© <span id="year">year</span> GitHub Inc. All rights reserved.</p>
+            </div>
+<!-- /#legal or /#legal_ie-->
+        </div>
+<!-- /.site -->
+      </div>
+<!-- /.lower_footer -->
+    </div>
+<!-- /#footer -->
+    <script type="text/javascript">
+      var _gauges = _gauges || [];
+      (function() {
+        var t   = document.createElement('script');
+        t.type  = 'text/javascript';
+        t.async = true;
+        t.id    = 'gauges-tracker';
+        t.setAttribute('data-site-id', '4f2038e0cb25bc1b55000003');
+        t.src = '//secure.gaug.es/track.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(t, s);
+      })();
+    </script>
+</body>
+</html>
+;T;	I"�Twig Templates
+==============
+
+Here are the main advantages that draw us towards replacing the .phtml templates
+used for earlier Magento extensions with a templating engine called Twig.
+
+The move helps enforce a desirable isolation of the presentation layer from
+domain and business logic and data, which is a fundamental goal of our new
+extension approach. Current .phtml templates allow inclusion of business logic
+and SQL queries within the presentation layer, which  can create serious
+challenges for maintenance and upgrades. We see the following additional
+benefits from separating the presentation logic:
+
+-   Theme switching becomes much easier and more predictable, because themes are
+    confined to presentation logic and won't need to be disentangled from domain
+    and business logic.
+
+-   Theme and template security issues are much reduced, for the same reason.
+
+-   Designers can change templates with more confidence--again, for the same
+    reason.
+
+About Twig
+----------
+
+We chose Twig because integrating it into Magento will give you the following
+features and benefits:
+
+-   Twig is concise. Gone are the days of the unavoidably messy .phtml files,
+    since the page html is separate from the code that populates the page. See
+    the [before and after comparison](#before-after) below to check out the difference.
+
+-   The separation of front-end concerns from implementation concerns enables
+    you to hire the best front-end designers while ensuring that your PHP
+    developers work on what they do best.
+
+-   Twig autoescapes by default, ensuring that your pages will avoid
+    embarrassing mistakes that can happen if you forget to wrap output
+    in *htmlspecialchars*.
+
+-   We haven't created extra work for you. Your existing PHP templates will
+    continue working as expected but we hope the improvements offered by Twig
+    will encourage you to switch soon.
+
+Learn more about [Twig][2].
+
+[2]: <http://twig.sensiolabs.org/>
+
+Twig vs. PHTML
+--------------
+
+
+
+-   Twig has cleaner code: you can focus on what your page does without needing
+    to also parse the business logic embedded in the .phtml code
+
+-   With the separation of font-end concerns, your front-end developer can focus
+    completely on the page look-and-feel.
+
+-   Twig is integrated with IDEs. Twig files are handled cleanly by IDEs,
+    ensuring that your front-end developer is able to spot mistakes in this file
+    with the help of the IDE instead of repeatedly running to code to see if
+    anything is wrong. This will result in more productivity.
+
+-   Code that intuitively makes sense: compare the line “\$this-\>__..” with
+    “..|translate”. Both of them do the same thing but the latter instantly
+    tells you what is going on whereas the former will require a few lookups in
+    code.
+
+### <a id="before-after"></a>Before and After   
+
+PHTML
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+<?php if ($this->canEmailToFriend()): ?>
+  <p class="email-friend">
+    <a href="<?php echo 
+      $this->helper('Mage_Catalog_Helper_Product')
+        ->getEmailToFriendUrl($_product) ?>">
+      <?php echo $this->__('Email to a Friend') ?>
+    </a>
+  </p>
+<?php endif; ?>
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+Twig
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+{% if product.canEmailToFriend %}
+  <p class="email-friend">
+    <a href="{{ links.emailToFriend }}">
+    {{ 'Email to a Friend'|translate }}
+    </a>
+  </p>
+{% endif %}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+How to Get Started
+------------------
+
+This section describes how to begin using Twig in your existing Magento
+extension or to build your new Magento extension with Twig. Our reference
+implementation is in the Mage/Catalog extension.
+
+-   Start by looking at our sample implementation in Mage/Catalog. You will see
+    the changes that we made to layout.xml to use the new datasources and twig
+    templates in place of the previous .phtml and model files.
+
+-   Switching from an existing .phtml template to a twig file is as simple as
+    taking the contents of the phtml file, pasting the contents to a twig file
+    that you create in the same directory, and then removing the PHP code from
+    this file. You end up with just html markup in your new twig file.
+
+-   Using the original phtml file as a reference and the Service document
+    available in this repo, ensure that the data needed by the phtml file is
+    available in the necessary service. You might need to define a new service
+    as defined in the Service IDL write-up, [here][8].
+
+[8]: <http://praveenck.github.io/docs/service-idl/>
+
+### Concrete Example
+
+The Twig half of the above [before and after comparison][1] shows the contents
+of `app/code/Mage/Catalog/view/frontend/product/view/options/type/date.twig`.
+You might ask yourself how the various variables used in this template are made
+available to it. This section will try to show you how.
+
+[1]: <#before-after>
+
+-   \*option\* (instance of Mage_Catalog_Model_Product_Option): This is
+    available to the block class associated with this template, i.e.
+    Mage_Catalog_Block_Product_View_Options_Type_Date. Any methods accessible to
+    the "option" instance are callable within the template, such as
+    \*isRequired\*.
+
+-   \*createBlock / getSelectFromToHtml / viewFileUrl\*: These are defined as a
+    Twig function in Mage_Core_Block_Template_Engine_TwigExtension; the latter
+    is part of the template engine subsystem included with Magento 2.
+    Incidentally, this template engine subsystem is responsible for ensuring
+    that you can include a .phtml block as part of your twig template. This
+    makes it easy to gradually convert over to using Twig.
+
+### Warnings and Gotchas
+
+-   Twig uses its own cache, which currently is stored in the same directory as
+    the other Magento Twig caches. To manually clear, do the following: `rm -rf
+    var/cache/??` while in the Magento base directory.
+
+-   Twig's cache is controlled by the BLOCK_HTML cache setting in Magento Admin.
+    Thus, disabling the "Blocks HTML Output" cache in Admin-\>Cache Management
+    also disables the Twig cache. As you are most likely already aware, it is
+    always best to keep Magento caches turned off during development.
+
+-   Twig's performance is further improved if you use APC or some other PHP
+    bytecache scheme.
+
+Conclusion
+----------
+
+We hope you can see some of the flexibility and power the use of Twig will bring
+to your development efforts on Magento. Our aim is to make development fun for
+you again by separating front-end design from back-end work and ensuring that
+you are looking at clean, easy-to-read, and easy-to-debug code.
+
+;T;
+I"#<h1 id="twig-templates">Twig Templates</h1>
+
+<p>Here are the main advantages that draw us towards replacing the .phtml templates
+used for earlier Magento extensions with a templating engine called Twig.</p>
+
+<p>The move helps enforce a desirable isolation of the presentation layer from
+domain and business logic and data, which is a fundamental goal of our new
+extension approach. Current .phtml templates allow inclusion of business logic
+and SQL queries within the presentation layer, which  can create serious
+challenges for maintenance and upgrades. We see the following additional
+benefits from separating the presentation logic:</p>
+
+<ul>
+<li>
+    <p>Theme switching becomes much easier and more predictable, because themes are
+confined to presentation logic and won’t need to be disentangled from domain
+and business logic.</p>
+  </li>
+  <li>
+    <p>Theme and template security issues are much reduced, for the same reason.</p>
+  </li>
+  <li>
+    <p>Designers can change templates with more confidence–again, for the same
+reason.</p>
+  </li>
+</ul><h2 id="about-twig">About Twig</h2>
+
+<p>We chose Twig because integrating it into Magento will give you the following
+features and benefits:</p>
+
+<ul>
+<li>
+    <p>Twig is concise. Gone are the days of the unavoidably messy .phtml files,
+since the page html is separate from the code that populates the page. See
+the <a href="#before-after">before and after comparison</a> below to check out the difference.</p>
+  </li>
+  <li>
+    <p>The separation of front-end concerns from implementation concerns enables
+you to hire the best front-end designers while ensuring that your PHP
+developers work on what they do best.</p>
+  </li>
+  <li>
+    <p>Twig autoescapes by default, ensuring that your pages will avoid
+embarrassing mistakes that can happen if you forget to wrap output
+in <em>htmlspecialchars</em>.</p>
+  </li>
+  <li>
+    <p>We haven’t created extra work for you. Your existing PHP templates will
+continue working as expected but we hope the improvements offered by Twig
+will encourage you to switch soon.</p>
+  </li>
+</ul><p>Learn more about <a href="http://twig.sensiolabs.org/">Twig</a>.</p>
+
+<h2 id="twig-vs-phtml">Twig vs. PHTML</h2>
+
+<ul>
+<li>
+    <p>Twig has cleaner code: you can focus on what your page does without needing
+to also parse the business logic embedded in the .phtml code</p>
+  </li>
+  <li>
+    <p>With the separation of font-end concerns, your front-end developer can focus
+completely on the page look-and-feel.</p>
+  </li>
+  <li>
+    <p>Twig is integrated with IDEs. Twig files are handled cleanly by IDEs,
+ensuring that your front-end developer is able to spot mistakes in this file
+with the help of the IDE instead of repeatedly running to code to see if
+anything is wrong. This will result in more productivity.</p>
+  </li>
+  <li>
+    <p>Code that intuitively makes sense: compare the line “$this-&gt;__..” with
+“..|translate”. Both of them do the same thing but the latter instantly
+tells you what is going on whereas the former will require a few lookups in
+code.</p>
+  </li>
+</ul><h3 id="a-idbefore-afterabefore-and-after">
+<a id="before-after"></a>Before and After</h3>
+
+<p>PHTML</p>
+
+<pre><code>
+&lt;?php if ($this-&gt;canEmailToFriend()): ?&gt;
+  &lt;p class="email-friend"&gt;
+    &lt;a href="&lt;?php echo 
+      $this-&gt;helper('Mage_Catalog_Helper_Product')
+        -&gt;getEmailToFriendUrl($_product) ?&gt;"&gt;
+      &lt;?php echo $this-&gt;__('Email to a Friend') ?&gt;
+    &lt;/a&gt;
+  &lt;/p&gt;
+&lt;?php endif; ?&gt;
+
+</code></pre>
+
+<p>Twig</p>
+
+<pre><code>
+{% if product.canEmailToFriend %}
+  &lt;p class="email-friend"&gt;
+    &lt;a href="{{ links.emailToFriend }}"&gt;
+    {{ 'Email to a Friend'|translate }}
+    &lt;/a&gt;
+  &lt;/p&gt;
+{% endif %}
+
+</code></pre>
+
+<h2 id="how-to-get-started">How to Get Started</h2>
+
+<p>This section describes how to begin using Twig in your existing Magento
+extension or to build your new Magento extension with Twig. Our reference
+implementation is in the Mage/Catalog extension.</p>
+
+<ul>
+<li>
+    <p>Start by looking at our sample implementation in Mage/Catalog. You will see
+the changes that we made to layout.xml to use the new datasources and twig
+templates in place of the previous .phtml and model files.</p>
+  </li>
+  <li>
+    <p>Switching from an existing .phtml template to a twig file is as simple as
+taking the contents of the phtml file, pasting the contents to a twig file
+that you create in the same directory, and then removing the PHP code from
+this file. You end up with just html markup in your new twig file.</p>
+  </li>
+  <li>
+    <p>Using the original phtml file as a reference and the Service document
+available in this repo, ensure that the data needed by the phtml file is
+available in the necessary service. You might need to define a new service
+as defined in the Service IDL write-up, <a href="http://praveenck.github.io/docs/service-idl/">here</a>.</p>
+  </li>
+</ul><h3 id="concrete-example">Concrete Example</h3>
+
+<p>The Twig half of the above <a href="#before-after">before and after comparison</a> shows the contents
+of <code>app/code/Mage/Catalog/view/frontend/product/view/options/type/date.twig</code>.
+You might ask yourself how the various variables used in this template are made
+available to it. This section will try to show you how.</p>
+
+<ul>
+<li>
+    <p>*option* (instance of Mage_Catalog_Model_Product_Option): This is
+available to the block class associated with this template, i.e.
+Mage_Catalog_Block_Product_View_Options_Type_Date. Any methods accessible to
+the “option” instance are callable within the template, such as
+*isRequired*.</p>
+  </li>
+  <li>
+    <p>*createBlock / getSelectFromToHtml / viewFileUrl*: These are defined as a
+Twig function in Mage_Core_Block_Template_Engine_TwigExtension; the latter
+is part of the template engine subsystem included with Magento 2.
+Incidentally, this template engine subsystem is responsible for ensuring
+that you can include a .phtml block as part of your twig template. This
+makes it easy to gradually convert over to using Twig.</p>
+  </li>
+</ul><h3 id="warnings-and-gotchas">Warnings and Gotchas</h3>
+
+<ul>
+<li>
+    <p>Twig uses its own cache, which currently is stored in the same directory as
+the other Magento Twig caches. To manually clear, do the following: <code>rm -rf
+var/cache/??</code> while in the Magento base directory.</p>
+  </li>
+  <li>
+    <p>Twig’s cache is controlled by the BLOCK_HTML cache setting in Magento Admin.
+Thus, disabling the “Blocks HTML Output” cache in Admin-&gt;Cache Management
+also disables the Twig cache. As you are most likely already aware, it is
+always best to keep Magento caches turned off during development.</p>
+  </li>
+  <li>
+    <p>Twig’s performance is further improved if you use APC or some other PHP
+bytecache scheme.</p>
+  </li>
+</ul><h2 id="conclusion">Conclusion</h2>
+
+<p>We hope you can see some of the flexibility and power the use of Twig will bring
+to your development efforts on Magento. Our aim is to make development fun for
+you again by separating front-end design from back-end work and ensuring that
+you are looking at clean, easy-to-read, and easy-to-debug code.</p>;T;@"I"/web-api/;T{;{	;I"�"<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="imagetoolbar" content="false">
+<meta name="MSSmartTagsPreventParsing" content="true">
+<title></title>
+<link href="../css/reset.css" rel="stylesheet" type="text/css">
+<link href="../css/960.css" rel="stylesheet" type="text/css">
+<link href="../css/uv_active4d.css" rel="stylesheet" type="text/css">
+<link href="../shared/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
+<link href="../shared/css/pygments.css" media="screen" rel="stylesheet" type="text/css">
+<script src="../shared/js/jquery.js" type="text/javascript"></script><script src="../shared/js/documentation.js" type="text/javascript"></script>
+</head>
+<body class="api">
+    <div id="header-wrapper">
+      <div id="header">
+        <div>
+          <a class="logo" href="../"><img src="../images/logo_developer.png" width="161" height="47" alt="GitHub:Developer"></a>
+          <ul class="nav">
+<li><a href="../">Home</a></li>
+            <li><a href="https://getsatisfaction.com/magento-2-prerelease">Feedback</a></li>
+          </ul>
+</div>
+      </div>
+<!-- #header -->
+    </div>
+<!-- #header-wrapper -->
+
+    <div id="wrapper">
+      <div class="content">
+    <h1 id="creating-web-apis">Creating Web APIs</h1>
+
+<p>[[<em>steal and summarize from service IDL and service implementation summaries</em>]]</p>
+
+<pre><code>You can expose your service over the web to REST and SOAP interfaces by
+making simple web API declarations in the form of annotations to a
+configuration file.
+</code></pre>
+
+<h2 id="highlights">Highlights</h2>
+
+<p>[[<em>maybe the first point below is rather generic, and the second is already
+explicit in the introductory sentences above–for the second thing, possibly
+break up the info by reducing the intro sentences to a teaser with some
+generalizations about what a service is. For the first thing, maybe sharpen the
+statement with details–e.g., what type of auth n auth?  ]]</em></p>
+
+<ul>
+<li>
+    <p>Authentication and Authorization functionality is handled by the API
+framework, allowing for developers to focus on building business logic</p>
+  </li>
+  <li>
+    <p>Your service’s business logic can be available to both the Magento web
+application and other native applications (iOS, Android, etc. apps)</p>
+  </li>
+</ul>
+<h2 id="web-api-declaration">Web API Declaration</h2>
+
+<p>We use a configuration file to expose services that use the IDL to REST and SOAP
+interfaces.</p>
+
+<p>For SOAP, we only need to declare the location of WSDL and the method. We can
+default the WSDL location to the service name (e.g., shipping) and the SOAP
+method to the PHP method (e.g., getCarriers).</p>
+
+<p><strong>webapi.xml</strong></p>
+
+<pre><code>
+&lt;?xml version="1.0"?&gt;
+&lt;webapi&gt;
+    &lt;service name="shipping"&gt;
+        &lt;rest-route method="GET" path="/shipping/carriers" call="getCarriers"&gt;
+        &lt;rest-route method="GET" path="/shipping/{shipment-id}" call="getOne"&gt;
+        &lt;rest-route method="GET" path="/shipping" call="getMany" query-params="sort,filter"&gt;
+    &lt;/service&gt;
+&lt;/webapi&gt;
+
+</code></pre>
+
+<p>[[<em>do we also use the declaration in webapi.xml for REST? does the declaration
+or where it’s made differ for REST?]</em></p>
+
+<p>Since REST doesn’t pass all inputs in its payload, its payload does not reflect
+the description in the XSD. Some inputs are passed as part of the path and query
+parameters. These inputs are then missing from the payload. Deserializing the
+payload would not result in the expected input associative array.</p>
+
+<p>To work around this problem, after deserialization, we insert those inputs into
+the input array. To map query-params and path-params, we use the parameter name
+(e.g., shipment-id, filter) for a matching key in the associative array. We use
+dotted notation to indicate levels in the array.</p>
+
+<pre><code>
+level1.level2.sort
+('level1' =&gt; array (
+    'level2' =&gt; array(
+        'sort' =&gt; ....
+    )
+))
+
+</code></pre>
+
+<h2 id="how-to-add-a-new-service">How to Add a New Service</h2>
+
+<ol>
+<li>
+    <p>Put the business logic PHP code into a class that extends MageService.
+[[<em>example</em>?]]</p>
+  </li>
+  <li>
+    <p>Annotate the new class with @Service and @Version (explained at <a href="http://praveenck.github.io/docs/service-idl/">Service
+IDL</a>.</p>
+  </li>
+</ol>
+<ol>
+<li>
+    <p>For each method, make sure it takes a single param as an associative array
+and returns another array</p>
+  </li>
+  <li>
+    <p>Create a new XSD file under the module /etc directory and describe the
+structure of the arrays.</p>
+  </li>
+  <li>
+    <p>To expose the service through the Web API, add or edit the webapi.xml under
+the module /etc directory and provide REST routing info.</p>
+  </li>
+</ol>
+<p>[[<em>these steps are very high level and would be way better with examples.
+without examples, the sequence is not clear enough to me that I can improve
+it]]</em></p>
+      </div>
+
+    <div id="js-sidebar" class="sidebar-shell">
+      <div class="js-toggle-list sidebar-module expandable">
+        <ul>
+<li class="js-guides"><h3><a href="../twig/">Twig Templates</a></h3></li>
+          <li class="js-guides"><h3><a href="../service-idl/">Service IDL</a></h3></li>
+          <li class="js-guides"><h3><a href="../service-impl/">Service Implementation</a></h3></li>
+          <li class="js-guides"><h3><a href="./">Creating Web APIs</a></h3></li>
+          <li class="js-guides"><h3><a href="../option-list/">Extension Configuration</a></h3></li>
+        </ul>
+</div> <!-- /sidebar-module -->
+    </div>
+<!-- /sidebar-shell -->
+
+    </div>
+<!-- #wrapper -->
+
+    <div id="footer">
+      <div class="upper_footer">
+        <div class="footer_inner clearfix">
+
+        <!--[if IE]><h4 id="blacktocat_ie">GitHub Links</h4><![endif]-->
+        <h4 id="blacktocat">GitHub Links</h4>
+
+        <ul class="footer_nav">
+<h4>GitHub</h4>
+          <li><a href="https://github.com/about">About</a></li>
+          <li><a href="https://github.com/blog">Blog</a></li>
+          <li><a href="https://github.com/features">Features</a></li>
+          <li><a href="https://github.com/contact">Contact &amp; Support</a></li>
+          <li><a href="https://github.com/training">Training</a></li>
+          <li><a href="http://status.github.com/">Site Status</a></li>
+        </ul>
+<ul class="footer_nav">
+<h4>Tools</h4>
+          <li><a href="http://mac.github.com/">GitHub for Mac</a></li>
+          <li><a href="http://mobile.github.com/">Issues for iPhone</a></li>
+          <li><a href="https://gist.github.com">Gist: Code Snippets</a></li>
+          <li><a href="http://enterprise.github.com/">GitHub Enterprise</a></li>
+          <li><a href="http://jobs.github.com/">Job Board</a></li>
+        </ul>
+<ul class="footer_nav">
+<h4>Extras</h4>
+          <li><a href="http://shop.github.com/">GitHub Shop</a></li>
+          <li><a href="http://octodex.github.com/">The Octodex</a></li>
+        </ul>
+<ul class="footer_nav">
+<h4>Documentation</h4>
+          <li><a href="http://help.github.com/">GitHub Help</a></li>
+          <li><a href="http://developer.github.com/">Developer API</a></li>
+          <li><a href="http://github.github.com/github-flavored-markdown/">GitHub Flavored Markdown</a></li>
+          <li><a href="http://pages.github.com/">GitHub Pages</a></li>
+        </ul>
+</div>
+<!-- /.site -->
+      </div>
+<!-- /.upper_footer -->
+
+      <div class="lower_footer">
+        <div class="footer_inner clearfix">
+            <div id="legal">
+              <!--[if IE]><a class="home_ie" href="http://github.com">Home</a><![endif]-->
+              <a class="home" href="http://github.com">Home</a>
+
+              <ul id="legal_links">
+<li><a href="http://help.github.com/terms-of-service/">Terms of Service</a></li>
+                <li><a href="http://help.github.com/privacy-policy/">Privacy</a></li>
+                <li><a href="http://help.github.com/security/">Security</a></li>
+              </ul>
+<p>© <span id="year">year</span> GitHub Inc. All rights reserved.</p>
+            </div>
+<!-- /#legal or /#legal_ie-->
+        </div>
+<!-- /.site -->
+      </div>
+<!-- /.lower_footer -->
+    </div>
+<!-- /#footer -->
+    <script type="text/javascript">
+      var _gauges = _gauges || [];
+      (function() {
+        var t   = document.createElement('script');
+        t.type  = 'text/javascript';
+        t.async = true;
+        t.id    = 'gauges-tracker';
+        t.setAttribute('data-site-id', '4f2038e0cb25bc1b55000003');
+        t.src = '//secure.gaug.es/track.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(t, s);
+      })();
+    </script>
+</body>
+</html>
+;T;	I"ICreating Web APIs
+=================
+
+[[*steal and summarize from service IDL and service implementation summaries*]]
+
+    You can expose your service over the web to REST and SOAP interfaces by
+    making simple web API declarations in the form of annotations to a
+    configuration file.
+
+Highlights
+----------
+
+[[*maybe the first point below is rather generic, and the second is already
+explicit in the introductory sentences above--for the second thing, possibly
+break up the info by reducing the intro sentences to a teaser with some
+generalizations about what a service is. For the first thing, maybe sharpen the
+statement with details--e.g., what type of auth n auth?  ]]*
+
+-   Authentication and Authorization functionality is handled by the API
+    framework, allowing for developers to focus on building business logic
+
+-   Your service's business logic can be available to both the Magento web
+    application and other native applications (iOS, Android, etc. apps)
+
+Web API Declaration
+-------------------
+
+We use a configuration file to expose services that use the IDL to REST and SOAP
+interfaces.
+
+For SOAP, we only need to declare the location of WSDL and the method. We can
+default the WSDL location to the service name (e.g., shipping) and the SOAP
+method to the PHP method (e.g., getCarriers).
+
+**webapi.xml**
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+<?xml version="1.0"?>
+<webapi>
+    <service name="shipping">
+        <rest-route method="GET" path="/shipping/carriers" call="getCarriers">
+        <rest-route method="GET" path="/shipping/{shipment-id}" call="getOne">
+        <rest-route method="GET" path="/shipping" call="getMany" query-params="sort,filter">
+    </service>
+</webapi>
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+[[*do we also use the declaration in webapi.xml for REST? does the declaration
+or where it's made differ for REST?]*
+
+Since REST doesn't pass all inputs in its payload, its payload does not reflect
+the description in the XSD. Some inputs are passed as part of the path and query
+parameters. These inputs are then missing from the payload. Deserializing the
+payload would not result in the expected input associative array.
+
+To work around this problem, after deserialization, we insert those inputs into
+the input array. To map query-params and path-params, we use the parameter name
+(e.g., shipment-id, filter) for a matching key in the associative array. We use
+dotted notation to indicate levels in the array.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+level1.level2.sort
+('level1' => array (
+    'level2' => array(
+        'sort' => ....
+    )
+))
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+How to Add a New Service
+------------------------
+
+1.  Put the business logic PHP code into a class that extends MageService.
+    [[*example*?]]
+
+2.  Annotate the new class with @Service and @Version (explained at [Service
+    IDL][1].
+
+[1]: <http://praveenck.github.io/docs/service-idl/>
+
+1.  For each method, make sure it takes a single param as an associative array
+    and returns another array
+
+2.  Create a new XSD file under the module /etc directory and describe the
+    structure of the arrays.
+
+3.  To expose the service through the Web API, add or edit the webapi.xml under
+    the module /etc directory and provide REST routing info.
+
+[[*these steps are very high level and would be way better with examples.
+without examples, the sequence is not clear enough to me that I can improve
+it]]*
+
+;T;
+I"�<h1 id="creating-web-apis">Creating Web APIs</h1>
+
+<p>[[<em>steal and summarize from service IDL and service implementation summaries</em>]]</p>
+
+<pre><code>You can expose your service over the web to REST and SOAP interfaces by
+making simple web API declarations in the form of annotations to a
+configuration file.
+</code></pre>
+
+<h2 id="highlights">Highlights</h2>
+
+<p>[[<em>maybe the first point below is rather generic, and the second is already
+explicit in the introductory sentences above–for the second thing, possibly
+break up the info by reducing the intro sentences to a teaser with some
+generalizations about what a service is. For the first thing, maybe sharpen the
+statement with details–e.g., what type of auth n auth?  ]]</em></p>
+
+<ul>
+<li>
+    <p>Authentication and Authorization functionality is handled by the API
+framework, allowing for developers to focus on building business logic</p>
+  </li>
+  <li>
+    <p>Your service’s business logic can be available to both the Magento web
+application and other native applications (iOS, Android, etc. apps)</p>
+  </li>
+</ul><h2 id="web-api-declaration">Web API Declaration</h2>
+
+<p>We use a configuration file to expose services that use the IDL to REST and SOAP
+interfaces.</p>
+
+<p>For SOAP, we only need to declare the location of WSDL and the method. We can
+default the WSDL location to the service name (e.g., shipping) and the SOAP
+method to the PHP method (e.g., getCarriers).</p>
+
+<p><strong>webapi.xml</strong></p>
+
+<pre><code>
+&lt;?xml version="1.0"?&gt;
+&lt;webapi&gt;
+    &lt;service name="shipping"&gt;
+        &lt;rest-route method="GET" path="/shipping/carriers" call="getCarriers"&gt;
+        &lt;rest-route method="GET" path="/shipping/{shipment-id}" call="getOne"&gt;
+        &lt;rest-route method="GET" path="/shipping" call="getMany" query-params="sort,filter"&gt;
+    &lt;/service&gt;
+&lt;/webapi&gt;
+
+</code></pre>
+
+<p>[[<em>do we also use the declaration in webapi.xml for REST? does the declaration
+or where it’s made differ for REST?]</em></p>
+
+<p>Since REST doesn’t pass all inputs in its payload, its payload does not reflect
+the description in the XSD. Some inputs are passed as part of the path and query
+parameters. These inputs are then missing from the payload. Deserializing the
+payload would not result in the expected input associative array.</p>
+
+<p>To work around this problem, after deserialization, we insert those inputs into
+the input array. To map query-params and path-params, we use the parameter name
+(e.g., shipment-id, filter) for a matching key in the associative array. We use
+dotted notation to indicate levels in the array.</p>
+
+<pre><code>
+level1.level2.sort
+('level1' =&gt; array (
+    'level2' =&gt; array(
+        'sort' =&gt; ....
+    )
+))
+
+</code></pre>
+
+<h2 id="how-to-add-a-new-service">How to Add a New Service</h2>
+
+<ol>
+<li>
+    <p>Put the business logic PHP code into a class that extends MageService.
+[[<em>example</em>?]]</p>
+  </li>
+  <li>
+    <p>Annotate the new class with @Service and @Version (explained at <a href="http://praveenck.github.io/docs/service-idl/">Service
+IDL</a>.</p>
+  </li>
+</ol><ol>
+<li>
+    <p>For each method, make sure it takes a single param as an associative array
+and returns another array</p>
+  </li>
+  <li>
+    <p>Create a new XSD file under the module /etc directory and describe the
+structure of the arrays.</p>
+  </li>
+  <li>
+    <p>To expose the service through the Web API, add or edit the webapi.xml under
+the module /etc directory and provide REST routing info.</p>
+  </li>
+</ol><p>[[<em>these steps are very high level and would be way better with examples.
+without examples, the sequence is not clear enough to me that I can improve
+it]]</em></p>;T;@(I"/static/css/960.css/;T{;{ I"/static/css/reset.css/;T{;{ I"!/static/css/uv_active4d.css/;T{;{ I"/static/favicon.ico/;T{;{ I"&/static/images/background-v2.png/;T{;{ I")/static/images/background-white.png/;T{;{ I"'/static/images/logo_developer.png/;T{;{ I"!/static/images/nav-rule.png/;T{;{ I"*/static/shared/css/documentation.css/;T{;{ I"%/static/shared/css/pygments.css/;T{;{ I",/static/shared/images/active-arrow.png/;T{;{ I"-/static/shared/images/background-v2.png/;T{;{ I"0/static/shared/images/background-white.png/;T{;{ I""/static/shared/images/bg.png/;T{;{ I"0/static/shared/images/bg_footer_bottom.png/;T{;{ I"-/static/shared/images/bg_footer_top.png/;T{;{ I"*/static/shared/images/blacktocat.png/;T{;{ I"*/static/shared/images/blacktocat.svg/;T{;{ I"+/static/shared/images/crud-sprite.png/;T{;{ I"0/static/shared/images/dropdown_sprites.jpg/;T{;{ I"-/static/shared/images/expand-arrows.png/;T{;{ I"+/static/shared/images/footer-logo.png/;T{;{ I"+/static/shared/images/footer-logo.svg/;T{;{ I"+/static/shared/images/footer_logo.png/;T{;{ I"(/static/shared/images/nav-rule.png/;T{;{ I"//static/shared/images/next_step_arrow.gif/;T{;{ I"%/static/shared/images/qmark.png/;T{;{ I"./static/shared/images/rackspace_logo.png/;T{;{ I"(/static/shared/js/documentation.js/;T{;{ I"!/static/shared/js/jquery.js/;T{;{ I" /static/images/ExtArch.jpg/;T{;{ I"4/static/shared/images/background-white-old.png/;T{;{ I" /static/images/ExtArch.png/;T{;{ :versioni

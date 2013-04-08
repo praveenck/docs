@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="imagetoolbar" content="false">
+<meta name="MSSmartTagsPreventParsing" content="true">
+<title></title>
+<link href="css/reset.css" rel="stylesheet" type="text/css">
+<link href="css/960.css" rel="stylesheet" type="text/css">
+<link href="css/uv_active4d.css" rel="stylesheet" type="text/css">
+<link href="shared/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
+<link href="shared/css/pygments.css" media="screen" rel="stylesheet" type="text/css">
+<script src="shared/js/jquery.js" type="text/javascript"></script><script src="shared/js/documentation.js" type="text/javascript"></script>
+</head>
+<body class="api">
+    <div id="header-wrapper">
+      <div id="header">
+        <div>
+          <a class="logo" href="./"><img src="images/logo_developer.png" width="161" height="47" alt="GitHub:Developer"></a>
+          <ul class="nav">
+<li><a href="./">Home</a></li>
+            <li><a href="https://getsatisfaction.com/magento-2-prerelease">Feedback</a></li>
+          </ul>
+</div>
+      </div>
+<!-- #header -->
+    </div>
+<!-- #header-wrapper -->
+
+    <div id="wrapper">
+      <div class="content">
+    <h1 id="magento-2-extension-model-proposal-alpha-1">Magento 2 Extension Model Proposal: Alpha 1</h1>
+
+<p>As part of the overall push in Magento 2 for better modularity, we’re
+introducing support for a few new ideas in the last push to the Github
+repository.   A major theme of these changes is the separation of
+responsibilities, primarily between business logic on one side and presentation
+logic and user experience on the other.</p>
+
+<p><img src="images/archExtensibility.jpg" alt=""></p>
+
+<p>The diagram above attempts to describe the ideas behind these changes visually.
+Business logic is confined to the service layer and encapsulated in service
+classes.</p>
+
+<h2 id="services">Services</h2>
+
+<p>Services provide a single, common entry point for all interaction between different UIs,
+including Blocks, Controllers and web services; and it can even serve as an
+interface for business logic for other modules.</p>
+
+<p>Services have well defined interfaces described using a service IDL. Service IDL
+documents the list of public methods available to templates, blocks, controllers
+and web services. For each method, the input and output data types are defined
+using XSDs.</p>
+
+<h2 id="webhooks-and-callbacks">Webhooks and Callbacks</h2>
+
+<p>As a nod to the desire to support better remote integrations with Magento, as
+well, we’re not only working on automatically exposing these Services as web
+services to external clients, but with this release, we’re also introducing
+support for real-time integrations with remote system using webhooks and
+callbacks.</p>
+
+<p>Webhooks provide Event Observer-like behavior over HTTP and allow you to be
+notified when certain events occur with Magento and even get real-time data from
+the system.  Callbacks also support communication from your Magento installation
+out to a remote system, but callbacks trigger synchronously and use the response
+from the remote integration in the rest of the user request processing.  As an
+example, in this release we’re supporting the ability to define remote shipping
+carriers where the shipping rates and retrieved over an HTTP call.</p>
+
+<h2 id="better-templating">Better Templating</h2>
+
+<p>On the presentation tier, we’re introducing support for Twig templating.  Theme
+development has always been a big part of Magento store customization, but
+templates written in PHP meant that business logic occasionally was written into
+the .phtml files.  This meant that the business logic was either lost or had to
+be duplicated from theme to theme.  With a templating language like Twig, which
+uses a restricted syntax, it is easier to ensure that your template files will
+only be concerned with the logic needed to render your data.</p>
+
+<p>Since templates need data to render and Services are designed to provide a
+well-managed, consistent view of the data a module can provide, we’ve introduced
+a syntax for binding templates to a service call directly from the layout file.</p>
+
+<h2 id="extension-configuration-improvement">Extension Configuration Improvement</h2>
+
+<p>There’s another small improvement that we’ve made to System Configuration that
+we hope will make your life a little easier.  For most of the configuration
+fields you define, you can describe everything you need in XML – except for the
+values of a select box.  We’ve introduced a syntax with this push that will
+allow you to describe static select options inline, and dynamic options can be
+extracted from the result of a service call.</p>
+
+<p>These concepts have been introduced in isolated parts of the Magento application
+so far in the hopes that you will comment on their value and help direct and
+refine how they work.  This is the first set of many ideas that we’re looking at
+to help improve the modularity of Magento, which should improve not only the
+compatibility of extensions within Magento, but also the upgradability of
+Magento itself.</p>
+
+<h2 id="new-approach-for-creating-extensionscustomizations">New Approach for Creating Extensions/Customizations</h2>
+
+<p>Here’s an outline of how to create an extension that includes some business logic and associated presentation logic:</p>
+
+<ul>
+<li>
+    <p>Create a service that encapsulates the extensions business logic. As part of the service creation, define the service interface using the service IDL. List all methods whose output is need in the presentation tier. Define the method input and output using XSDs</p>
+  </li>
+  <li>
+    <p>Create a template that renders the visual aspects</p>
+  </li>
+  <li>
+    <p>Associate the template’s reuired data to one or more service calls via configuration in layout.xml</p>
+  </li>
+  <li>
+    <p>Optionally, accept configuration for your extension using option lists.</p>
+  </li>
+</ul>
+<p>The sections below describe the steps.</p>
+
+<h3 id="create-the-service-that-serves-data-to-your-extension">1. Create the Service That Serves Data to Your Extension</h3>
+
+<p>You can modify an existing service, such as the Product service. You could use
+the data returned by the product service to populate, say, a product detail
+page.</p>
+
+<p>A service can be shared</p>
+
+<p>Link to <a href="http://praveenck.github.io/docs/service-impl/">Service Implementations</a></p>
+
+<h3 id="create-the-template-for-your-extension">2. Create the Template for Your Extension</h3>
+
+<p>As with the service, you can start by modifying an existing template. Here’s an
+example [<em>__</em>]</p>
+
+<p>Here are some things you should know about using Twig.</p>
+
+<p><a href="http://praveenck.github.io/docs/twig/">Twig templates</a></p>
+
+<h3 id="create-the-visual-component">3. Create the Visual Component</h3>
+
+<p>The visual component takes its appearance from the the template, its data from
+the service, and other configuration from layout.xml. Here’s an example of a
+layout.xml file.</p>
+
+<p>[[* this is a mere definition. what files do you create/modify to have a visual
+component? and do we need a sub-document that discusses visual components more,
+with example? This is the only step without such a sub-document]]*</p>
+
+<h3 id="configure-your-extension">4. Configure Your Extension</h3>
+
+<p>In this step, you’re setting up options for a merchant to select. [*example
+options? what is the extent–what are the possibilities–for this option
+setting?] *</p>
+
+<p>You edit a system.xml file to set your extensions preferences for, for example,
+static and dynamic option lists.</p>
+
+<p><a href="http://praveenck.github.io/docs/option-list/">Extension Configuration</a></p>
+      </div>
+
+    <div id="js-sidebar" class="sidebar-shell">
+      <div class="js-toggle-list sidebar-module expandable">
+        <ul>
+<li class="js-guides"><h3><a href="twig/">Twig Templates</a></h3></li>
+          <li class="js-guides"><h3><a href="service-idl/">Service IDL</a></h3></li>
+          <li class="js-guides"><h3><a href="service-impl/">Service Implementation</a></h3></li>
+          <li class="js-guides"><h3><a href="web-api/">Creating Web APIs</a></h3></li>
+          <li class="js-guides"><h3><a href="option-list/">Extension Configuration</a></h3></li>
+        </ul>
+</div> <!-- /sidebar-module -->
+    </div>
+<!-- /sidebar-shell -->
+
+    </div>
+<!-- #wrapper -->
+
+    <div id="footer">
+      <div class="upper_footer">
+        <div class="footer_inner clearfix">
+
+        <!--[if IE]><h4 id="blacktocat_ie">GitHub Links</h4><![endif]-->
+        <h4 id="blacktocat">GitHub Links</h4>
+
+        <ul class="footer_nav">
+<h4>GitHub</h4>
+          <li><a href="https://github.com/about">About</a></li>
+          <li><a href="https://github.com/blog">Blog</a></li>
+          <li><a href="https://github.com/features">Features</a></li>
+          <li><a href="https://github.com/contact">Contact &amp; Support</a></li>
+          <li><a href="https://github.com/training">Training</a></li>
+          <li><a href="http://status.github.com/">Site Status</a></li>
+        </ul>
+<ul class="footer_nav">
+<h4>Tools</h4>
+          <li><a href="http://mac.github.com/">GitHub for Mac</a></li>
+          <li><a href="http://mobile.github.com/">Issues for iPhone</a></li>
+          <li><a href="https://gist.github.com">Gist: Code Snippets</a></li>
+          <li><a href="http://enterprise.github.com/">GitHub Enterprise</a></li>
+          <li><a href="http://jobs.github.com/">Job Board</a></li>
+        </ul>
+<ul class="footer_nav">
+<h4>Extras</h4>
+          <li><a href="http://shop.github.com/">GitHub Shop</a></li>
+          <li><a href="http://octodex.github.com/">The Octodex</a></li>
+        </ul>
+<ul class="footer_nav">
+<h4>Documentation</h4>
+          <li><a href="http://help.github.com/">GitHub Help</a></li>
+          <li><a href="http://developer.github.com/">Developer API</a></li>
+          <li><a href="http://github.github.com/github-flavored-markdown/">GitHub Flavored Markdown</a></li>
+          <li><a href="http://pages.github.com/">GitHub Pages</a></li>
+        </ul>
+</div>
+<!-- /.site -->
+      </div>
+<!-- /.upper_footer -->
+
+      <div class="lower_footer">
+        <div class="footer_inner clearfix">
+            <div id="legal">
+              <!--[if IE]><a class="home_ie" href="http://github.com">Home</a><![endif]-->
+              <a class="home" href="http://github.com">Home</a>
+
+              <ul id="legal_links">
+<li><a href="http://help.github.com/terms-of-service/">Terms of Service</a></li>
+                <li><a href="http://help.github.com/privacy-policy/">Privacy</a></li>
+                <li><a href="http://help.github.com/security/">Security</a></li>
+              </ul>
+<p>© <span id="year">year</span> GitHub Inc. All rights reserved.</p>
+            </div>
+<!-- /#legal or /#legal_ie-->
+        </div>
+<!-- /.site -->
+      </div>
+<!-- /.lower_footer -->
+    </div>
+<!-- /#footer -->
+    <script type="text/javascript">
+      var _gauges = _gauges || [];
+      (function() {
+        var t   = document.createElement('script');
+        t.type  = 'text/javascript';
+        t.async = true;
+        t.id    = 'gauges-tracker';
+        t.setAttribute('data-site-id', '4f2038e0cb25bc1b55000003');
+        t.src = '//secure.gaug.es/track.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(t, s);
+      })();
+    </script>
+</body>
+</html>
