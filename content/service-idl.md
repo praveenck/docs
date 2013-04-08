@@ -34,6 +34,7 @@ PHP Annotations
 
 ### 
 
+<div>
 <table>
 <table style="border:1px solid black;border-collapse:collapse;">
 <tr>
@@ -72,8 +73,9 @@ PHP Annotations
 <td style="border:1px solid black;"> Identifies the location of the XSD that defines the structure of output parameters and the root element of the data structure. </td>
 </tr>
 </table>
+<div>
 
-### 
+###
 
 ### Service Calls
 

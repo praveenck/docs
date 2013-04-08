@@ -1,4 +1,4 @@
-{:	data{,I"/:ET{:default{	:	lastI"4-<!DOCTYPE html>
+{:	data{-I"/:ET{:default{	:	lastI"4-<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -38,7 +38,7 @@ repository.   A major theme of these changes is the separation of
 responsibilities, primarily between business logic on one side and presentation
 logic and user experience on the other.</p>
 
-<p><img src="images/archExtensibility.jpg" alt=""></p>
+<p><img src="images/archExtensibility.png" alt=""></p>
 
 <p>The diagram above attempts to describe the ideas behind these changes visually.
 Business logic is confined to the service layer and encapsulated in service
@@ -263,7 +263,7 @@ repository.   A major theme of these changes is the separation of
 responsibilities, primarily between business logic on one side and presentation
 logic and user experience on the other.
 
-![](</images/archExtensibility.jpg>)
+![](</images/archExtensibility.png>)
 
 The diagram above attempts to describe the ideas behind these changes visually.
 Business logic is confined to the service layer and encapsulated in service
@@ -403,7 +403,7 @@ repository.   A major theme of these changes is the separation of
 responsibilities, primarily between business logic on one side and presentation
 logic and user experience on the other.</p>
 
-<p><img src="/images/archExtensibility.jpg" alt=""></p>
+<p><img src="/images/archExtensibility.png" alt=""></p>
 
 <p>The diagram above attempts to describe the ideas behind these changes visually.
 Business logic is confined to the service layer and encapsulated in service
@@ -3475,4 +3475,4 @@ the module /etc directory and provide REST routing info.</p>
   </li>
 </ol><p>[[<em>these steps are very high level and would be way better with examples.
 without examples, the sequence is not clear enough to me that I can improve
-it]]</em></p>;T;@(I"/static/css/960.css/;T{;{ I"/static/css/reset.css/;T{;{ I"!/static/css/uv_active4d.css/;T{;{ I"/static/favicon.ico/;T{;{ I"&/static/images/background-v2.png/;T{;{ I")/static/images/background-white.png/;T{;{ I"'/static/images/logo_developer.png/;T{;{ I"!/static/images/nav-rule.png/;T{;{ I"*/static/shared/css/documentation.css/;T{;{ I"%/static/shared/css/pygments.css/;T{;{ I",/static/shared/images/active-arrow.png/;T{;{ I"-/static/shared/images/background-v2.png/;T{;{ I"0/static/shared/images/background-white.png/;T{;{ I""/static/shared/images/bg.png/;T{;{ I"0/static/shared/images/bg_footer_bottom.png/;T{;{ I"-/static/shared/images/bg_footer_top.png/;T{;{ I"*/static/shared/images/blacktocat.png/;T{;{ I"*/static/shared/images/blacktocat.svg/;T{;{ I"+/static/shared/images/crud-sprite.png/;T{;{ I"0/static/shared/images/dropdown_sprites.jpg/;T{;{ I"-/static/shared/images/expand-arrows.png/;T{;{ I"+/static/shared/images/footer-logo.png/;T{;{ I"+/static/shared/images/footer-logo.svg/;T{;{ I"+/static/shared/images/footer_logo.png/;T{;{ I"(/static/shared/images/nav-rule.png/;T{;{ I"//static/shared/images/next_step_arrow.gif/;T{;{ I"%/static/shared/images/qmark.png/;T{;{ I"./static/shared/images/rackspace_logo.png/;T{;{ I"(/static/shared/js/documentation.js/;T{;{ I"!/static/shared/js/jquery.js/;T{;{ I" /static/images/ExtArch.jpg/;T{;{ I"4/static/shared/images/background-white-old.png/;T{;{ I" /static/images/ExtArch.png/;T{;{ :versioni
+it]]</em></p>;T;@(I"/static/css/960.css/;T{;{ I"/static/css/reset.css/;T{;{ I"!/static/css/uv_active4d.css/;T{;{ I"/static/favicon.ico/;T{;{ I"&/static/images/background-v2.png/;T{;{ I")/static/images/background-white.png/;T{;{ I"'/static/images/logo_developer.png/;T{;{ I"!/static/images/nav-rule.png/;T{;{ I"*/static/shared/css/documentation.css/;T{;{ I"%/static/shared/css/pygments.css/;T{;{ I",/static/shared/images/active-arrow.png/;T{;{ I"-/static/shared/images/background-v2.png/;T{;{ I"0/static/shared/images/background-white.png/;T{;{ I""/static/shared/images/bg.png/;T{;{ I"0/static/shared/images/bg_footer_bottom.png/;T{;{ I"-/static/shared/images/bg_footer_top.png/;T{;{ I"*/static/shared/images/blacktocat.png/;T{;{ I"*/static/shared/images/blacktocat.svg/;T{;{ I"+/static/shared/images/crud-sprite.png/;T{;{ I"0/static/shared/images/dropdown_sprites.jpg/;T{;{ I"-/static/shared/images/expand-arrows.png/;T{;{ I"+/static/shared/images/footer-logo.png/;T{;{ I"+/static/shared/images/footer-logo.svg/;T{;{ I"+/static/shared/images/footer_logo.png/;T{;{ I"(/static/shared/images/nav-rule.png/;T{;{ I"//static/shared/images/next_step_arrow.gif/;T{;{ I"%/static/shared/images/qmark.png/;T{;{ I"./static/shared/images/rackspace_logo.png/;T{;{ I"(/static/shared/js/documentation.js/;T{;{ I"!/static/shared/js/jquery.js/;T{;{ I" /static/images/ExtArch.jpg/;T{;{ I"4/static/shared/images/background-white-old.png/;T{;{ I" /static/images/ExtArch.png/;T{;{ I"*/static/images/archExtensibility.png/;T{;{ :versioni
