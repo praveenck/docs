@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Language" content="en-us">
 <meta http-equiv="imagetoolbar" content="false">
 <meta name="MSSmartTagsPreventParsing" content="true">
-<title>Extension Configuration</title>
+<title></title>
 <link href="../css/reset.css" rel="stylesheet" type="text/css">
 <link href="../css/960.css" rel="stylesheet" type="text/css">
 <link href="../css/uv_active4d.css" rel="stylesheet" type="text/css">
@@ -32,7 +32,247 @@
       <div class="content">
     <h1 id="extension-configuration">Extension Configuration</h1>
 
-<p>This page contains the documentation of extension configuration, specifically, configurable option lists</p>
+<p>This documents the proposal for defining system configuration options for an
+extension.</p>
+
+<p>In the old model, to provide a drop-down selection box with values for the
+merchant to select from, you had to write a PHP class source model to return the
+array. Now, you can define static option lists in system.xml directly.</p>
+
+<h2 id="configurable-static-option-lists">Configurable Static Option Lists</h2>
+
+<p>Here are a couple of side-by-side comparisons of the old configuration model and
+the new. We’ll look at an example in which we get a customer to show up in a
+group, and set up whether the VAT number appears in the frontend.</p>
+
+<h3 id="options--option-with-string-value">&lt;options&gt; + &lt;option&gt; with string value</h3>
+
+<p>In the old old model, you configure the source model and the source_model class
+(in this example,  Mage_Backend_Model_Config_Source_Yesno).</p>
+
+<pre><code>
+1.  In system.xml:
+
+&lt;field id="auto_group_assign" translate="label comment"
+type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
+showInStore="1"&gt;
+    &lt;label&gt;Enable Automatic Assignment to Customer Group&lt;/label&gt;
+    &lt;comment&gt;To show VAT number on frontend, set Show VAT Number on
+            Frontend option to Yes.&lt;/comment&gt;
+    &lt;source_model&gt;Mage_Backend_Model_Config_Source_Yesno&lt;/source_model&gt;
+&lt;/field&gt;
+
+2.  Create Yesno.php:
+
+class Mage_Backend_Model_Config_Source_Yesno implements
+ Mage_Core_Model_Option_ArrayInterface
+{
+	/**
+	* Options getter
+	*
+	* @return array
+	*/
+	public function toOptionArray()
+    {
+		return array(
+			array('value' =&gt; 1,
+            'label'=&gt;Mage::helper('Mage_Backend_Helper_Data')-&gt;__('Yes')),
+
+			array('value' =&gt; 0,
+            'label'=&gt;Mage::helper('Mage_Backend_Helper_Data')-&gt;__('No')),
+		);
+	}
+	/**
+	* Get options in "key-value" format
+	*
+	* @return array
+	*/
+
+	public function toArray()
+	{
+		return array(
+			0 =&gt;
+            Mage::helper('Mage_Backend_Helper_Data')-&gt;__('No'),
+			1 =&gt;
+            Mage::helper('Mage_Backend_Helper_Data')-&gt;__('Yes'),
+		);
+	}
+}
+            
+</code></pre>
+
+<p>Using the new model, all you have to do is configure options in system.xml.</p>
+
+<pre><code>
+1.  In system.xml:
+
+&lt;field id="auto_group_assign" translate="label comment"
+type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
+showInStore="1"&gt;
+	&lt;label&gt;Enable Automatic Assignment to Customer Group&lt;/label&gt;
+	&lt;comment&gt;To show VAT number on frontend, set Show VAT Number on
+		Frontend option to Yes.&lt;/comment&gt;
+	&lt;options&gt;
+		&lt;option label="Yes"&gt;1&lt;/option&gt;
+		&lt;option label="No"&gt;0&lt;/option&gt;
+	&lt;/options&gt;
+&lt;/field&gt;
+
+</code></pre>
+
+<h3 id="options--option-with-constant-value--classconstant">&lt;options&gt; + &lt;option&gt; with constant value - class::constant</h3>
+
+<p>In this example, we’re setting up tax calculations based on customer location.</p>
+
+<p>Using the old configuration model, it was necessary to configure the source
+model and the source_model class (in this example the class is called
+Mage_Customer_Model_Config_Source_Address_Type)</p>
+
+<pre><code>
+1.  In system.xml:
+
+&lt;field id="tax_calculation_address_type" translate="label"
+type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
+showInStore="1"&gt;
+	&lt;label&gt;Tax Calculation Based On&lt;/label&gt;
+	&lt;source_model&gt;Mage_Customer_Model_Config_Source_Address_Type&lt;/source_model&gt;
+	&lt;depends&gt;
+		&lt;field id="auto_group_assign"&gt;1&lt;/field&gt;
+	&lt;/depends&gt;
+&lt;/field&gt;
+
+2.  Type.php:
+
+	class Mage_Customer_Model_Config_Source_Address_Type implements
+    Mage_Core_Model_Option_ArrayInterface
+	{
+		/**
+		* Retrieve possible customer address types
+		*
+		* @return array
+		*/
+		public function toOptionArray()
+		{
+			return array(
+
+				Mage_Customer_Model_Address_Abstract::TYPE_BILLING =&gt;
+            		Mage::helper('Mage_Customer_Helper_Data')-&gt;__('Billing Address'),
+
+				Mage_Customer_Model_Address_Abstract::TYPE_SHIPPING =&gt;
+				Mage::helper('Mage_Customer_Helper_Data')-&gt;__('Shipping Address')
+			);
+		}
+	}
+
+</code></pre>
+
+<p>Using the new model, all that’s necessary is to configure options in system.xml.</p>
+
+<pre><code>
+1.  system.xml
+
+&lt;field id="tax_calculation_address_type" translate="label"
+type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
+showInStore="1"&gt;
+	&lt;label&gt;Tax Calculation Based On&lt;/label&gt;
+	&lt;options&gt;
+		&lt;option label="Billing
+        Address"&gt;{{Mage_Customer_Model_Address_Abstract::TYPE_BILLING}}&lt;/option&gt;
+        &lt;option label="Shipping
+        Address"&gt;{{Mage_Customer_Model_Address_Abstract::TYPE_SHIPPING}}&lt;/option&gt;
+	&lt;/options&gt;
+	&lt;depends&gt;
+		&lt;field id="auto_group_assign"&gt;1&lt;/field&gt;
+	&lt;/depends&gt;
+&lt;/field&gt;
+
+</code></pre>
+
+<h2 id="configurable-dynamic-option-lists">Configurable Dynamic Option Lists</h2>
+
+<h3 id="options-with-service-call-attribute">&lt;options&gt; with service-call attribute</h3>
+
+<p>Using the old model, you had to configure both the source_model and the
+source_model class (in this example,  Mage_Customer_Model_Config_Source_Group)</p>
+
+<pre><code>
+1.  In system.xml:
+
+&lt;field id="default_group" translate="label" type="select"
+sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1"&gt;
+	&lt;label&gt;Default Group&lt;/label&gt;
+	&lt;source_model&gt;Mage_Customer_Model_Config_Source_Group&lt;/source_model&gt;
+&lt;/field&gt;
+
+2.  Group.php:
+
+class Mage_Customer_Model_Config_Source_Group implements
+Mage_Core_Model_Option_ArrayInterface
+{
+	protected $_options;
+	public function toOptionArray()
+	{
+		if (!$this-&gt;_options) {
+			$this-&gt;_options =
+			Mage::getResourceModel('Mage_Customer_Model_Resource_Group_Collection')
+			-&gt;setRealGroupsFilter()
+			-&gt;loadData()-&gt;toOptionArray();
+	
+			array_unshift($this-&gt;_options, array('value'=&gt; '',
+	            'label'=&gt; Mage::helper('Mage_Customer_Helper_Data')-&gt;__('-- Please
+	            Select --')));
+		}
+		return $this-&gt;_options;
+	}
+}
+
+</code></pre>
+
+<p>Using the new model, you only have to configure options for service-call attributes idField and labelField in system.xml.</p>
+
+<pre><code>
+1.  In system.xml:
+
+&lt;field id="default_group" translate="label" type="select"
+sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1"&gt;
+	&lt;label&gt;Default Group&lt;/label&gt;
+	&lt;options service-call="customerGroup"
+	idField="customer_group_id" labelField="customer_group_code"/&gt;
+&lt;/field&gt;
+
+</code></pre>
+
+<p>Note: The service specified by the service-call attribute returns a list of objects, each containing data in key-value pairs. In the example above, the customerGroup service returns the following list of objects:</p>
+
+<pre><code>
+groups: {
+	object0: {
+		customer_group_id: 1
+		customer_group_code: General
+		tax_class_id: 3
+	}
+	object1: {
+		customer_group_id: 2
+		customer_group_code: Wholesale
+		tax_class_id: 3
+	}
+	object2: {
+		customer_group_id: 3
+		customer_group_code: Retailer
+		tax_class_id: 3
+	}
+}
+
+</code></pre>
+
+<p>The idField identifies the option, in this case the customer_group_id, and the labelField identifies the value, in this case the customer_group_code. In the current example, rendering will result in the following html:</p>
+
+<pre><code>
+&lt;option value="1"&gt;General&lt;/option&gt;
+&lt;option value="2"&gt;Wholesale&lt;/option&gt;
+&lt;option value="3"&gt;Retailer&lt;/option&gt;
+
+</code></pre>
       </div>
 
     <div id="js-sidebar" class="sidebar-shell">
