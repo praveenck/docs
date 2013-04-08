@@ -65,9 +65,6 @@ what follows.</p>
 
 <h2 id="php-annotations">PHP Annotations</h2>
 
-<h3 id="section"></h3>
-
-<table>
 <table style="border:1px solid black;border-collapse:collapse;">
 <tr>
 <th style="border:1px solid black;"> Annotation </th>
@@ -105,19 +102,15 @@ what follows.</p>
 <td style="border:1px solid black;"> Identifies the location of the XSD that defines the structure of output parameters and the root element of the data structure. </td>
 </tr>
 </table>
+<h3 id="service-calls">Service Calls</h3>
 
-### 
-
-### Service Calls
-
-A service operation is implemented as a class method. The class maps to the
+<p>A service operation is implemented as a class method. The class maps to the
 service via the requirement that operations from a service be grouped into a
-single class.
+single class.</p>
 
-**Example of a service call**
+<p><strong>Example of a service call</strong></p>
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+<pre><code>
 /**
 @Service shipping
  * @Version 2
@@ -140,17 +133,17 @@ class ShippingService extends MageService
     }
 }
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</code></pre>
 
-Here, the input data structure is identified in the @Consumes annotation as
+<p>Here, the input data structure is identified in the @Consumes annotation as
 belonging to the <getcarriersrequest> element in shipping/consumerux.xsd, and the
 output data structure is identified in the @Produces annotation as belonging to
 the <getcarriersresponse> element in shipping/consumerux.xsd. The shipping/consumerux.xsd file is
-shown below.
+shown below.</getcarriersresponse></getcarriersrequest></p>
 
-The PHP function receives an associative array ($params function parameter)
+<p>The PHP function receives an associative array ($params function parameter)
 reflecting the structure described by the element <getcarriersrequest>. It returns
-another associative array reflecting the structure described by the element
+another associative array reflecting the structure described by the element</getcarriersrequest></p>
 <getcarriersresponse>.
 
 XSD
@@ -275,8 +268,7 @@ array.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-</getcarriersresponse></getcarriersrequest></getcarriersresponse></getcarriersrequest>
-</table>
+</getcarriersresponse>
 </div>
 
     <div id="js-sidebar" class="sidebar-shell">
