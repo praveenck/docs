@@ -109,15 +109,15 @@ class ShippingService extends MageService
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Here, the input data structure is identified in the @Consumes annotation as
-belonging to the <getCarriersRequest> element in shipping/consumerux.xsd, and the
+belonging to the <getCarriersRequest\> element in shipping/consumerux.xsd, and the
 output data structure is identified in the @Produces annotation as belonging to
-the <getCarriersResponse> element in shipping/consumerux.xsd. The shipping/consumerux.xsd file is
+the <getCarriersResponse\> element in shipping/consumerux.xsd. The shipping/consumerux.xsd file is
 shown below.
 
 The PHP function receives an associative array ($params function parameter)
-reflecting the structure described by the element <getCarriersRequest>. It returns
+reflecting the structure described by the element <getCarriersRequest\>. It returns
 another associative array reflecting the structure described by the element
-<getCarriersResponse>.
+<getCarriersResponse\>.
 
 XSD
 ---
