@@ -22,81 +22,53 @@ In the old old model, you configure the source model and the source_model class
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-        1.  In system.xml:
+1.  In system.xml:
 
-            <field id="auto_group_assign" translate="label comment"
-            type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
-            showInStore="1">
-
-                <label>Enable Automatic Assignment to Customer Group</label>
-
-                <comment>To show VAT number on frontend, set Show VAT Number on
+<field id="auto_group_assign" translate="label comment"
+type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
+showInStore="1">
+    <label>Enable Automatic Assignment to Customer Group</label>
+    <comment>To show VAT number on frontend, set Show VAT Number on
             Frontend option to Yes.</comment>
+    <source_model>Mage_Backend_Model_Config_Source_Yesno</source_model>
+</field>
 
-                <source_model>Mage_Backend_Model_Config_Source_Yesno</source_model>
+2.  Create Yesno.php:
 
-            </field>
-
-        2.  Create Yesno.php:
-
-            class Mage_Backend_Model_Config_Source_Yesno implements
-            Mage_Core_Model_Option_ArrayInterface
-
-            {
-
-                /**
-
-                 * Options getter
-
-                 *
-
-                 * @return array
-
-                 */
-
-                public function toOptionArray()
-
-                {
-
-                    return array(
-
-                        array('value' => 1,
+class Mage_Backend_Model_Config_Source_Yesno implements
+ Mage_Core_Model_Option_ArrayInterface
+{
+	/**
+	* Options getter
+	*
+	* @return array
+	*/
+	public function toOptionArray()
+    {
+		return array(
+			array('value' => 1,
             'label'=>Mage::helper('Mage_Backend_Helper_Data')->__('Yes')),
 
-                        array('value' => 0,
+			array('value' => 0,
             'label'=>Mage::helper('Mage_Backend_Helper_Data')->__('No')),
+		);
+	}
+	/**
+	* Get options in "key-value" format
+	*
+	* @return array
+	*/
 
-                    );
-
-                }
-
-                /**
-
-                 * Get options in "key-value" format
-
-                 *
-
-                 * @return array
-
-                 */
-
-                public function toArray()
-
-                {
-
-                    return array(
-
-                        0 =>
+	public function toArray()
+	{
+		return array(
+			0 =>
             Mage::helper('Mage_Backend_Helper_Data')->__('No'),
-
-                        1 =>
+			1 =>
             Mage::helper('Mage_Backend_Helper_Data')->__('Yes'),
-
-                    );
-
-                }
-
-            }
+		);
+	}
+}
             
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -104,26 +76,19 @@ Using the new model, all you have to do is configure options in system.xml.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-        1.  In system.xml:
+1.  In system.xml:
 
-            <field id="auto_group_assign" translate="label comment"
-            type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
-            showInStore="1">
-
-                <label>Enable Automatic Assignment to Customer Group</label>
-
-                <comment>To show VAT number on frontend, set Show VAT Number on
-            Frontend option to Yes.</comment>
-
-                <options>
-
-                    <option label="Yes">1</option>
-
-                    <option label="No">0</option>
-
-                </options>
-
-            </field>
+<field id="auto_group_assign" translate="label comment"
+type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
+showInStore="1">
+	<label>Enable Automatic Assignment to Customer Group</label>
+	<comment>To show VAT number on frontend, set Show VAT Number on
+		Frontend option to Yes.</comment>
+	<options>
+		<option label="Yes">1</option>
+		<option label="No">0</option>
+	</options>
+</field>
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -137,58 +102,40 @@ Mage_Customer_Model_Config_Source_Address_Type)
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-        1.  In system.xml:
+1.  In system.xml:
 
-            <field id="tax_calculation_address_type" translate="label"
-            type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
-            showInStore="1">
+<field id="tax_calculation_address_type" translate="label"
+type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
+showInStore="1">
+	<label>Tax Calculation Based On</label>
+	<source_model>Mage_Customer_Model_Config_Source_Address_Type</source_model>
+	<depends>
+		<field id="auto_group_assign">1</field>
+	</depends>
+</field>
 
-                <label>Tax Calculation Based On</label>
+2.  Type.php:
 
-                <source_model>Mage_Customer_Model_Config_Source_Address_Type</source_model>
+	class Mage_Customer_Model_Config_Source_Address_Type implements
+    Mage_Core_Model_Option_ArrayInterface
+	{
+		/**
+		* Retrieve possible customer address types
+		*
+		* @return array
+		*/
+		public function toOptionArray()
+		{
+			return array(
 
-                <depends>
+				Mage_Customer_Model_Address_Abstract::TYPE_BILLING =>
+            		Mage::helper('Mage_Customer_Helper_Data')->__('Billing Address'),
 
-                    <field id="auto_group_assign">1</field>
-
-                </depends>
-
-            </field>
-
-        2.  Type.php:
-
-            class Mage_Customer_Model_Config_Source_Address_Type implements
-            Mage_Core_Model_Option_ArrayInterface
-
-            {
-
-                /**
-
-                 * Retrieve possible customer address types
-
-                 *
-
-                 * @return array
-
-                 */
-
-                public function toOptionArray()
-
-                {
-
-                    return array(
-
-                        Mage_Customer_Model_Address_Abstract::TYPE_BILLING =>
-            Mage::helper('Mage_Customer_Helper_Data')->__('Billing Address'),
-
-                        Mage_Customer_Model_Address_Abstract::TYPE_SHIPPING =>
-            Mage::helper('Mage_Customer_Helper_Data')->__('Shipping Address')
-
-                    );
-
-                }
-
-            }
+				Mage_Customer_Model_Address_Abstract::TYPE_SHIPPING =>
+				Mage::helper('Mage_Customer_Helper_Data')->__('Shipping Address')
+			);
+		}
+	}
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -196,31 +143,22 @@ Using the new model, all that's necessary is to configure options in system.xml.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-        1.  system.xml
+1.  system.xml
 
-            <field id="tax_calculation_address_type" translate="label"
-            type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
-            showInStore="1">
-
-                <label>Tax Calculation Based On</label>
-
-                <options>
-
-                    <option label="Billing
-            Address">{{Mage_Customer_Model_Address_Abstract::TYPE_BILLING}}</option>
-
-                    <option label="Shipping
-            Address">{{Mage_Customer_Model_Address_Abstract::TYPE_SHIPPING}}</option>
-
-                </options>
-
-                <depends>
-
-                    <field id="auto_group_assign">1</field>
-
-                </depends>
-
-            </field>
+<field id="tax_calculation_address_type" translate="label"
+type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
+showInStore="1">
+	<label>Tax Calculation Based On</label>
+	<options>
+		<option label="Billing
+        Address">{{Mage_Customer_Model_Address_Abstract::TYPE_BILLING}}</option>
+        <option label="Shipping
+        Address">{{Mage_Customer_Model_Address_Abstract::TYPE_SHIPPING}}</option>
+	</options>
+	<depends>
+		<field id="auto_group_assign">1</field>
+	</depends>
+</field>
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -234,66 +172,50 @@ source_model class (in this example,  Mage_Customer_Model_Config_Source_Group)
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-        1.  In system.xml:
+1.  In system.xml:
 
-            <field id="default_group" translate="label" type="select"
-            sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+<field id="default_group" translate="label" type="select"
+sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+	<label>Default Group</label>
+	<source_model>Mage_Customer_Model_Config_Source_Group</source_model>
+</field>
 
-                <label>Default Group</label>
+2.  Group.php:
 
-                <source_model>Mage_Customer_Model_Config_Source_Group</source_model>
+class Mage_Customer_Model_Config_Source_Group implements
+Mage_Core_Model_Option_ArrayInterface
+{
+	protected $_options;
+	public function toOptionArray()
+	{
+		if (!$this->_options) {
+			$this->_options =
+			Mage::getResourceModel('Mage_Customer_Model_Resource_Group_Collection')
+			->setRealGroupsFilter()
+			->loadData()->toOptionArray();
+	
+			array_unshift($this->_options, array('value'=> '',
+	            'label'=> Mage::helper('Mage_Customer_Helper_Data')->__('-- Please
+	            Select --')));
+		}
+		return $this->_options;
+	}
+}
 
-            </field>
-
-        2.  Group.php:
-
-            class Mage_Customer_Model_Config_Source_Group implements
-            Mage_Core_Model_Option_ArrayInterface
-
-            {
-
-                protected $_options;
-
-                public function toOptionArray()
-
-                {
-
-                    if (!$this->_options) {
-
-                        $this->_options =
-            Mage::getResourceModel('Mage_Customer_Model_Resource_Group_Collection')
-
-                            ->setRealGroupsFilter()
-
-                            ->loadData()->toOptionArray();
-
-                        array_unshift($this->_options, array('value'=> '',
-            'label'=> Mage::helper('Mage_Customer_Helper_Data')->__('-- Please
-            Select --')));
-
-                    }
-
-                    return $this->_options;
-
-                }
-
-            }
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Using the new model, you only have to configure options for service-call attributes idField and labelField in system.xml.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-        1.  In system.xml:
+1.  In system.xml:
 
-            <field id="default_group" translate="label" type="select"
-            sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-
-                <label>Default Group</label>
-
-                <options service-call="customerGroup"
-            idField="customer_group_id" labelField="customer_group_code"/>
-
-            </field>
+<field id="default_group" translate="label" type="select"
+sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+	<label>Default Group</label>
+	<options service-call="customerGroup"
+	idField="customer_group_id" labelField="customer_group_code"/>
+</field>
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -301,39 +223,23 @@ Note: The service specified by the service-call attribute returns a list of obje
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-            groups: {
-
-                object0: {
-
-                        customer_group_id: 1
-
-                        customer_group_code: General
-
-                        tax_class_id: 3
-
-                       }
-
-                object1: {
-
-                        customer_group_id: 2
-
-                        customer_group_code: Wholesale
-
-                        tax_class_id: 3
-
-                       }
-
-                object2: {
-
-                        customer_group_id: 3
-
-                        customer_group_code: Retailer
-
-                        tax_class_id: 3
-
-                       }
-
-                    }
+groups: {
+	object0: {
+		customer_group_id: 1
+		customer_group_code: General
+		tax_class_id: 3
+	}
+	object1: {
+		customer_group_id: 2
+		customer_group_code: Wholesale
+		tax_class_id: 3
+	}
+	object2: {
+		customer_group_id: 3
+		customer_group_code: Retailer
+		tax_class_id: 3
+	}
+}
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -341,10 +247,10 @@ The idField identifies the option, in this case the customer_group_id, and the l
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-            <option value="1">General</option>
+<option value="1">General</option>
+<option value="2">Wholesale</option>
+<option value="3">Retailer</option>
 
-            <option value="2">Wholesale</option>
-
-            <option value="3">Retailer</option>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
