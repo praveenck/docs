@@ -20,7 +20,7 @@
           <a class="logo" href="../"><img src="../images/logo_developer.png" width="161" height="47" alt="GitHub:Developer"></a>
           <ul class="nav">
 <li><a href="../">Home</a></li>
-            <li><a href="../vmimage">VM Image</a></li>
+            <li><a href=".">VM Image</a></li>
             <li><a href="https://getsatisfaction.com/magento-2-prerelease">Feedback</a></li>
           </ul>
 </div>
@@ -31,78 +31,99 @@
 
     <div id="wrapper">
       <div class="content">
-    <h1 id="creating-web-apis">Creating Web APIs</h1>
+    <h1 id="setting-up-magento-2-extension-model-alpha-1-vm-image">Setting up Magento 2 Extension Model Alpha 1 VM Image</h1>
 
-<p>Once you’ve created a service, you can expose its functionality over the web to
-REST and SOAP interfaces by making simple web API declarations in the form of
-annotations to a configuration file.</p>
+<p>This document describes the steps to download and install a VirtualBox image containing the Magento 2 Extension Model Improvements (Alpha 1). For an overview of the proposed improvements, please refer to the documentation <a href="http://magento.github.io/magento2-developer-docs/">here</a>.</p>
 
-<p>Note that in the current Alpha-1 release, this is a proposal only, and not yet
-implemented. Please leave comments on this proposal on https://getsatisfaction.com/magento-2-prerelease/topics</p>
+<h2 id="download">Download</h2>
 
-<p>To find out about creating a service, see <a href="http://praveenck.github.io/docs/service-impl/">Service Implementation</a>.</p>
+<p>Download the ova file by clicking on the link below and save it to the disk. If you do not have virtual box installed, please refer to <a href="https://www.virtualbox.org/wiki/Downloads">this link</a> for download and installation instructions.</p>
 
-<p>Some advantages of converting your service into a web API:</p>
+<p><a href="https://ebay.box.com/s/a2k6twcsoappu4zv5lsq">Magento 2 Extension Model Improvements (Alpha 1)</a></p>
 
-<ul>
-<li>
-    <p>Authentication and authorization will be handled by the API framework,
-allowing you to focus on building business logic</p>
-  </li>
-  <li>
-    <p>Your service’s business logic becomes available to the Magento web
-application and also to other native applications (e.g., iOS and Android
-apps).</p>
-  </li>
-</ul>
-<h2 id="web-api-declaration">Web API Declaration</h2>
+<h2 id="starting-vm">Starting VM</h2>
 
-<p>We use a configuration file to expose services that use the IDL to REST and SOAP
-interfaces.</p>
+<p>Start the virtual box application. Import the VM image by clicking on File-&gt;Import Appliance menu option. Click on “Open Appliance” button and browse to the location where you saved the .ova file. Select the ova file and click open. Continue to the next screen and click on import. Once the import is complete, the virtual appliance is displayed in the list of appliances on the left sidebar as magento2_2.</p>
 
-<p>For SOAP, we only need to declare the location of WSDL and the method. We can
-default the WSDL location to the service name (e.g., shipping) and the SOAP
-method to the PHP method (e.g., getCarriers).</p>
+<p>To start the VM, select the magento2_2 VM and click on the start button. Once it comes up you will be presented with a gui login. You can use this or you can ssh directly into the machine via PuTTY or similar tool.</p>
 
-<p><strong>webapi.xml</strong></p>
+<h3 id="edit-your-hosts-file">Edit your hosts file</h3>
 
-<pre><code>
-&lt;?xml version="1.0"?&gt;
-&lt;webapi&gt;
-    &lt;service name="shipping"&gt;
-        &lt;rest-route method="GET" path="/shipping/carriers" call="getCarriers"&gt;
-        &lt;rest-route method="GET" path="/shipping/{shipment-id}" call="getOne"&gt;
-        &lt;rest-route method="GET" path="/shipping" call="getMany" query-params="sort,filter"&gt;
-    &lt;/service&gt;
-&lt;/webapi&gt;
+<p>Be sure to edit your local hosts file to add an entry for this vm as shown below. You will be able to hit this http://magento.local url after this in your local machine’s browser to finish the magento install.</p>
 
-</code></pre>
+<pre>
+192.168.56.101 magento.local
+</pre>
 
-<p>To expose your service as a REST API, there is an additional step. Because REST
-doesn’t pass all inputs in its payload, its payload does not reflect the
-description in the XSD. Some inputs are passed as part of the path and query
-parameters, and are thus missing from the payload. Deserializing the payload
-would not result in the expected input associative array.</p>
+<h2 id="login-details">Login details</h2>
 
-<p>To form the expected array, after deserialization, we insert the missing inputs
-into the array. We use the parameter name (e.g., shipment-id, filter) as a
-matching key to map to query-params and path-params in the array, and we use
-dotted notation to indicate levels in the array, as follows:</p>
+<p>The ip address of the VM is <b>192.168.56.101</b> and below logins will work via ssh.</p>
 
-<pre><code>
-level1.level2.sort
+<h3 id="linux-user-accounts">Linux User Accounts</h3>
 
-('level1' =&gt; array (
+<table>
+<thead><tr>
+<th style="text-align: left">Username</th>
+      <th style="text-align: left">Password</th>
+      <th style="text-align: left">Has Root Access</th>
+      <th style="text-align: left">Login via GUI</th>
+    </tr></thead>
+<tbody>
+<tr>
+<td style="text-align: left">mage</td>
+      <td style="text-align: left">123456</td>
+      <td style="text-align: left">via sudo</td>
+      <td style="text-align: left">yes</td>
+    </tr>
+<tr>
+<td style="text-align: left">root</td>
+      <td style="text-align: left">123456</td>
+      <td style="text-align: left">yes</td>
+      <td style="text-align: left">no</td>
+    </tr>
+</tbody>
+</table>
+<h3 id="mysql-accounts">Mysql Accounts</h3>
 
-    'level2' =&gt; array(
+<p>You can use mysql workbench to connect to the mysql server, just specify the ip address of the vm and one of the below accounts.</p>
 
-        'sort' =&gt; ....
+<table>
+<thead><tr>
+<th style="text-align: left">Username</th>
+      <th style="text-align: left">Password</th>
+      <th style="text-align: center">Remote Login</th>
+      <th style="text-align: left">Database</th>
+    </tr></thead>
+<tbody>
+<tr>
+<td style="text-align: left">magento2</td>
+      <td style="text-align: left">magento2</td>
+      <td style="text-align: center">yes</td>
+      <td style="text-align: left">magento2</td>
+    </tr>
+<tr>
+<td style="text-align: left">root</td>
+      <td style="text-align: left">123456</td>
+      <td style="text-align: center">yes</td>
+      <td style="text-align: left">All Dbs</td>
+    </tr>
+</tbody>
+</table>
+<h3 id="magento-admin-account">Magento Admin Account</h3>
 
-    )
+<table>
+<thead><tr>
+<th style="text-align: left">Username</th>
+      <th style="text-align: left">Password</th>
+    </tr></thead>
+<tbody><tr>
+<td style="text-align: left">magento2</td>
+      <td style="text-align: left">magento2</td>
+    </tr></tbody>
+</table>
+<h2 id="magento2-install">Magento2 install</h2>
 
-))
-
-</code></pre>
+<p>Magento is already installed at /var/mage/magento2. A snapshot of magento2 code containing the Extension Model imrpovements is already there. To access Magento Frontend use http://magento.local and for Magento admin (backend), use http://magento.local/index.php/backend/admin. There already is a mysql server running on the vm with a magento2 database.</p>
       </div>
 
     <div id="js-sidebar" class="sidebar-shell">
@@ -113,7 +134,7 @@ level1.level2.sort
           <li class="js-guides"><h3><a href="../service-idl/">Service IDL</a></h3></li>
           <li class="js-guides"><h3><a href="../service-impl/">Service Implementation</a></h3></li>
           <li class="js-guides"><h3><a href="../webhooks/">Webhooks</a></h3></li>
-          <li class="js-guides"><h3><a href="./">Creating Web APIs</a></h3></li>
+          <li class="js-guides"><h3><a href="../web-api/">Creating Web APIs</a></h3></li>
           <li class="js-guides"><h3><a href="../option-list/">Extension Configuration</a></h3></li>
         </ul>
 </div> <!-- /sidebar-module -->

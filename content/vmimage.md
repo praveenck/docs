@@ -33,11 +33,11 @@ Be sure to edit your local hosts file to add an entry for this vm as shown below
 Login details
 --------
 
-The ip address of the VM is 192.168.56.101 and below logins will work via ssh.
+The ip address of the VM is <b>192.168.56.101</b> and below logins will work via ssh.
 
 ### Linux User Accounts
 
-| Username | Password | Has Root Access | Login via GUI|
+| Username | Password | Has Root Access | Login via GUI |
 |:--------|:-------|:--------|:--------|
 | mage | 123456 | via sudo | yes |
 | root | 123456 | yes | no |
