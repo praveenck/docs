@@ -119,48 +119,7 @@ Magento itself.</p>
     <p>Optionally, accept configuration for your extension using option lists.</p>
   </li>
 </ul>
-<p>The sections below describe the steps.</p>
-
-<h3 id="create-the-service-that-serves-data-to-your-extension">1. Create the Service That Serves Data to Your Extension</h3>
-
-<p>You can modify an existing service, such as the Product service. You could use
-the data returned by the product service to populate, say, a product detail
-page.</p>
-
-<p>A service can be shared</p>
-
-<p>Link to <a href="http://praveenck.github.io/docs/service-impl/">Service Implementations</a></p>
-
-<h3 id="create-the-template-for-your-extension">2. Create the Template for Your Extension</h3>
-
-<p>As with the service, you can start by modifying an existing template. Here’s an
-example [<em>__</em>]</p>
-
-<p>Here are some things you should know about using Twig.</p>
-
-<p><a href="http://praveenck.github.io/docs/twig/">Twig templates</a></p>
-
-<h3 id="create-the-visual-component">3. Create the Visual Component</h3>
-
-<p>The visual component takes its appearance from the the template, its data from
-the service, and other configuration from layout.xml. Here’s an example of a
-layout.xml file.</p>
-
-<p>[[* this is a mere definition. what files do you create/modify to have a visual
-component? and do we need a sub-document that discusses visual components more,
-with example? This is the only step without such a sub-document]]*</p>
-
-<h3 id="configure-your-extension">4. Configure Your Extension</h3>
-
-<p>In this step, you’re setting up options for a merchant to select. [*example
-options? what is the extent–what are the possibilities–for this option
-setting?] *</p>
-
-<p>You edit a system.xml file to set your extensions preferences for, for example,
-static and dynamic option lists.</p>
-
-<p><a href="http://praveenck.github.io/docs/option-list/">Extension Configuration</a></p>
-      </div>
+</div>
 
     <div id="js-sidebar" class="sidebar-shell">
       <div class="js-toggle-list sidebar-module expandable">
@@ -168,6 +127,7 @@ static and dynamic option lists.</p>
 <li class="js-guides"><h3><a href="twig/">Twig Templates</a></h3></li>
           <li class="js-guides"><h3><a href="service-idl/">Service IDL</a></h3></li>
           <li class="js-guides"><h3><a href="service-impl/">Service Implementation</a></h3></li>
+          <li class="js-guides"><h3><a href="webhooks/">Webhooks</a></h3></li>
           <li class="js-guides"><h3><a href="web-api/">Creating Web APIs</a></h3></li>
           <li class="js-guides"><h3><a href="option-list/">Extension Configuration</a></h3></li>
         </ul>
