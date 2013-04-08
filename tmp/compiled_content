@@ -112,10 +112,10 @@ Magento itself.</p>
     <p>Create a template that renders the visual aspects</p>
   </li>
   <li>
-    <p>Associate the template‚Äôs reuired data to one or more service calls via configuration in layout.xml</p>
+    <p>Associate the template‚Äôs required data to one or more service calls via configuration in layout.xml</p>
   </li>
   <li>
-    <p>Optionally, accept configuration for your extension using option lists.</p>
+    <p>Optionally, accept configuration for your extension using option lists</p>
   </li>
 </ul>
 </div>
@@ -301,9 +301,9 @@ Here's an outline of how to create an extension that includes some business logi
 
 -   Create a template that renders the visual aspects
 
--   Associate the template's reuired data to one or more service calls via configuration in layout.xml
+-   Associate the template's required data to one or more service calls via configuration in layout.xml
 
--   Optionally, accept configuration for your extension using option lists.
+-   Optionally, accept configuration for your extension using option lists
 
 ;T:preI"Ú<h1 id="magento-2-extension-model-proposal-alpha-1">Magento 2 Extension Model Proposal: Alpha 1</h1>
 
@@ -386,10 +386,10 @@ Magento itself.</p>
     <p>Create a template that renders the visual aspects</p>
   </li>
   <li>
-    <p>Associate the template‚Äôs reuired data to one or more service calls via configuration in layout.xml</p>
+    <p>Associate the template‚Äôs required data to one or more service calls via configuration in layout.xml</p>
   </li>
   <li>
-    <p>Optionally, accept configuration for your extension using option lists.</p>
+    <p>Optionally, accept configuration for your extension using option lists</p>
   </li>
 </ul>;T:	post@
 I"/option-list/;T{;{	;I"*2<!DOCTYPE html>
@@ -3383,7 +3383,7 @@ level1.level2.sort
 </body>
 </html>
 ;T;	I"# Webhooks - Coming Soon!;T;
-I"A<h1 id="webhooks---coming-soon">Webhooks - Coming Soon!</h1>;T;@èI"/vmimage/;T{;{	;I"(%<!DOCTYPE html>
+I"A<h1 id="webhooks---coming-soon">Webhooks - Coming Soon!</h1>;T;@èI"/vmimage/;T{;{	;I"ç&<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -3442,69 +3442,69 @@ I"A<h1 id="webhooks---coming-soon">Webhooks - Coming Soon!</h1>;T;@èI"/vmim
 
 <h2 id="login-details">Login details</h2>
 
-<p>The ip address of the VM is <b>192.168.56.101</b> and below logins will work via ssh.</p>
+<p>The ip address of the VM is <b>192.168.56.101</b> and below logins will work via ssh</p>
 
 <h3 id="linux-user-accounts">Linux User Accounts</h3>
 
-<table>
-<thead><tr>
-<th style="text-align: left">Username</th>
-      <th style="text-align: left">Password</th>
-      <th style="text-align: left">Has Root Access</th>
-      <th style="text-align: left">Login via GUI</th>
-    </tr></thead>
-<tbody>
+<p>Following are the user accounts for linux login via GUI and ssh.</p>
+
+<table style="border:1px solid black;border-collapse:collapse;">
 <tr>
-<td style="text-align: left">mage</td>
-      <td style="text-align: left">123456</td>
-      <td style="text-align: left">via sudo</td>
-      <td style="text-align: left">yes</td>
-    </tr>
+<th style="border:1px solid black;"> <b> Username </b> </th>
+<th style="border:1px solid black;"> <b> Password </b> </th>
+<th style="border:1px solid black;"> <b> Has Root Access </b> </th>
+<th style="border:1px solid black;"> <b> Login via GUI </b> </th>
+</tr>
 <tr>
-<td style="text-align: left">root</td>
-      <td style="text-align: left">123456</td>
-      <td style="text-align: left">yes</td>
-      <td style="text-align: left">no</td>
-    </tr>
-</tbody>
+<td style="border:1px solid black;"> mage </td>
+<td style="border:1px solid black;"> 123456 </td>
+<td style="border:1px solid black;"> via sudo </td>
+<td style="border:1px solid black;"> yes </td>
+</tr>
+<tr>
+<td style="border:1px solid black;"> root </td>
+<td style="border:1px solid black;"> 123456 </td>
+<td style="border:1px solid black;"> yes </td>
+<td style="border:1px solid black;"> no </td>
+</tr>
 </table>
 <h3 id="mysql-accounts">Mysql Accounts</h3>
 
-<p>You can use mysql workbench to connect to the mysql server, just specify the ip address of the vm and one of the below accounts.</p>
+<p>You can use mysql workbench to connect to the mysql server, just specify the ip address of the vm and one of the below accounts</p>
 
-<table>
-<thead><tr>
-<th style="text-align: left">Username</th>
-      <th style="text-align: left">Password</th>
-      <th style="text-align: center">Remote Login</th>
-      <th style="text-align: left">Database</th>
-    </tr></thead>
-<tbody>
+<table style="border:1px solid black;border-collapse:collapse;">
 <tr>
-<td style="text-align: left">magento2</td>
-      <td style="text-align: left">magento2</td>
-      <td style="text-align: center">yes</td>
-      <td style="text-align: left">magento2</td>
-    </tr>
+<th style="border:1px solid black;"> Username </th>
+<th style="border:1px solid black;"> Password </th>
+<th style="border:1px solid black;"> Remote Login </th>
+<th style="border:1px solid black;"> Database </th>
+</tr>
 <tr>
-<td style="text-align: left">root</td>
-      <td style="text-align: left">123456</td>
-      <td style="text-align: center">yes</td>
-      <td style="text-align: left">All Dbs</td>
-    </tr>
-</tbody>
+<td style="border:1px solid black;"> magento2 </td>
+<td style="border:1px solid black;"> magento2 </td>
+<td style="border:1px solid black;"> yes </td>
+<td style="border:1px solid black;"> magento2 </td>
+</tr>
+<tr>
+<td style="border:1px solid black;"> root </td>
+<td style="border:1px solid black;"> 123456 </td>
+<td style="border:1px solid black;"> yes </td>
+<td style="border:1px solid black;"> All Dbs </td>
+</tr>
 </table>
 <h3 id="magento-admin-account">Magento Admin Account</h3>
 
-<table>
-<thead><tr>
-<th style="text-align: left">Username</th>
-      <th style="text-align: left">Password</th>
-    </tr></thead>
-<tbody><tr>
-<td style="text-align: left">magento2</td>
-      <td style="text-align: left">magento2</td>
-    </tr></tbody>
+<p>Following are the admin accounts for accessing Magento admin (backend)</p>
+
+<table style="border:1px solid black;border-collapse:collapse;">
+<tr>
+<th style="border:1px solid black;"> Username </th>
+<th style="border:1px solid black;"> Password </th>
+</tr>
+<tr>
+<td style="border:1px solid black;"> magento2 </td>
+<td style="border:1px solid black;"> magento2 </td>
+</tr>
 </table>
 <h2 id="magento2-install">Magento2 install</h2>
 
@@ -3605,8 +3605,7 @@ I"A<h1 id="webhooks---coming-soon">Webhooks - Coming Soon!</h1>;T;@èI"/vmim
     </script>
 </body>
 </html>
-;T;	I"Ï
-Setting up Magento 2 Extension Model Alpha 1 VM Image
+;T;	I"–Setting up Magento 2 Extension Model Alpha 1 VM Image
 =====================================================
 
 This document describes the steps to download and install a VirtualBox image containing the Magento 2 Extension Model Improvements (Alpha 1). For an overview of the proposed improvements, please refer to the documentation [here][1].
@@ -3641,40 +3640,81 @@ Be sure to edit your local hosts file to add an entry for this vm as shown below
 Login details
 --------
 
-The ip address of the VM is <b>192.168.56.101</b> and below logins will work via ssh.
+The ip address of the VM is <b>192.168.56.101</b> and below logins will work via ssh
 
 ### Linux User Accounts
 
-| Username | Password | Has Root Access | Login via GUI |
-|:--------|:-------|:--------|:--------|
-| mage | 123456 | via sudo | yes |
-| root | 123456 | yes | no |
+Following are the user accounts for linux login via GUI and ssh.
 
-
+<table style="border:1px solid black;border-collapse:collapse;">
+<tr>
+<th style="border:1px solid black;"> <b> Username </b> </th>
+<th style="border:1px solid black;"> <b> Password </b> </th>
+<th style="border:1px solid black;"> <b> Has Root Access </b> </th>
+<th style="border:1px solid black;"> <b> Login via GUI </b> </th>
+</tr>
+<tr>
+<td style="border:1px solid black;"> mage </td>
+<td style="border:1px solid black;"> 123456 </td>
+<td style="border:1px solid black;"> via sudo </td>
+<td style="border:1px solid black;"> yes </td>
+</tr>
+<tr>
+<td style="border:1px solid black;"> root </td>
+<td style="border:1px solid black;"> 123456 </td>
+<td style="border:1px solid black;"> yes </td>
+<td style="border:1px solid black;"> no </td>
+</tr>
+</table>
 
 ### Mysql Accounts
 
-You can use mysql workbench to connect to the mysql server, just specify the ip address of the vm and one of the below accounts.
+You can use mysql workbench to connect to the mysql server, just specify the ip address of the vm and one of the below accounts
 
-| Username | Password | Remote Login | Database |
-|:--------|:-------|:--------:|:--------|
-| magento2 | magento2 | yes | magento2 |
-| root | 123456 | yes | All Dbs |
+<table style="border:1px solid black;border-collapse:collapse;">
+<tr>
+<th style="border:1px solid black;"> Username </th>
+<th style="border:1px solid black;"> Password </th>
+<th style="border:1px solid black;"> Remote Login </th>
+<th style="border:1px solid black;"> Database </th>
+</tr>
+<tr>
+<td style="border:1px solid black;"> magento2 </td>
+<td style="border:1px solid black;"> magento2 </td>
+<td style="border:1px solid black;"> yes </td>
+<td style="border:1px solid black;"> magento2 </td>
+</tr>
+<tr>
+<td style="border:1px solid black;"> root </td>
+<td style="border:1px solid black;"> 123456 </td>
+<td style="border:1px solid black;"> yes </td>
+<td style="border:1px solid black;"> All Dbs </td>
+</tr>
+</table>
 
 
 
 ### Magento Admin Account
 
-| Username | Password |
-|:--------|:-------|
-| magento2 | magento2 |
+Following are the admin accounts for accessing Magento admin (backend)
+
+<table style="border:1px solid black;border-collapse:collapse;">
+<tr>
+<th style="border:1px solid black;"> Username </th>
+<th style="border:1px solid black;"> Password </th>
+</tr>
+<tr>
+<td style="border:1px solid black;"> magento2 </td>
+<td style="border:1px solid black;"> magento2 </td>
+</tr>
+</table>
 
 Magento2 install
 --------
 
 Magento is already installed at /var/mage/magento2. A snapshot of magento2 code containing the Extension Model imrpovements is already there. To access Magento Frontend use http://magento.local and for Magento admin (backend), use http://magento.local/index.php/backend/admin. There already is a mysql server running on the vm with a magento2 database.
 ;T;
-I"à<h1 id="setting-up-magento-2-extension-model-alpha-1-vm-image">Setting up Magento 2 Extension Model Alpha 1 VM Image</h1>
+I"Ì<h1 id="setting-up-magento-2-extension-model-alpha-1-vm-image">Setting up Magento 2 Extension Model Alpha 1 VM Image</h1>
 
 <p>This document describes the steps to download and install a VirtualBox image containing the Magento 2 Extension Model Improvements (Alpha 1). For an overview of the proposed improvements, please refer to the documentation <a href="http://magento.github.io/magento2-developer-docs/">here</a>.</p>
 
@@ -3700,67 +3740,67 @@ I"à<h1 id="setting-up-magento-2-extension-model-alpha-1-vm-image">Setting up M
 
 <h2 id="login-details">Login details</h2>
 
-<p>The ip address of the VM is <b>192.168.56.101</b> and below logins will work via ssh.</p>
+<p>The ip address of the VM is <b>192.168.56.101</b> and below logins will work via ssh</p>
 
 <h3 id="linux-user-accounts">Linux User Accounts</h3>
 
-<table>
-<thead><tr>
-<th style="text-align: left">Username</th>
-      <th style="text-align: left">Password</th>
-      <th style="text-align: left">Has Root Access</th>
-      <th style="text-align: left">Login via GUI</th>
-    </tr></thead>
-<tbody>
+<p>Following are the user accounts for linux login via GUI and ssh.</p>
+
+<table style="border:1px solid black;border-collapse:collapse;">
 <tr>
-<td style="text-align: left">mage</td>
-      <td style="text-align: left">123456</td>
-      <td style="text-align: left">via sudo</td>
-      <td style="text-align: left">yes</td>
-    </tr>
+<th style="border:1px solid black;"> <b> Username </b> </th>
+<th style="border:1px solid black;"> <b> Password </b> </th>
+<th style="border:1px solid black;"> <b> Has Root Access </b> </th>
+<th style="border:1px solid black;"> <b> Login via GUI </b> </th>
+</tr>
 <tr>
-<td style="text-align: left">root</td>
-      <td style="text-align: left">123456</td>
-      <td style="text-align: left">yes</td>
-      <td style="text-align: left">no</td>
-    </tr>
-</tbody>
+<td style="border:1px solid black;"> mage </td>
+<td style="border:1px solid black;"> 123456 </td>
+<td style="border:1px solid black;"> via sudo </td>
+<td style="border:1px solid black;"> yes </td>
+</tr>
+<tr>
+<td style="border:1px solid black;"> root </td>
+<td style="border:1px solid black;"> 123456 </td>
+<td style="border:1px solid black;"> yes </td>
+<td style="border:1px solid black;"> no </td>
+</tr>
 </table><h3 id="mysql-accounts">Mysql Accounts</h3>
 
-<p>You can use mysql workbench to connect to the mysql server, just specify the ip address of the vm and one of the below accounts.</p>
+<p>You can use mysql workbench to connect to the mysql server, just specify the ip address of the vm and one of the below accounts</p>
 
-<table>
-<thead><tr>
-<th style="text-align: left">Username</th>
-      <th style="text-align: left">Password</th>
-      <th style="text-align: center">Remote Login</th>
-      <th style="text-align: left">Database</th>
-    </tr></thead>
-<tbody>
+<table style="border:1px solid black;border-collapse:collapse;">
 <tr>
-<td style="text-align: left">magento2</td>
-      <td style="text-align: left">magento2</td>
-      <td style="text-align: center">yes</td>
-      <td style="text-align: left">magento2</td>
-    </tr>
+<th style="border:1px solid black;"> Username </th>
+<th style="border:1px solid black;"> Password </th>
+<th style="border:1px solid black;"> Remote Login </th>
+<th style="border:1px solid black;"> Database </th>
+</tr>
 <tr>
-<td style="text-align: left">root</td>
-      <td style="text-align: left">123456</td>
-      <td style="text-align: center">yes</td>
-      <td style="text-align: left">All Dbs</td>
-    </tr>
-</tbody>
+<td style="border:1px solid black;"> magento2 </td>
+<td style="border:1px solid black;"> magento2 </td>
+<td style="border:1px solid black;"> yes </td>
+<td style="border:1px solid black;"> magento2 </td>
+</tr>
+<tr>
+<td style="border:1px solid black;"> root </td>
+<td style="border:1px solid black;"> 123456 </td>
+<td style="border:1px solid black;"> yes </td>
+<td style="border:1px solid black;"> All Dbs </td>
+</tr>
 </table><h3 id="magento-admin-account">Magento Admin Account</h3>
 
-<table>
-<thead><tr>
-<th style="text-align: left">Username</th>
-      <th style="text-align: left">Password</th>
-    </tr></thead>
-<tbody><tr>
-<td style="text-align: left">magento2</td>
-      <td style="text-align: left">magento2</td>
-    </tr></tbody>
+<p>Following are the admin accounts for accessing Magento admin (backend)</p>
+
+<table style="border:1px solid black;border-collapse:collapse;">
+<tr>
+<th style="border:1px solid black;"> Username </th>
+<th style="border:1px solid black;"> Password </th>
+</tr>
+<tr>
+<td style="border:1px solid black;"> magento2 </td>
+<td style="border:1px solid black;"> magento2 </td>
+</tr>
 </table><h2 id="magento2-install">Magento2 install</h2>
 
 <p>Magento is already installed at /var/mage/magento2. A snapshot of magento2 code containing the Extension Model imrpovements is already there. To access Magento Frontend use http://magento.local and for Magento admin (backend), use http://magento.local/index.php/backend/admin. There already is a mysql server running on the vm with a magento2 database.</p>;T;@ï:versioni

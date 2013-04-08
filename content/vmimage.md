@@ -39,13 +39,12 @@ The ip address of the VM is <b>192.168.56.101</b> and below logins will work via
 
 Following are the user accounts for linux login via GUI and ssh.
 
-<table>
 <table style="border:1px solid black;border-collapse:collapse;">
 <tr>
-<th style="border:1px solid black;"> Username </th>
-<th style="border:1px solid black;"> Password </th>
-<th style="border:1px solid black;"> Has Root Access </th>
-<th style="border:1px solid black;"> Login via GUI </th>
+<th style="border:1px solid black;"> <b> Username </b> </th>
+<th style="border:1px solid black;"> <b> Password </b> </th>
+<th style="border:1px solid black;"> <b> Has Root Access </b> </th>
+<th style="border:1px solid black;"> <b> Login via GUI </b> </th>
 </tr>
 <tr>
 <td style="border:1px solid black;"> mage </td>
@@ -65,13 +64,12 @@ Following are the user accounts for linux login via GUI and ssh.
 
 You can use mysql workbench to connect to the mysql server, just specify the ip address of the vm and one of the below accounts
 
-<table>
 <table style="border:1px solid black;border-collapse:collapse;">
 <tr>
-<th style="border:1px solid black;"> Username </th>
-<th style="border:1px solid black;"> Password </th>
-<th style="border:1px solid black;"> Remote Login </th>
-<th style="border:1px solid black;"> Database </th>
+<th style="border:1px solid black;"> <b> Username </b> </th>
+<th style="border:1px solid black;"> <b> Password </b> </th>
+<th style="border:1px solid black;"> <b> Remote Login </b> </th>
+<th style="border:1px solid black;"> <b> Database </b> </th>
 </tr>
 <tr>
 <td style="border:1px solid black;"> magento2 </td>
@@ -93,11 +91,10 @@ You can use mysql workbench to connect to the mysql server, just specify the ip 
 
 Following are the admin accounts for accessing Magento admin (backend)
 
-<table>
 <table style="border:1px solid black;border-collapse:collapse;">
 <tr>
-<th style="border:1px solid black;"> Username </th>
-<th style="border:1px solid black;"> Password </th>
+<th style="border:1px solid black;"> <b> Username </b> </th>
+<th style="border:1px solid black;"> <b> Password </b> </th>
 </tr>
 <tr>
 <td style="border:1px solid black;"> magento2 </td>
