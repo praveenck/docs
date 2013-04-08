@@ -74,7 +74,8 @@ PHP Annotations
 
 
 
-### Service Calls
+Service Calls
+---
 
 A service operation is implemented as a class method. The class maps to the
 service via the requirement that operations from a service be grouped into a
