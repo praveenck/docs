@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Language" content="en-us">
 <meta http-equiv="imagetoolbar" content="false">
 <meta name="MSSmartTagsPreventParsing" content="true">
-<title>Service IDL</title>
+<title></title>
 <link href="../css/reset.css" rel="stylesheet" type="text/css">
 <link href="../css/960.css" rel="stylesheet" type="text/css">
 <link href="../css/uv_active4d.css" rel="stylesheet" type="text/css">
@@ -32,8 +32,252 @@
       <div class="content">
     <h1 id="service-idl">Service IDL</h1>
 
-<p>This page contains the documentation of Service IDL</p>
-      </div>
+<p>The proposed new architecture consolidates all of an extension’s business into a
+service layer. Presented here is an Interface Definition Language specification
+that describes the services exposed through the service layer. An IDL formally
+describes the functionality a service provides (methods, inputs and outputs of
+methods) without exposing the details of how that functionality is implemented.</p>
+
+<p>Some advantages of using an IDL:</p>
+
+<ul>
+<li>
+    <p>Allows for well-defined and versioned interfaces that the services and
+visual components depend on. This makes it simpler to control compatibility
+issues during upgrades.</p>
+  </li>
+  <li>
+    <p>An IDL can support more than one version of the domain/business logic
+running in the Magento instance at the same time, increasing backward
+compatibility.</p>
+  </li>
+</ul>
+<h2 id="overview">Overview</h2>
+
+<p>This document specifies the Interface Definition Language (IDL) that describes
+the operations permitted by the Service layer. To support REST and SOAP Web
+APIs, WADL and WSDL will be auto-generated from the IDL.</p>
+
+<p>The data structure used in the payloads is defined in an XSD. The metadata about
+a service call, such as version, required permissions, and locations of XSDs,
+are carried by PHP annotations. Data structure and metadata are described in
+what follows.</p>
+
+<h2 id="php-annotations">PHP Annotations</h2>
+
+<h3 id="section"></h3>
+
+<table>
+<table style="border:1px solid black;border-collapse:collapse;">
+<tr>
+<th style="border:1px solid black;"> Annotation </th>
+<th style="border:1px solid black;"> Scope </th>
+<th style="border:1px solid black;"> Values </th>
+<th style="border:1px solid black;"> Required </th>
+<th style="border:1px solid black;"> Definition </th>
+</tr>
+<tr>
+<td style="border:1px solid black;"> @Service </td>
+<td style="border:1px solid black;"> service </td>
+<td style="border:1px solid black;"> string </td>
+<td style="border:1px solid black;"> X </td>
+<td style="border:1px solid black;"> Identifies the service being implemented </td>
+</tr>
+<tr>
+<td style="border:1px solid black;"> @Version </td>
+<td style="border:1px solid black;"> service </td>
+<td style="border:1px solid black;"> N.M. </td>
+<td style="border:1px solid black;"> X </td>
+<td style="border:1px solid black;"> Service interface version </td>
+</tr>
+<tr>
+<td style="border:1px solid black;"> @Consumes </td>
+<td style="border:1px solid black;"> Call </td>
+<td style="border:1px solid black;"> String </td>
+<td style="border:1px solid black;"> X </td>
+<td style="border:1px solid black;"> Identifies the location of the XSD that defines the structure of input parameters and the root element of the data structure. </td>
+</tr>
+<tr>
+<td style="border:1px solid black;"> @Produces </td>
+<td style="border:1px solid black;"> Call </td>
+<td style="border:1px solid black;"> String </td>
+<td style="border:1px solid black;"> X </td>
+<td style="border:1px solid black;"> Identifies the location of the XSD that defines the structure of output parameters and the root element of the data structure. </td>
+</tr>
+</table>
+
+### 
+
+### Service Calls
+
+A service operation is implemented as a class method. The class maps to the
+service via the requirement that operations from a service be grouped into a
+single class.
+
+**Example of a service call**
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+/**
+@Service shipping
+ * @Version 2
+*/
+
+class ShippingService extends MageService 
+{
+
+    /**
+     * @Permissions [shipping, inventory]
+     * @Consumes (schema="shipping.xsd", element="getCarriersRequest")
+     * @Produces (schema="shipping.xsd", element="getCarriersResponse")
+     */
+
+    public function getCarriers ($params)
+    {
+
+    ...
+
+    }
+}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Here, the input data structure is identified in the @Consumes annotation as
+belonging to the <getcarriersrequest> element in shipping/consumerux.xsd, and the
+output data structure is identified in the @Produces annotation as belonging to
+the <getcarriersresponse> element in shipping/consumerux.xsd. The shipping/consumerux.xsd file is
+shown below.
+
+The PHP function receives an associative array ($params function parameter)
+reflecting the structure described by the element <getcarriersrequest>. It returns
+another associative array reflecting the structure described by the element
+<getcarriersresponse>.
+
+XSD
+---
+
+The XSD is used to describe the data structure passed in during the API call as
+well as the returned data. During runtime data is stored into a associative
+array.
+
+**shipping/consumerux.xsd**
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+<?xml version="1.0"?><schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <complextype name="address_type">
+        <sequence>
+            <element name="street" type="xs:string"></element>
+            <element name="city" type="xs:string"></element>
+            <element name="region_id" type="xs:integer"></element>
+            <element name="country_id" type="xs:string"></element>
+            <element name="postcode" type="xs:integer"></element>
+            <element name="meta_data" minoccurs="0">
+                <complextype>
+                    <sequence>
+                        <element name="lift_gate_required" type="xs:boolean" minoccurs="0"></element>
+                    </sequence>
+                </complextype>
+            </element>
+        </sequence>
+    </complextype>
+
+    <complextype name="item_type">
+        <sequence>
+            <element name="sku" type="xs:integer"></element>
+            <element name="name" type="xs:string"></element>
+            <element name="value" type="xs:string"></element>
+            <element name="weight" type="xs:string"></element>
+            <element name="height" type="xs:string"></element>
+            <element name="width" type="xs:string"></element>
+            <element name="depth" type="xs:string"></element>
+            <element name="qty" type="xs:integer"></element>
+            <element name="free_shipping" type="xs:boolean"></element>
+            <element name="meta_data">
+                <complextype>
+                    <sequence>
+                        <element name="hazard" type="xs:boolean" minoccurs="0"></element>
+                    </sequence>
+                </complextype>
+            </element>
+            <element name="parent" minoccurs="0">
+                <complextype>
+                    <sequence>
+                        <element name="item" type="item_type"></element>
+                    </sequence>
+                </complextype>
+            </element>
+            <element name="children" minoccurs="0">
+                <complextype>
+                    <sequence>
+                        <element name="item" type="item_type"></element>
+                    </sequence>
+                </complextype>
+            </element>
+        </sequence>
+    </complextype>
+
+    <element name="getCarriersRequest">
+        <complextype>
+            <sequence>
+                <element name="rate_request">
+                    <complextype>
+                        <sequence>
+                            <element name="orig" type="address_type"></element>
+                            <element name="dest" type="address_type"></element>
+                            <element name="list_of_items">
+                                <complextype>
+                                    <sequence maxoccurs="unbounded">
+                                        <element name="item" type="item_type"></element>
+                                    </sequence>
+                                </complextype>
+                            </element>
+                            <element name="carrier_configuration" maxoccurs="1">
+                                <complextype>
+                                    <sequence>
+                                        <element name="insurance" type="xs:boolean"></element>
+                                        <element name="handling" type="xs:string"></element>
+                                        <element name="pickup" type="xs:string"></element>
+                                    </sequence>
+                                </complextype>
+                            </element>
+                        </sequence>
+                    </complextype>
+                </element>
+            </sequence>
+        </complextype>
+    </element>
+
+    <complextype name="method_type">
+        <sequence>
+            <element name="carrier" type="xs:string"></element>
+            <element name="carrier_title" type="xs:string"></element>
+            <element name="method" type="xs:string"></element>
+            <element name="method_title" type="xs:string"></element>
+            <element name="price" type="xs:string"></element>
+        </sequence>
+    </complextype>
+
+    <element name="getCarriersResponse">
+        <complextype>
+            <sequence>
+                <element name="shipping_methods">
+                    <complextype>
+                        <sequence maxoccurs="unbounded">
+                            <element name="method" type="method_type"></element>
+                        </sequence>
+                    </complextype>
+                </element>
+            </sequence>
+        </complextype>
+    </element></schema>
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+</getcarriersresponse></getcarriersrequest></getcarriersresponse></getcarriersrequest>
+</table>
+</div>
 
     <div id="js-sidebar" class="sidebar-shell">
       <div class="js-toggle-list sidebar-module expandable">
