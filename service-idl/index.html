@@ -113,159 +113,102 @@ single class.</p>
 
 <pre><code>
 /**
-@Service shipping
- * @Version 2
-*/
-
-class ShippingService extends MageService 
+ * @Service product
+ * @Version 1.0
+ * @Path /products
+ */
+class Mage_Catalog_Service_Product
 {
-
-    /**
-     * @Permissions [shipping, inventory]
-     * @Consumes (schema="shipping.xsd", element="getCarriersRequest")
-     * @Produces (schema="shipping.xsd", element="getCarriersResponse")
-     */
-
-    public function getCarriers ($params)
-    {
-
-    ...
-
-    }
+	/**
+     * Returns info about one particular product.
+     *
+     * @Type call
+     * @Method GET
+     * @Path /:id
+     * @Bindings [REST]
+     * @Consumes (schema="etc/resources/product/item/input.xsd", element="id")
+     * @Produces (schema="etc/resources/product/item/output.xsd", element="product")
+     * @param int $id
+     * @return array
+     */
+    public function item($id)
+    {
+        $this-&gt;_getObject($id);
+        $data = $this-&gt;getProduct($id);
+        $data = array_merge($data, $this-&gt;getAdditionalDetails($id));
+        return $data;
+    }
 }
 
 </code></pre>
 
 <p>Here, the input data structure is identified in the @Consumes annotation as
-belonging to the &lt;getCarriersRequest&gt; element in shipping/consumerux.xsd, and the
+belonging to the &lt;id&gt; element in <a href="https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/etc/resources/product/item/input.xsd">input.xsd</a>, and the
 output data structure is identified in the @Produces annotation as belonging to
-the &lt;getCarriersResponse&gt; element in shipping/consumerux.xsd. The shipping/consumerux.xsd file is
+the &lt;product&gt; element in <a href="https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/etc/resources/product/item/output.xsd">output.xsd</a>. The shipping/consumerux.xsd file is
 shown below.</p>
 
-<p>The PHP function receives an associative array ($params function parameter)
-reflecting the structure described by the element &lt;getCarriersRequest&gt;. It returns
+<p>The PHP function receives an associative array ($id function parameter)
+reflecting the structure described by the element &lt;id&gt;. It returns
 another associative array reflecting the structure described by the element
-&lt;getCarriersResponse&gt;.</p>
+&lt;product&gt;.</p>
 
 <h2 id="xsd">XSD</h2>
 
-<p>The XSD is used to describe the data structure passed in during the API call as
+<p>The XSD is used to describe the data structure passed in during the service method call as
 well as the returned data. During runtime data is stored into a associative
 array.</p>
 
-<p><strong>shipping/consumerux.xsd</strong></p>
+<p><strong><a href="https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/etc/resources/product/item/input.xsd">etc/resources/product/item/input.xsd</a></strong></p>
 
 <pre><code>
-&lt;?xml version="1.0"?&gt;
 &lt;xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"&gt;
-
-    &lt;xs:complexType name="address_type"&gt;
-        &lt;xs:sequence&gt;
-            &lt;xs:element name="street" type="xs:string"/&gt;
-            &lt;xs:element name="city" type="xs:string"/&gt;
-            &lt;xs:element name="region_id" type="xs:integer"/&gt;
-            &lt;xs:element name="country_id" type="xs:string"/&gt;
-            &lt;xs:element name="postcode" type="xs:integer"/&gt;
-            &lt;xs:element name="meta_data" minOccurs="0"&gt;
-                &lt;xs:complexType&gt;
-                    &lt;xs:sequence&gt;
-                        &lt;xs:element name="lift_gate_required" type="xs:boolean" minOccurs="0"/&gt;
-                    &lt;/xs:sequence&gt;
-                &lt;/xs:complexType&gt;
-            &lt;/xs:element&gt;
-        &lt;/xs:sequence&gt;
-    &lt;/xs:complexType&gt;
-
-    &lt;xs:complexType name="item_type"&gt;
-        &lt;xs:sequence&gt;
-            &lt;xs:element name="sku" type="xs:integer"/&gt;
-            &lt;xs:element name="name" type="xs:string"/&gt;
-            &lt;xs:element name="value" type="xs:string"/&gt;
-            &lt;xs:element name="weight" type="xs:string"/&gt;
-            &lt;xs:element name="height" type="xs:string"/&gt;
-            &lt;xs:element name="width" type="xs:string"/&gt;
-            &lt;xs:element name="depth" type="xs:string"/&gt;
-            &lt;xs:element name="qty" type="xs:integer"/&gt;
-            &lt;xs:element name="free_shipping" type="xs:boolean"/&gt;
-            &lt;xs:element name="meta_data"&gt;
-                &lt;xs:complexType&gt;
-                    &lt;xs:sequence&gt;
-                        &lt;xs:element name="hazard" type="xs:boolean" minOccurs="0"/&gt;
-                    &lt;/xs:sequence&gt;
-                &lt;/xs:complexType&gt;
-            &lt;/xs:element&gt;
-            &lt;xs:element name="parent" minOccurs="0"&gt;
-                &lt;xs:complexType&gt;
-                    &lt;xs:sequence&gt;
-                        &lt;xs:element name="item" type="item_type"/&gt;
-                    &lt;/xs:sequence&gt;
-                &lt;/xs:complexType&gt;
-            &lt;/xs:element&gt;
-            &lt;xs:element name="children" minOccurs="0"&gt;
-                &lt;xs:complexType&gt;
-                    &lt;xs:sequence&gt;
-                        &lt;xs:element name="item" type="item_type" /&gt;
-                    &lt;/xs:sequence&gt;
-                &lt;/xs:complexType&gt;
-            &lt;/xs:element&gt;
-        &lt;/xs:sequence&gt;
-    &lt;/xs:complexType&gt;
-
-    &lt;xs:element name="getCarriersRequest"&gt;
-        &lt;xs:complexType&gt;
-            &lt;xs:sequence&gt;
-                &lt;xs:element name="rate_request"&gt;
-                    &lt;xs:complexType&gt;
-                        &lt;xs:sequence&gt;
-                            &lt;xs:element name="orig" type="address_type"/&gt;
-                            &lt;xs:element name="dest" type="address_type"/&gt;
-                            &lt;xs:element name="list_of_items"&gt;
-                                &lt;xs:complexType&gt;
-                                    &lt;xs:sequence maxOccurs="unbounded"&gt;
-                                        &lt;xs:element name="item" type="item_type" /&gt;
-                                    &lt;/xs:sequence&gt;
-                                &lt;/xs:complexType&gt;
-                            &lt;/xs:element&gt;
-                            &lt;xs:element name="carrier_configuration" maxOccurs="1"&gt;
-                                &lt;xs:complexType&gt;
-                                    &lt;xs:sequence&gt;
-                                        &lt;xs:element name="insurance" type="xs:boolean"/&gt;
-                                        &lt;xs:element name="handling" type="xs:string"/&gt;
-                                        &lt;xs:element name="pickup" type="xs:string"/&gt;
-                                    &lt;/xs:sequence&gt;
-                                &lt;/xs:complexType&gt;
-                            &lt;/xs:element&gt;
-                        &lt;/xs:sequence&gt;
-                    &lt;/xs:complexType&gt;
-                &lt;/xs:element&gt;
-            &lt;/xs:sequence&gt;
-        &lt;/xs:complexType&gt;
-    &lt;/xs:element&gt;
-
-    &lt;xs:complexType name="method_type"&gt;
-        &lt;xs:sequence&gt;
-            &lt;xs:element name="carrier" type="xs:string"/&gt;
-            &lt;xs:element name="carrier_title" type="xs:string"/&gt;
-            &lt;xs:element name="method" type="xs:string"/&gt;
-            &lt;xs:element name="method_title" type="xs:string"/&gt;
-            &lt;xs:element name="price" type="xs:string"/&gt;
-        &lt;/xs:sequence&gt;
-    &lt;/xs:complexType&gt;
-
-    &lt;xs:element name="getCarriersResponse"&gt;
-        &lt;xs:complexType&gt;
-            &lt;xs:sequence&gt;
-                &lt;xs:element name="shipping_methods"&gt;
-                    &lt;xs:complexType&gt;
-                        &lt;xs:sequence maxOccurs="unbounded"&gt;
-                            &lt;xs:element name="method" type="method_type" /&gt;
-                        &lt;/xs:sequence&gt;
-                    &lt;/xs:complexType&gt;
-                &lt;/xs:element&gt;
-            &lt;/xs:sequence&gt;
-        &lt;/xs:complexType&gt;
-    &lt;/xs:element&gt;
+    &lt;xs:element name="id" type="xs:integer"/&gt;
 &lt;/xs:schema&gt;
+
+</code></pre>
+
+<p><strong><a href="https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/etc/resources/product/item/output.xsd">etc/resources/product/item/output.xsd</a></strong></p>
+
+<pre><code>
+&lt;xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:mage="http://www.magento.com"&gt;
+    &lt;xs:complexType name="product"&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:element name="entityId" type="xs:integer" /&gt;
+            &lt;xs:element name="sku"&gt;
+                &lt;xs:simpleType&gt;
+                    &lt;xs:restriction base="xs:string"&gt;
+                        &lt;xs:maxLength value="64"/&gt;
+                    &lt;/xs:restriction&gt;
+                &lt;/xs:simpleType&gt;
+            &lt;/xs:element&gt;
+            &lt;xs:element name="name" type="xs:string"/&gt;
+            &lt;xs:element name="description" type="xs:string"/&gt;
+            &lt;xs:element name="shortDescription" type="xs:string"/&gt;
+            &lt;xs:element name="price" type="mage:price"/&gt;
+        &lt;/xs:sequence&gt;
+        ...
+        ...
+        ...
+    &lt;/xs:complexType&gt;
+&lt;/xs:schema&gt;
+
+</code></pre>
+
+<p>The sample input associative array that is passed to the service method and the sample output associative array returned by the service method are shown below.</p>
+
+<p><strong>Sample input</strong></p>
+
+<pre><code>
+
+
+</code></pre>
+
+<p><strong>Sample output</strong></p>
+
+<pre><code>
+
 
 </code></pre>
       </div>
