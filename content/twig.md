@@ -67,7 +67,7 @@ Twig vs. PHTML
 
 ### Before and After
 
-    [1]: <#before-after>
+[1]: <#before-after>
 
 PHTML
 

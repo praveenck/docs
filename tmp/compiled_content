@@ -1,4 +1,4 @@
-{:	data{/I"/:ET{:default{	:	lastI"�9<!DOCTYPE html>
+{:	data{/I"/:ET{:default{	:	lastI"b9<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -46,7 +46,7 @@ Business logic is confined to the service layer and encapsulated in service
 classes.</p>
 
 <p>You can find the source code for the proposed changes in the recent github push
-<a href="https://github.com/magento/magento2">here</a>. There is also a VirtualBox image that contains the installation of a
+<a href="https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/view/frontend/layout.xml">here</a>. There is also a VirtualBox image that contains the installation of a
 recent Magento-2 code base <a href="http://praveenck.github.io/docs/option-list/">here</a>. Instructions for using the virtualbox
 image are <a href="http://praveenck.github.io/docs/vmimage/">here</a>.</p>
 
@@ -196,11 +196,8 @@ your extension’s template in layout.xml.</p>
 
 </code></pre>
 
-<p>For reference, you can review the product service call invocation here: <a href="https://github.com/magento/magento2">Product
+<p>For reference, you can review the product service call invocation here: <a href="https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/view/frontend/layout.xml">Product
 Service Call Invocation</a></p>
-
-<p><a href="https://github.com/magento/magento2">4</a>:
-<a href="https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/view/frontend/layout.xml">https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/view/frontend/layout.xml</a></p>
 
 <p>At this point, you should have a working extension that has both presentation
 and business logic implemented and working together.</p>
@@ -306,7 +303,7 @@ up option lists here: <a href="http://praveenck.github.io/docs/option-list/">Ext
     </script>
 </body>
 </html>
-;T:rawI"6#Magento 2 Extension Model Proposal: Alpha 1
+;T:rawI"5#Magento 2 Extension Model Proposal: Alpha 1
 ===========================================
 
 To support our overall goal of better modularity in Magento 2, we're introducing
@@ -487,8 +484,7 @@ For reference, you can review the product service call invocation here: [Product
 Service Call Invocation][4]
 
 [3]: <https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/etc/service-calls.xml>
-[4]:
-<https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/view/frontend/layout.xml>
+[4]: <https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/view/frontend/layout.xml>
 
 At this point, you should have a working extension that has both presentation
 and business logic implemented and working together.
@@ -502,7 +498,7 @@ up option lists here: [Extension Configuration][5]
 [5]: <http://praveenck.github.io/docs/option-list/>
 
 
-;T:preI"%<h1 id="magento-2-extension-model-proposal-alpha-1">Magento 2 Extension Model Proposal: Alpha 1</h1>
+;T:preI"�$<h1 id="magento-2-extension-model-proposal-alpha-1">Magento 2 Extension Model Proposal: Alpha 1</h1>
 
 <p>To support our overall goal of better modularity in Magento 2, we’re introducing
 support for a few new ideas in this Alpha-1 release of Extension Model
@@ -517,7 +513,7 @@ Business logic is confined to the service layer and encapsulated in service
 classes.</p>
 
 <p>You can find the source code for the proposed changes in the recent github push
-<a href="https://github.com/magento/magento2">here</a>. There is also a VirtualBox image that contains the installation of a
+<a href="https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/view/frontend/layout.xml">here</a>. There is also a VirtualBox image that contains the installation of a
 recent Magento-2 code base <a href="http://praveenck.github.io/docs/option-list/">here</a>. Instructions for using the virtualbox
 image are <a href="http://praveenck.github.io/docs/vmimage/">here</a>.</p>
 
@@ -666,11 +662,8 @@ your extension’s template in layout.xml.</p>
 
 </code></pre>
 
-<p>For reference, you can review the product service call invocation here: <a href="https://github.com/magento/magento2">Product
+<p>For reference, you can review the product service call invocation here: <a href="https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/view/frontend/layout.xml">Product
 Service Call Invocation</a></p>
-
-<p><a href="https://github.com/magento/magento2">4</a>:
-<a href="https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/view/frontend/layout.xml">https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/view/frontend/layout.xml</a></p>
 
 <p>At this point, you should have a working extension that has both presentation
 and business logic implemented and working together.</p>
@@ -4749,7 +4742,7 @@ method.</p>
 <td style="border:1px solid black;"> Contains the IDs of the upsell products. <b>Optional</b>. </td>
 <td style="border:1px solid black;"> 1 </td>
 </tr>
-</table>;T;@I"/twig/;T{;{	;I"�0<!DOCTYPE html>
+</table>;T;@I"/twig/;T{;{	;I"�0<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -4784,12 +4777,12 @@ method.</p>
       <div class="content">
     <h1 id="twig-templates">Twig Templates</h1>
 
-<p>We see good reasons for replacing the .phtml templates used for earlier Magento
+<p>This is a proposal to replace the .phtml templates used for earlier Magento
 extensions with a templating engine called Twig.</p>
 
 <p>The move to a templating engine will help enforce a desirable isolation of the
 presentation layer from domain and business logic and data, which is a
-fundamental goal of our new extension approach. Current .phtml templates allow
+fundamental goal of Extension Model Improvements. Current .phtml templates allow
 inclusion of business logic and SQL queries within the presentation layer, which
 can create serious challenges for maintenance and upgrades. We see the following
 additional benefits from separating the presentation logic:</p>
@@ -4845,8 +4838,8 @@ will encourage you to switch soon.</p>
 to also parse the business logic embedded in the .phtml code</p>
   </li>
   <li>
-    <p>With the separation of font-end concerns, your front-end developer can focus
-completely on the page look-and-feel.</p>
+    <p>The separation of font-end concerns lets your front-end developer focus
+completely on page look-and-feel.</p>
   </li>
   <li>
     <p>Twig is integrated with IDEs. Twig files are handled cleanly by IDEs,
@@ -4855,10 +4848,10 @@ with the help of the IDE instead of repeatedly running to code to see if
 anything is wrong. This will result in more productivity.</p>
   </li>
   <li>
-    <p>Code that intuitively makes sense: compare the line “$this-&gt;__..” with
+    <p>Twig’s code intuitively makes sense. Compare the line “$this-&gt;__..” with
 “..|translate”. Both of them do the same thing but the latter instantly
-tells you what is going on whereas the former will require a few lookups in
-code.</p>
+tells you what is going on, while understanding the former will require a
+few lookups in code.</p>
   </li>
 </ul>
 <h3 id="before-and-after">Before and After</h3>
@@ -4893,7 +4886,7 @@ code.</p>
 <h2 id="how-to-get-started">How to Get Started</h2>
 
 <p>This section describes how to begin using Twig in your existing Magento
-extension or to build your new Magento extension with Twig. Our reference
+extension, and how to build your new Magento extension with Twig. Our reference
 implementation is in the Mage/Catalog extension.</p>
 
 <ul>
@@ -4924,14 +4917,14 @@ available to it. This section will try to show you how.</p>
 
 <ul>
 <li>
-    <p><i>option</i> (instance of Mage_Catalog_Model_Product_Option): This is
+    <p>*option* (instance of Mage_Catalog_Model_Product_Option): This is
 available to the block class associated with this template, i.e.
 Mage_Catalog_Block_Product_View_Options_Type_Date. Any methods accessible to
 the “option” instance are callable within the template, such as
-<b>isRequired<b>.</b></b></p>
+*isRequired*.</p>
   </li>
   <li>
-    <p><i>createBlock/getSelectFromToHtml/viewFileUrl</i>: These are defined as a
+    <p>*createBlock / getSelectFromToHtml / viewFileUrl*: These are defined as a
 Twig function in Mage_Core_Block_Template_Engine_TwigExtension; the latter
 is part of the template engine subsystem included with Magento 2.
 Incidentally, this template engine subsystem is responsible for ensuring
@@ -5060,15 +5053,15 @@ you are looking at clean, easy-to-read, and easy-to-debug code.</p>
     </script>
 </body>
 </html>
-;T;	I"�Twig Templates
+;T;	I"�Twig Templates
 ==============
 
-We see good reasons for replacing the .phtml templates used for earlier Magento
+This is a proposal to replace the .phtml templates used for earlier Magento
 extensions with a templating engine called Twig.
 
 The move to a templating engine will help enforce a desirable isolation of the
 presentation layer from domain and business logic and data, which is a
-fundamental goal of our new extension approach. Current .phtml templates allow
+fundamental goal of Extension Model Improvements. Current .phtml templates allow
 inclusion of business logic and SQL queries within the presentation layer, which
 can create serious challenges for maintenance and upgrades. We see the following
 additional benefits from separating the presentation logic:
@@ -5111,23 +5104,21 @@ Learn more about [Twig][2].
 Twig vs. PHTML
 --------------
 
-
-
 -   Twig has cleaner code: you can focus on what your page does without needing
     to also parse the business logic embedded in the .phtml code
 
--   With the separation of font-end concerns, your front-end developer can focus
-    completely on the page look-and-feel.
+-   The separation of font-end concerns lets your front-end developer focus
+    completely on page look-and-feel.
 
 -   Twig is integrated with IDEs. Twig files are handled cleanly by IDEs,
     ensuring that your front-end developer is able to spot mistakes in this file
     with the help of the IDE instead of repeatedly running to code to see if
     anything is wrong. This will result in more productivity.
 
--   Code that intuitively makes sense: compare the line “\$this-\>__..” with
+-   Twig's code intuitively makes sense. Compare the line “\$this-\>__..” with
     “..|translate”. Both of them do the same thing but the latter instantly
-    tells you what is going on whereas the former will require a few lookups in
-    code.
+    tells you what is going on, while understanding the former will require a
+    few lookups in code.
 
 ### Before and After
 
@@ -5167,7 +5158,7 @@ How to Get Started
 ------------------
 
 This section describes how to begin using Twig in your existing Magento
-extension or to build your new Magento extension with Twig. Our reference
+extension, and how to build your new Magento extension with Twig. Our reference
 implementation is in the Mage/Catalog extension.
 
 -   Start by looking at our sample implementation in Mage/Catalog. You will see
@@ -5195,13 +5186,13 @@ available to it. This section will try to show you how.
 
 [1]: <#before-after>
 
--   <i>option</i> (instance of Mage_Catalog_Model_Product_Option): This is
+-   \*option\* (instance of Mage_Catalog_Model_Product_Option): This is
     available to the block class associated with this template, i.e.
     Mage_Catalog_Block_Product_View_Options_Type_Date. Any methods accessible to
     the "option" instance are callable within the template, such as
-    <b>isRequired<b>.
+    \*isRequired\*.
 
--   <i>createBlock/getSelectFromToHtml/viewFileUrl</i>: These are defined as a
+-   \*createBlock / getSelectFromToHtml / viewFileUrl\*: These are defined as a
     Twig function in Mage_Core_Block_Template_Engine_TwigExtension; the latter
     is part of the template engine subsystem included with Magento 2.
     Incidentally, this template engine subsystem is responsible for ensuring
@@ -5230,14 +5221,14 @@ to your development efforts on Magento. Our aim is to make development fun for
 you again by separating front-end design from back-end work and ensuring that
 you are looking at clean, easy-to-read, and easy-to-debug code.
 ;T;
-I";<h1 id="twig-templates">Twig Templates</h1>
+I"5<h1 id="twig-templates">Twig Templates</h1>
 
-<p>We see good reasons for replacing the .phtml templates used for earlier Magento
+<p>This is a proposal to replace the .phtml templates used for earlier Magento
 extensions with a templating engine called Twig.</p>
 
 <p>The move to a templating engine will help enforce a desirable isolation of the
 presentation layer from domain and business logic and data, which is a
-fundamental goal of our new extension approach. Current .phtml templates allow
+fundamental goal of Extension Model Improvements. Current .phtml templates allow
 inclusion of business logic and SQL queries within the presentation layer, which
 can create serious challenges for maintenance and upgrades. We see the following
 additional benefits from separating the presentation logic:</p>
@@ -5291,8 +5282,8 @@ will encourage you to switch soon.</p>
 to also parse the business logic embedded in the .phtml code</p>
   </li>
   <li>
-    <p>With the separation of font-end concerns, your front-end developer can focus
-completely on the page look-and-feel.</p>
+    <p>The separation of font-end concerns lets your front-end developer focus
+completely on page look-and-feel.</p>
   </li>
   <li>
     <p>Twig is integrated with IDEs. Twig files are handled cleanly by IDEs,
@@ -5301,10 +5292,10 @@ with the help of the IDE instead of repeatedly running to code to see if
 anything is wrong. This will result in more productivity.</p>
   </li>
   <li>
-    <p>Code that intuitively makes sense: compare the line “$this-&gt;__..” with
+    <p>Twig’s code intuitively makes sense. Compare the line “$this-&gt;__..” with
 “..|translate”. Both of them do the same thing but the latter instantly
-tells you what is going on whereas the former will require a few lookups in
-code.</p>
+tells you what is going on, while understanding the former will require a
+few lookups in code.</p>
   </li>
 </ul><h3 id="before-and-after">Before and After</h3>
 
@@ -5338,7 +5329,7 @@ code.</p>
 <h2 id="how-to-get-started">How to Get Started</h2>
 
 <p>This section describes how to begin using Twig in your existing Magento
-extension or to build your new Magento extension with Twig. Our reference
+extension, and how to build your new Magento extension with Twig. Our reference
 implementation is in the Mage/Catalog extension.</p>
 
 <ul>
@@ -5368,14 +5359,14 @@ available to it. This section will try to show you how.</p>
 
 <ul>
 <li>
-    <p><i>option</i> (instance of Mage_Catalog_Model_Product_Option): This is
+    <p>*option* (instance of Mage_Catalog_Model_Product_Option): This is
 available to the block class associated with this template, i.e.
 Mage_Catalog_Block_Product_View_Options_Type_Date. Any methods accessible to
 the “option” instance are callable within the template, such as
-<b>isRequired<b>.</b></b></p>
+*isRequired*.</p>
   </li>
   <li>
-    <p><i>createBlock/getSelectFromToHtml/viewFileUrl</i>: These are defined as a
+    <p>*createBlock / getSelectFromToHtml / viewFileUrl*: These are defined as a
 Twig function in Mage_Core_Block_Template_Engine_TwigExtension; the latter
 is part of the template engine subsystem included with Magento 2.
 Incidentally, this template engine subsystem is responsible for ensuring
