@@ -97,11 +97,12 @@ Below are details of the input and output data schema for Product service item m
 
 This schema defines the service's single request parameter.
 
-
-
 <table style="border:1px solid black;border-collapse:collapse;">
 <tr>
-<th style="border:1px solid black;"> Name </th><th style="border:1px solid black;"> Type </th><th style="border:1px solid black;"> Description </th><th style="border:1px solid black;"> Sample </th>
+<th style="border:1px solid black;"> Name </th>
+<th style="border:1px solid black;"> Type </th>
+<th style="border:1px solid black;"> Description </th>
+<th style="border:1px solid black;"> Sample </th>
 </tr>
 <tr>
 <td style="border:1px solid black;"> <b>id</b> </td>
@@ -118,8 +119,12 @@ This schema defines the array to be returned  by the product service item method
 
 <table style="border:1px solid black;border-collapse:collapse;">
 <tr>
-<th style="border:1px solid black;"> Name </th><th style="border:1px solid black;"> Type </th><th style="border:1px solid black;"> Description </th><th style="border:1px solid black;"> Sample </th>
+<th style="border:1px solid black;"> Name </th>
+<th style="border:1px solid black;"> Type </th>
+<th style="border:1px solid black;"> Description </th>
+<th style="border:1px solid black;"> Sample </th>
 </tr>
+
 <tr>
 <td style="border:1px solid black;"> <b>product</b> </td>
 <td style="border:1px solid black;"> <b>mage:product</b> </td>
@@ -128,87 +133,133 @@ This schema defines the array to be returned  by the product service item method
 </tr>
 
 <tr>
-<td style="border:1px solid black;"> product.<b>data</b> 
+<td style="border:1px solid black;"> product.<b>data</b></td> 
 <td style="border:1px solid black;"> <b></b> </td>
 <td style="border:1px solid black;"> <b></b> </td>
-<td style="border:1px solid black;"> <b></b> </td></tr>
-<tr>
-<td style="border:1px solid black;"> product.<b>relatedData</b> 
 <td style="border:1px solid black;"> <b></b> </td>
-<td style="border:1px solid black;"> <b></b> </td>
-<td style="border:1px solid black;"> <b></b> </td></tr>
+</tr>
 
-<td style="border:1px solid black;"> <b>dictionary</b> 
+<tr>
+<td style="border:1px solid black;"> product.<b>relatedData</b></td>
+<td style="border:1px solid black;"> <b></b> </td>
+<td style="border:1px solid black;"> <b></b> </td>
+<td style="border:1px solid black;"> <b></b> </td>
+</tr>
+
+<tr>
+<td style="border:1px solid black;"> <b>dictionary</b></td>
 <td style="border:1px solid black;"> Complex type </td>
 <td style="border:1px solid black;"> <b></b> </td>
-<td style="border:1px solid black;"> <b></b> </td></tr>
+<td style="border:1px solid black;"> <b></b> </td>
+</tr>
 
-<td style="border:1px solid black;"> dictionary.<b>urlInStore</b> 
+<tr>
+<td style="border:1px solid black;"> dictionary.<b>urlInStore</b></td>
 <td style="border:1px solid black;"> xs:anyURI </td>
 <td style="border:1px solid black;"> <b></b> </td>
-<td style="border:1px solid black;"> <b></b> </td></tr>
+<td style="border:1px solid black;"> <b></b> </td>
+</tr>
 
-<td style="border:1px solid black;"> dictionary.<b>urlPath</b> 
+<tr>
+<td style="border:1px solid black;"> dictionary.<b>urlPath</b></td>
 <td style="border:1px solid black;"> xs:string </td>
 <td style="border:1px solid black;"> <b></b> </td>
-<td style="border:1px solid black;"> <b></b> </td></tr>
+<td style="border:1px solid black;"> <b></b> </td>
+</tr>
 
+<tr>
 <td style="border:1px solid black;"> dictionary<strong>url</strong></td>
 <td style="border:1px solid black;">  xs.anyURI</td>
 <td style="border:1px solid black;"> <b></b> </td>
-<td style="border:1px solid black;"> <b></b> </td></tr>
-  <td style="border:1px solid black;"> dictionary.<strong>submitUrl</strong>  <td style="border:1px solid black;">xs.anyURI</td>
 <td style="border:1px solid black;"> <b></b> </td>
-<td style="border:1px solid black;"> <b></b> </td></tr>
-  <td style="border:1px solid black;"> dictionary.<strong>compareURL</strong>
-    <td style="border:1px solid black;"> xs:anyURI</td>
-<td style="border:1px solid black;"> <b></b> </td>
-<td style="border:1px solid black;"> <b></b> </td></tr>
-  <td style="border:1px solid black;"> dictionary.<strong>compareURL</strong>
-    <td style="border:1px solid black;"> xs:anyURI</td>
-<td style="border:1px solid black;"> <b></b> </td>
-<td style="border:1px solid black;"> <b></b> </td></tr>
-  <td style="border:1px solid black;"> dictionary.<strong>fileViewURL</strong>
-    <td style="border:1px solid black;"> xs:anyURI</td>
-<td style="border:1px solid black;"> <b></b> </td>
-<td style="border:1px solid black;"> <b></b> </td></tr>
-  <td style="border:1px solid black;"> dictionary.<strong>emailToFriendURL</strong>
-    <td style="border:1px solid black;">xs:anyURI</td>
-<td style="border:1px solid black;"> <b></b> </td>
-<td style="border:1px solid black;"> <b></b> </td></tr>
-  <td style="border:1px solid black;"> dictionary.<strong>canEmailToFriend</strong>
-    <td style="border:1px solid black;"> xs:anyURI</td>
-<td style="border:1px solid black;"> <b></b> </td>
-<td style="border:1px solid black;"> <b></b> </td></tr>
-  <td style="border:1px solid black;"> dictionary.<strong>hasOptions</strong>
-    <td style="border:1px solid black;"> xs:boolean</td>
-<td style="border:1px solid black;"> <b></b> </td>
-<td style="border:1px solid black;"> <b></b> </td></tr>
-  <td style="border:1px solid black;"> dictionary.<strong>wishListDataAllowed</strong>
-    <td style="border:1px solid black;">xs:boolean</td>
-<td style="border:1px solid black;"> <b></b> </td>
-<td style="border:1px solid black;"> <b></b> </td></tr>
-  <td style="border:1px solid black;"> dictionary.<strong>optionsContainer</strong>
-    <td style="border:1px solid black;"> xs:string</td>
-<td style="border:1px solid black;"> <b></b> </td>
-<td style="border:1px solid black;"> <b></b> </td></tr>
-  <td style="border:1px solid black;"> dictionary.<strong>jsonConfig</strong>
-    <td style="border:1px solid black;"> xs:string</td>
-<td style="border:1px solid black;"> <b></b> </td>
-<td style="border:1px solid black;"> <b></b> </td></tr>
-  <td style="border:1px solid black;"> dictionary.<strong>isSaleable</strong>
-    <td style="border:1px solid black;"> xs:boolean</td>
-<td style="border:1px solid black;"> <b></b> </td>
-<td style="border:1px solid black;"> <b></b> </td></tr>
-  <td style="border:1px solid black;"> dictionary.<strong>formattedPrice</strong>
-    <td style="border:1px solid black;"> xs:string</td>
-<td style="border:1px solid black;"> <b></b> </td>
-<td style="border:1px solid black;"> <b></b> </td></tr>
 </tr>
-</td>
+
+<tr>
+<td style="border:1px solid black;"> dictionary.<strong>submitUrl</strong></td>  
+<td style="border:1px solid black;">xs.anyURI</td>
+<td style="border:1px solid black;"> <b></b> </td>
+<td style="border:1px solid black;"> <b></b> </td>
+</tr>
+
+<tr>
+<td style="border:1px solid black;"> dictionary.<strong>compareURL</strong></td>
+<td style="border:1px solid black;"> xs:anyURI</td>
+<td style="border:1px solid black;"> <b></b> </td>
+<td style="border:1px solid black;"> <b></b> </td>
+</tr>
+
+<tr>
+<td style="border:1px solid black;"> dictionary.<strong>compareURL</strong></td>
+<td style="border:1px solid black;"> xs:anyURI</td>
+<td style="border:1px solid black;"> <b></b> </td>
+<td style="border:1px solid black;"> <b></b> </td>
+</tr>
+
+<tr>
+<td style="border:1px solid black;"> dictionary.<strong>fileViewURL</strong></td>
+<td style="border:1px solid black;"> xs:anyURI</td>
+<td style="border:1px solid black;"> <b></b> </td>
+<td style="border:1px solid black;"> <b></b> </td>
+</tr>
+
+<tr>
+<td style="border:1px solid black;"> dictionary.<strong>emailToFriendURL</strong></td>
+<td style="border:1px solid black;">xs:anyURI</td>
+<td style="border:1px solid black;"> <b></b> </td>
+<td style="border:1px solid black;"> <b></b> </td>
+</tr>
+
+<tr>
+<td style="border:1px solid black;"> dictionary.<strong>canEmailToFriend</strong></td>
+<td style="border:1px solid black;"> xs:anyURI</td>
+<td style="border:1px solid black;"> <b></b> </td>
+<td style="border:1px solid black;"> <b></b> </td>
+</tr>
+
+<tr>
+<td style="border:1px solid black;"> dictionary.<strong>hasOptions</strong></td>
+<td style="border:1px solid black;"> xs:boolean</td>
+<td style="border:1px solid black;"> <b></b> </td>
+<td style="border:1px solid black;"> <b></b> </td>
+</tr>
+
+<tr>
+<td style="border:1px solid black;"> dictionary.<strong>wishListDataAllowed</strong></td>
+<td style="border:1px solid black;">xs:boolean</td>
+<td style="border:1px solid black;"> <b></b> </td>
+<td style="border:1px solid black;"> <b></b> </td>
+</tr>
+
+<tr>
+<td style="border:1px solid black;"> dictionary.<strong>optionsContainer</strong></td>
+<td style="border:1px solid black;"> xs:string</td>
+<td style="border:1px solid black;"> <b></b> </td>
+<td style="border:1px solid black;"> <b></b> </td>
+</tr>
+
+<tr>
+<td style="border:1px solid black;"> dictionary.<strong>jsonConfig</strong></td>
+<td style="border:1px solid black;"> xs:string</td>
+<td style="border:1px solid black;"> <b></b> </td>
+<td style="border:1px solid black;"> <b></b> </td>
+</tr>
+
+<tr>
+<td style="border:1px solid black;"> dictionary.<strong>isSaleable</strong></td>
+<td style="border:1px solid black;"> xs:boolean</td>
+<td style="border:1px solid black;"> <b></b> </td>
+<td style="border:1px solid black;"> <b></b> </td>
+</tr>
+
+<tr>
+<td style="border:1px solid black;"> dictionary.<strong>formattedPrice</strong></td>
+<td style="border:1px solid black;"> xs:string</td>
+<td style="border:1px solid black;"> <b></b> </td>
+<td style="border:1px solid black;"> <b></b> </td>
+</tr>
 </table>
 
-The product complextype in the above schema is defined below
+<p> The table below documents complex type Product from the above schema </p>
 
 <table style="border:1px solid black;border-collapse:collapse;">
 <tr>
@@ -217,6 +268,7 @@ The product complextype in the above schema is defined below
 <th style="border:1px solid black;"> Description </th>
 <th style="border:1px solid black;"> Sample </th>
 </tr>
+
 <tr>
 <td style="border:1px solid black;"> name </td>
 <td style="border:1px solid black;"> string </td>
@@ -248,25 +300,25 @@ The product complextype in the above schema is defined below
 <td style="border:1px solid black;"> 200 </td>
 </tr>
 <tr>
-<td style="border:1px solid black;"> <b>specialPrice<b> </td>
+<td style="border:1px solid black;"> <b>specialPrice</b> </td>
 <td style="border:1px solid black;"> complex type </td>
 <td style="border:1px solid black;">   </td>
 <td style="border:1px solid black;">  </td>
 </tr>
 <tr>
-<td style="border:1px solid black;"> specialPrice.<b>specialPrice<b> </td>
+<td style="border:1px solid black;"> specialPrice.<b>specialPrice</b> </td>
 <td style="border:1px solid black;"> mage:price </td>
 <td style="border:1px solid black;"> Product special price. <b>Optional</b>. </td>
 <td style="border:1px solid black;"> 150 </td>
 </tr>
 <tr>
-<td style="border:1px solid black;"> specialPrice.<b>specialFromDate<b> </td>
+<td style="border:1px solid black;"> specialPrice.<b>specialFromDate</b> </td>
 <td style="border:1px solid black;"> dateTime </td>
 <td style="border:1px solid black;"> Date starting from which the special price will be applied to the product. <b>Optional</b>. </td>
 <td style="border:1px solid black;"> 2005-08-15T15:52:01+0000 </td>
 </tr>
 <tr>
-<td style="border:1px solid black;"> specialPrice.<b>specialToDate<b> </td>
+<td style="border:1px solid black;"> specialPrice.<b>specialToDate</b> </td>
 <td style="border:1px solid black;"> dateTime </td>
 <td style="border:1px solid black;"> Date till which the special price will be applied to the product. <b>Optional</b>. </td>
 <td style="border:1px solid black;"> 2005-08-15T15:52:01+0000  </td>
@@ -294,6 +346,7 @@ The product complextype in the above schema is defined below
 <td style="border:1px solid black;"> string </td>
 <td style="border:1px solid black;"> Product meta title. <b>Optional</b>. </td>
 <td style="border:1px solid black;"> new product  </td>
+</tr>
 <tr>
 <td style="border:1px solid black;"> metaKeyword </td>
 <td style="border:1px solid black;"> string </td>
@@ -307,25 +360,25 @@ The product complextype in the above schema is defined below
 <td style="border:1px solid black;"> This is a new product  </td>
 </tr>
 <tr>
-<td style="border:1px solid black;"> <b>images<b>  </td>
+<td style="border:1px solid black;"> <b>images</b>  </td>
 <td style="border:1px solid black;"> complex type  </td>
 <td style="border:1px solid black;">  </td>
 <td style="border:1px solid black;">  </td>
 </tr>
 <tr>
-<td style="border:1px solid black;"> images.<b>image<b> </td>
+<td style="border:1px solid black;"> images.<b>image</b> </td>
 <td style="border:1px solid black;"> mage:image_type </td>
 <td style="border:1px solid black;"> Product image. <b>Optional</b>. </td>
 <td style="border:1px solid black;">  </td>
 </tr>
 <tr>
-<td style="border:1px solid black;"> images.<b>smallImage<b> </td>
+<td style="border:1px solid black;"> images.<b>smallImage</b> </td>
 <td style="border:1px solid black;"> mage:image_type </td>
 <td style="border:1px solid black;"> Product small image. <b>Optional</b>. </td>
 <td style="border:1px solid black;">  </td>
 </tr>
 <tr>
-<td style="border:1px solid black;"> images.<b>thumbnail<b> </td>
+<td style="border:1px solid black;"> images.<b>thumbnail</b> </td>
 <td style="border:1px solid black;"> mage:image_type </td>
 <td style="border:1px solid black;"> Product thumbnail image. <b>Optional</b>. </td>
 <td style="border:1px solid black;">  </td>
@@ -511,85 +564,85 @@ The product complextype in the above schema is defined below
 <td style="border:1px solid black;"> 140 </td>
 </tr>
 <tr>
-<td style="border:1px solid black;"> <b>quantityAndStockStatus<b> </td>
+<td style="border:1px solid black;"> <b>quantityAndStockStatus</b> </td>
 <td style="border:1px solid black;"> complexType </td>
 <td style="border:1px solid black;">  </td>
 <td style="border:1px solid black;">  </td>
 </tr>
 <tr>
-<td style="border:1px solid black;"> quantityAndStockStatus.<b>isInStock<b> </td>
+<td style="border:1px solid black;"> quantityAndStockStatus.<b>isInStock</b> </td>
 <td style="border:1px solid black;"> boolean </td>
 <td style="border:1px solid black;"> Defines whether the product is available for selling. <b>Optional</b>. </td>
 <td style="border:1px solid black;"> 1 </td>
 </tr>
 <tr>
-<td style="border:1px solid black;"> quantityAndStockStatus.<b>qty<b> </td>
+<td style="border:1px solid black;"> quantityAndStockStatus.<b>qty</b> </td>
 <td style="border:1px solid black;"> decimal </td>
 <td style="border:1px solid black;"> Quantity of stock items for the current product. <b>Optional</b>. </td>
 <td style="border:1px solid black;"> 99 </td>
 </tr>
 <tr>
-<td style="border:1px solid black;"> <b>bundle<b> </td>
+<td style="border:1px solid black;"> <b>bundle</b> </td>
 <td style="border:1px solid black;"> complexType </td>
 <td style="border:1px solid black;">  </td>
 <td style="border:1px solid black;">  </td>
 </tr>
 <tr>
-<td style="border:1px solid black;"> bundle.<b>priceType<b> </td>
+<td style="border:1px solid black;"> bundle.<b>priceType</b> </td>
 <td style="border:1px solid black;"> integer </td>
 <td style="border:1px solid black;"> Defines whether the bundle product price is Dynamic or Fixed. <b>Required</b>. </td>
 <td style="border:1px solid black;"> 1 </td>
 </tr>
 <tr>
-<td style="border:1px solid black;"> bundle.<b>skuType<b> </td>
+<td style="border:1px solid black;"> bundle.<b>skuType</b> </td>
 <td style="border:1px solid black;"> integer </td>
 <td style="border:1px solid black;"> Defined whether the bundle product SKU is Dynamic or Fixed. <b>Required</b>. </td>
 <td style="border:1px solid black;"> 1 </td>
 </tr>
 <tr>
-<td style="border:1px solid black;"> bundle.<b>weightType<b> </td>
+<td style="border:1px solid black;"> bundle.<b>weightType</b> </td>
 <td style="border:1px solid black;"> integer </td>
 <td style="border:1px solid black;"> Defined whether the bundle product weight is Dynamic or Fixed. <b>Required</b>. </td>
 <td style="border:1px solid black;"> 1 </td>
 </tr>
 <tr>
-<td style="border:1px solid black;"> bundle.<b>priceView<b> </td>
+<td style="border:1px solid black;"> bundle.<b>priceView</b> </td>
 <td style="border:1px solid black;"> mage:integer_label </td>
 <td style="border:1px solid black;"> Defined whether the bundle product price should display as "Price Range" or "As Low as." <b>Required</b>. </td>
 <td style="border:1px solid black;"> 1 </td>
 </tr>
 <tr>
-<td style="border:1px solid black;"> bundle.<b>shipmentType<b> </td>
+<td style="border:1px solid black;"> bundle.<b>shipmentType</b> </td>
 <td style="border:1px solid black;"> integer </td>
 <td style="border:1px solid black;"> Defines whether the bundle items are to be shipped together or separately. <b>Optional</b>. </td>
 <td style="border:1px solid black;"> 1 </td>
 </tr>
 <tr>
-<td style="border:1px solid black;"> <b>downloadable<b> </td>
+<td style="border:1px solid black;"> <b>downloadable</b> </td>
 <td style="border:1px solid black;"> complexType </td>
 <td style="border:1px solid black;">  </td>
 <td style="border:1px solid black;">  </td>
 </tr>
 <tr>
-<td style="border:1px solid black;"> downloadable.<b>linksPurchasedSeparately<b> </td>
+<td style="border:1px solid black;"> downloadable.<b>linksPurchasedSeparately</b> </td>
 <td style="border:1px solid black;"> boolean </td>
 <td style="border:1px solid black;"> Defines whether the downloadable product links could be purchased separately. <b>Optional</b>. </td>
 <td style="border:1px solid black;"> 1 </td>
 </tr>
 <tr>
-<td style="border:1px solid black;"> downloadable.<b>samplesTitle<b> </td>
+<td style="border:1px solid black;"> downloadable.<b>samplesTitle</b> </td>
 <td style="border:1px solid black;"> string </td>
 <td style="border:1px solid black;"> Title of the downloadable product sample. <b>Optional</b>. </td>
 <td style="border:1px solid black;"> Sample </td>
 </tr>
 <tr>
-<td style="border:1px solid black;"> downloadable.<b>linksTitle<b> </td>
+<td style="border:1px solid black;"> downloadable.<b>linksTitle</b> </td>
 <td style="border:1px solid black;"> string </td>
 <td style="border:1px solid black;"> Title of the downloadable product link. <b>Optional</b>. </td>
 <td style="border:1px solid black;"> Links </td>
 </tr>
 <tr>
-<td style="border:1px solid black;"> downloadable.<b>linksExist<b> </td>
+<td style="border:1px solid black;"> downloadable.<b>linksExist</b> </td>
 <td style="border:1px solid black;"> boolean </td>
 <td style="border:1px solid black;"> <b>Optional</b>. </td>
 <td style="border:1px solid black;"> 1 </td>
@@ -613,91 +666,91 @@ The product complextype in the above schema is defined below
 <td style="border:1px solid black;"> 1 </td>
 </tr>
 <tr>
-<td style="border:1px solid black;"> <b>giftcard<b> </td>
+<td style="border:1px solid black;"> <b>giftcard</b> </td>
 <td style="border:1px solid black;"> complexType </td>
 <td style="border:1px solid black;">  </td>
 <td style="border:1px solid black;">  </td>
 </tr>
 <tr>
-<td style="border:1px solid black;"> <b>giftcard.giftcardAmounts<b> </td>
+<td style="border:1px solid black;"> <b>giftcard.giftcardAmounts</b> </td>
 <td style="border:1px solid black;"> complexType </td>
 <td style="border:1px solid black;"> Defines the available amounts for the gift card product. <b>Required</b>. </td>
 <td style="border:1px solid black;">  </td>
 </tr>
 <tr>
-<td style="border:1px solid black;"> giftcard.giftcardAmounts.<b>amount<b> </td>
+<td style="border:1px solid black;"> giftcard.giftcardAmounts.<b>amount</b> </td>
 <td style="border:1px solid black;"> mage:price </td>
 <td style="border:1px solid black;"> Defines the amount for a gift card. Constrains: maxOccurs = unbounded. <b>Required</b>. </td>
 <td style="border:1px solid black;"> 20 </td>
 </tr>
 <tr>
-<td style="border:1px solid black;"> giftcard.<b>allowOpenAmount<b> </td>
+<td style="border:1px solid black;"> giftcard.<b>allowOpenAmount</b> </td>
 <td style="border:1px solid black;"> boolean </td>
 <td style="border:1px solid black;"> Defines whether the open amount is allowed for a gift card. <b>Optional</b>. </td>
 <td style="border:1px solid black;"> 1 </td>
 </tr>
 <tr>
-<td style="border:1px solid black;"> giftcard.<b>openAmountMin<b> </td>
+<td style="border:1px solid black;"> giftcard.<b>openAmountMin</b> </td>
 <td style="border:1px solid black;"> mage:price </td>
 <td style="border:1px solid black;"> Defines the minimal amount of a gift card if the open amount is allowed. <b>Optional</b>. </td>
 <td style="border:1px solid black;"> 5 </td>
 </tr>
 <tr>
-<td style="border:1px solid black;"> giftcard.<b>openAmountMax<b> </td>
+<td style="border:1px solid black;"> giftcard.<b>openAmountMax</b> </td>
 <td style="border:1px solid black;"> mage:price </td>
 <td style="border:1px solid black;"> Defines the maximal amount of a gift card if the open amount is allowed. <b>Optional</b>. </td>
 <td style="border:1px solid black;"> 100 </td>
 </tr>
 <tr>
-<td style="border:1px solid black;"> giftcard.<b>giftcardType<b> </td>
+<td style="border:1px solid black;"> giftcard.<b>giftcardType</b> </td>
 <td style="border:1px solid black;"> mage:integer_label </td>
 <td style="border:1px solid black;"> Defines the type of a gift card: Virtual, Physical, or Combined. <b>Required</b>. </td>
 <td style="border:1px solid black;"> 2 </td>
 </tr>
 <tr>
-<td style="border:1px solid black;"> giftcard.<b>isRedeemable<b> </td>
+<td style="border:1px solid black;"> giftcard.<b>isRedeemable</b> </td>
 <td style="border:1px solid black;"> boolean </td>
 <td style="border:1px solid black;"> Defines whether the card is redeemable. <b>Optional</b>. </td>
 <td style="border:1px solid black;"> 1 </td>
 </tr>
 <tr>
-<td style="border:1px solid black;"> giftcard.<b>useConfigIsRedeemable<b> </td>
+<td style="border:1px solid black;"> giftcard.<b>useConfigIsRedeemable</b> </td>
 <td style="border:1px solid black;"> boolean </td>
 <td style="border:1px solid black;"> Defines whether the settings specified in the store's Configuration section should apply for the Is Redeemable option. <b>Optional</b>. </td>
 <td style="border:1px solid black;"> 1 </td>
 </tr>
 <tr>
-<td style="border:1px solid black;"> giftcard.<b>lifetime<b> </td>
+<td style="border:1px solid black;"> giftcard.<b>lifetime</b> </td>
 <td style="border:1px solid black;"> integer </td>
 <td style="border:1px solid black;"> Defines for how many days a gift card is valid. <b>Optional</b>. </td>
 <td style="border:1px solid black;"> 3 </td>
 </tr>
 <tr>
-<td style="border:1px solid black;"> giftcard.<b>useConfigLifetime<b> </td>
+<td style="border:1px solid black;"> giftcard.<b>useConfigLifetime</b> </td>
 <td style="border:1px solid black;"> boolean </td>
 <td style="border:1px solid black;"> Defines whether the settings specified in the store's Configuration section should apply for the Lifetime option. <b>Optional</b>. </td>
 <td style="border:1px solid black;"> 1 </td>
 </tr>
 <tr>
-<td style="border:1px solid black;"> giftcard.<b>emailTemplate<b> </td>
+<td style="border:1px solid black;"> giftcard.<b>emailTemplate</b> </td>
 <td style="border:1px solid black;"> string </td>
 <td style="border:1px solid black;"> Defines which email template should be used for a gift card. <b>Optional</b>. </td>
 <td style="border:1px solid black;">  </td>
 </tr>
 <tr>
-<td style="border:1px solid black;"> giftcard.<b>useConfigEmailTemplate<b> </td>
+<td style="border:1px solid black;"> giftcard.<b>useConfigEmailTemplate</b> </td>
 <td style="border:1px solid black;"> boolean </td>
 <td style="border:1px solid black;"> Defines whether the settings specified in the store's Configuration section should apply for the Email Template option. <b>Optional</b>. </td>
 <td style="border:1px solid black;"> 1 </td>
 </tr>
 <tr>
-<td style="border:1px solid black;"> giftcard.<b>allowMessage<b> </td>
+<td style="border:1px solid black;"> giftcard.<b>allowMessage</b> </td>
 <td style="border:1px solid black;"> boolean </td>
 <td style="border:1px solid black;"> Defines whether the accompanying message is allowed for a gift card. <b>Optional</b>. </td>
 <td style="border:1px solid black;"> 1 </td>
 </tr>
 <tr>
-<td style="border:1px solid black;"> giftcard.<b>useConfigAllowMessage<b> </td>
+<td style="border:1px solid black;"> giftcard.<b>useConfigAllowMessage</b> </td>
 <td style="border:1px solid black;"> boolean </td>
 <td style="border:1px solid black;"> Defines whether the settings specified in the store's Configuration section should apply for the Allow Message option. <b>Optional</b>. </td>
 <td style="border:1px solid black;"> 1 </td>
@@ -721,19 +774,19 @@ The product complextype in the above schema is defined below
 <td style="border:1px solid black;"> 1 </td>
 </tr>
 <tr>
-<td style="border:1px solid black;"> <b>targetRules<b> </td>
+<td style="border:1px solid black;"> <b>targetRules</b> </td>
 <td style="border:1px solid black;"> complexType </td>
 <td style="border:1px solid black;">  </td>
 <td style="border:1px solid black;">  </td>
 </tr>
 <tr>
-<td style="border:1px solid black;"> targetRules.<b>related<b> </td>
+<td style="border:1px solid black;"> targetRules.<b>related</b> </td>
 <td style="border:1px solid black;"> mage:target_rule </td>
 <td style="border:1px solid black;"> Contains the IDs of the related products. <b>Optional</b>. </td>
 <td style="border:1px solid black;"> 1 </td>
 </tr>
 <tr>
-<td style="border:1px solid black;"> targetRules.<b>upsell<b> </td>
+<td style="border:1px solid black;"> targetRules.<b>upsell</b> </td>
 <td style="border:1px solid black;"> mage:target_rule </td>
 <td style="border:1px solid black;"> Contains the IDs of the upsell products. <b>Optional</b>. </td>
 <td style="border:1px solid black;"> 1 </td>
