@@ -1,11 +1,11 @@
 Magento 2 Extension Model Proposal: Alpha 1
 ===========================================
 
-As part of the overall goal of better modularity in Magento 2, we're introducing
-support for a few new ideas in the recent push to the Github repository.  A
-major theme of these changes is the separation of responsibilities, primarily
-between business logic on one side and presentation logic and user experience on
-the other.
+To support our overall goal of better modularity in Magento 2, we're introducing
+support for a few new ideas in this Alpha-1 release of Extension Model
+Improvements.  A major theme of these ideas is the separation of
+responsibilities, especially between business logic on one side and presentation
+logic and user experience on the other.
 
 ![](</images/archExtensibility.png>)
 
@@ -13,10 +13,10 @@ The diagram above attempts to describe the ideas behind these changes visually.
 Business logic is confined to the service layer and encapsulated in service
 classes.
 
-The source code for the proposed changes can be found in the recent github push
+You can find the source code for the proposed changes in the recent github push
 [here][4]. There is also a VirtualBox image that contains the installation of a
-recent Magento-2 code base [here][5]. You can find the instructions for using
-the virtualbox image [here][6].
+recent Magento-2 code base [here][5]. Instructions for using the virtualbox
+image are [here][6].
 
 [4]: <https://github.com/magento/magento2>
 
@@ -27,19 +27,18 @@ the virtualbox image [here][6].
 Services
 --------
 
-Services provide a single, common entry point for all interaction between
+Services provide a single, common entry point for all interaction among
 different UIs, including blocks, controllers and web services. A service can
 even serve as an interface for business logic for other modules.
 
 Services have well defined interfaces described in a service IDL. Service IDLs
 document the public methods available to templates, blocks, controllers and web
-services. For each method, the input and output data types are defined using
-XSDs.
+services. For each method, the input and output data types are defined in XSDs.
 
 Webhooks and Callbacks
 ----------------------
 
-To support better remote integrations with Magento, we're enabling the automatic
+To improve remote integrations with Magento, we're enabling the automatic
 exposure of these services as web services to external clients. This Alpha-1
 release also introduces support for real-time integrations with remote systems
 using webhooks and callbacks.
@@ -180,7 +179,8 @@ For reference, you can review the product service call invocation here: [Product
 Service Call Invocation][4]
 
 [3]: <https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/etc/service-calls.xml>
-[4]: <https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/view/frontend/layout.xml>
+[4]:
+<https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/view/frontend/layout.xml>
 
 At this point, you should have a working extension that has both presentation
 and business logic implemented and working together.
@@ -192,4 +192,5 @@ and dynamic option lists by editing a system.xml file. Learn more about setting
 up option lists here: [Extension Configuration][5]
 
 [5]: <http://praveenck.github.io/docs/option-list/>
+
 

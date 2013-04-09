@@ -2228,7 +2228,7 @@ array.</p>
 <pre><code>
 
 
-</code></pre>;T;@I"/service-impl/;T{;{	;I"ãž<!DOCTYPE html>
+</code></pre>;T;@I"/service-impl/;T{;{	;I"àž<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -2305,7 +2305,7 @@ how to define a service using the service IDL.</p>
 
 <p>The source code for Product service is <a href="https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/Service/Product.php">here</a></p>
 
-<p>The service has a method, <code>item</code> (line 117&lt;/i&gt;). The method takes a single
+<p>The service has a method, <code>item</code> (<i>line 117</i>). The method takes a single
 parameter, which is the product ID, and retrieves product data in an array
 defined by the response schema.</p>
 
@@ -3150,7 +3150,7 @@ method.</p>
     </script>
 </body>
 </html>
-;T;	I"ª‰Service Implementation
+;T;	I"­‰Service Implementation
 ======================
 
 This is the proposed model for implementing Magento services. Using a service
@@ -3194,7 +3194,7 @@ The source code for Product service is [here][4]
 
 [4]: <https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/Service/Product.php>
 
-The service has a method, `item` (line 117</i>). The method takes a single
+The service has a method, `item` (<i>line 117</i>). The method takes a single
 parameter, which is the product ID, and retrieves product data in an array
 defined by the response schema.
 
@@ -3956,7 +3956,7 @@ method.
 
 
 ;T;
-I"MŠ<h1 id="service-implementation">Service Implementation</h1>
+I"JŠ<h1 id="service-implementation">Service Implementation</h1>
 
 <p>This is the proposed model for implementing Magento services. Using a service
 layer with interfaces described by service IDLs provides the following
@@ -3998,7 +3998,7 @@ how to define a service using the service IDL.</p>
 
 <p>The source code for Product service is <a href="https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/Service/Product.php">here</a></p>
 
-<p>The service has a method, <code>item</code> (line 117&lt;/i&gt;). The method takes a single
+<p>The service has a method, <code>item</code> (<i>line 117</i>). The method takes a single
 parameter, which is the product ID, and retrieves product data in an array
 defined by the response schema.</p>
 
