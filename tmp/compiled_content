@@ -1546,7 +1546,7 @@ groups: {
 &lt;option value="2"&gt;Wholesale&lt;/option&gt;
 &lt;option value="3"&gt;Retailer&lt;/option&gt;
 
-</code></pre>;T;@I"/service-idl/;T{;{	;I"O/<!DOCTYPE html>
+</code></pre>;T;@I"/service-idl/;T{;{	;I"p/<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -1703,7 +1703,7 @@ another associative array reflecting the structure described by the element
 
 <h2 id="xsd">XSD</h2>
 
-<p>The XSD is used to describe the data structure passed in during the API call as
+<p>The XSD is used to describe the data structure passed in during the service method call as
 well as the returned data. During runtime data is stored into a associative
 array.</p>
 
@@ -1746,14 +1746,14 @@ array.</p>
 
 <p>The sample input associative array that is passed to the service method and the sample output associative array returned by the service method are shown below.</p>
 
-<p>** Sample input **</p>
+<p><strong>Sample input</strong></p>
 
 <pre><code>
 
 
 </code></pre>
 
-<p>** Sample output **</p>
+<p><strong>Sample output</strong></p>
 
 <pre><code>
 
@@ -1855,7 +1855,7 @@ array.</p>
     </script>
 </body>
 </html>
-;T;	I"åService IDL
+;T;	I"ìService IDL
 ===========
 
 The proposed new architecture consolidates all of an extension's business into a
@@ -1989,7 +1989,7 @@ another associative array reflecting the structure described by the element
 XSD
 ---
 
-The XSD is used to describe the data structure passed in during the API call as
+The XSD is used to describe the data structure passed in during the service method call as
 well as the returned data. During runtime data is stored into a associative
 array.
 
@@ -2034,7 +2034,7 @@ array.
 
 The sample input associative array that is passed to the service method and the sample output associative array returned by the service method are shown below.
 
-** Sample input **
+**Sample input**
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -2042,7 +2042,7 @@ The sample input associative array that is passed to the service method and the 
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-** Sample output **
+**Sample output**
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -2051,7 +2051,7 @@ The sample input associative array that is passed to the service method and the 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ;T;
-I"´<h1 id="service-idl">Service IDL</h1>
+I"Õ<h1 id="service-idl">Service IDL</h1>
 
 <p>The proposed new architecture consolidates all of an extensionâ€™s business into a
 service layer. Presented here is an Interface Definition Language specification
@@ -2173,7 +2173,7 @@ another associative array reflecting the structure described by the element
 
 <h2 id="xsd">XSD</h2>
 
-<p>The XSD is used to describe the data structure passed in during the API call as
+<p>The XSD is used to describe the data structure passed in during the service method call as
 well as the returned data. During runtime data is stored into a associative
 array.</p>
 
@@ -2216,14 +2216,14 @@ array.</p>
 
 <p>The sample input associative array that is passed to the service method and the sample output associative array returned by the service method are shown below.</p>
 
-<p>** Sample input **</p>
+<p><strong>Sample input</strong></p>
 
 <pre><code>
 
 
 </code></pre>
 
-<p>** Sample output **</p>
+<p><strong>Sample output</strong></p>
 
 <pre><code>
 
