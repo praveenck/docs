@@ -33,15 +33,15 @@
       <div class="content">
     <h1 id="twig-templates">Twig Templates</h1>
 
-<p>Here are the main advantages that draw us towards replacing the .phtml templates
-used for earlier Magento extensions with a templating engine called Twig.</p>
+<p>We see good reasons for replacing the .phtml templates used for earlier Magento
+extensions with a templating engine called Twig.</p>
 
-<p>The move helps enforce a desirable isolation of the presentation layer from
-domain and business logic and data, which is a fundamental goal of our new
-extension approach. Current .phtml templates allow inclusion of business logic
-and SQL queries within the presentation layer, which  can create serious
-challenges for maintenance and upgrades. We see the following additional
-benefits from separating the presentation logic:</p>
+<p>The move to a templating engine will help enforce a desirable isolation of the
+presentation layer from domain and business logic and data, which is a
+fundamental goal of our new extension approach. Current .phtml templates allow
+inclusion of business logic and SQL queries within the presentation layer, which
+can create serious challenges for maintenance and upgrades. We see the following
+additional benefits from separating the presentation logic:</p>
 
 <ul>
 <li>
@@ -110,13 +110,14 @@ tells you what is going on whereas the former will require a few lookups in
 code.</p>
   </li>
 </ul>
-<h3 id="a-idbefore-afterabefore-and-after">
-<a id="before-after"></a>Before and After</h3>
+<h3 id="before-and-after">Before and After</h3>
+
+<pre><code>[1]: &lt;#before-after&gt;
+</code></pre>
 
 <p>PHTML</p>
 
-<pre><code>
-&lt;?php if ($this-&gt;canEmailToFriend()): ?&gt;
+<pre><code>&lt;?php if ($this-&gt;canEmailToFriend()): ?&gt;
   &lt;p class="email-friend"&gt;
     &lt;a href="&lt;?php echo 
       $this-&gt;helper('Mage_Catalog_Helper_Product')
@@ -125,20 +126,17 @@ code.</p>
     &lt;/a&gt;
   &lt;/p&gt;
 &lt;?php endif; ?&gt;
-
 </code></pre>
 
 <p>Twig</p>
 
-<pre><code>
-{% if product.canEmailToFriend %}
+<pre><code>{% if product.canEmailToFriend %}
   &lt;p class="email-friend"&gt;
     &lt;a href="{{ links.emailToFriend }}"&gt;
     {{ 'Email to a Friend'|translate }}
     &lt;/a&gt;
   &lt;/p&gt;
 {% endif %}
-
 </code></pre>
 
 <h2 id="how-to-get-started">How to Get Started</h2>
@@ -175,14 +173,14 @@ available to it. This section will try to show you how.</p>
 
 <ul>
 <li>
-    <p>*option* (instance of Mage_Catalog_Model_Product_Option): This is
+    <p><i>option</i> (instance of Mage_Catalog_Model_Product_Option): This is
 available to the block class associated with this template, i.e.
 Mage_Catalog_Block_Product_View_Options_Type_Date. Any methods accessible to
 the “option” instance are callable within the template, such as
-*isRequired*.</p>
+<b>isRequired<b>.</b></b></p>
   </li>
   <li>
-    <p>*createBlock / getSelectFromToHtml / viewFileUrl*: These are defined as a
+    <p><i>createBlock/getSelectFromToHtml/viewFileUrl</i>: These are defined as a
 Twig function in Mage_Core_Block_Template_Engine_TwigExtension; the latter
 is part of the template engine subsystem included with Magento 2.
 Incidentally, this template engine subsystem is responsible for ensuring

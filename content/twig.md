@@ -1,15 +1,15 @@
 Twig Templates
 ==============
 
-Here are the main advantages that draw us towards replacing the .phtml templates
-used for earlier Magento extensions with a templating engine called Twig.
+We see good reasons for replacing the .phtml templates used for earlier Magento
+extensions with a templating engine called Twig.
 
-The move helps enforce a desirable isolation of the presentation layer from
-domain and business logic and data, which is a fundamental goal of our new
-extension approach. Current .phtml templates allow inclusion of business logic
-and SQL queries within the presentation layer, which  can create serious
-challenges for maintenance and upgrades. We see the following additional
-benefits from separating the presentation logic:
+The move to a templating engine will help enforce a desirable isolation of the
+presentation layer from domain and business logic and data, which is a
+fundamental goal of our new extension approach. Current .phtml templates allow
+inclusion of business logic and SQL queries within the presentation layer, which
+can create serious challenges for maintenance and upgrades. We see the following
+additional benefits from separating the presentation logic:
 
 -   Theme switching becomes much easier and more predictable, because themes are
     confined to presentation logic and won't need to be disentangled from domain
@@ -28,7 +28,7 @@ features and benefits:
 
 -   Twig is concise. Gone are the days of the unavoidably messy .phtml files,
     since the page html is separate from the code that populates the page. See
-    the [before and after comparison](#before-after) below to check out the difference.
+    the [before and after comparison][1] below to check out the difference.
 
 -   The separation of front-end concerns from implementation concerns enables
     you to hire the best front-end designers while ensuring that your PHP
@@ -67,12 +67,13 @@ Twig vs. PHTML
     tells you what is going on whereas the former will require a few lookups in
     code.
 
-### <a id="before-after"></a>Before and After   
+### Before and After
+
+    [1]: <#before-after>
 
 PHTML
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 <?php if ($this->canEmailToFriend()): ?>
   <p class="email-friend">
     <a href="<?php echo 
@@ -82,7 +83,6 @@ PHTML
     </a>
   </p>
 <?php endif; ?>
-
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -90,7 +90,6 @@ PHTML
 Twig
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 {% if product.canEmailToFriend %}
   <p class="email-friend">
     <a href="{{ links.emailToFriend }}">
@@ -98,7 +97,6 @@ Twig
     </a>
   </p>
 {% endif %}
-
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -135,13 +133,13 @@ available to it. This section will try to show you how.
 
 [1]: <#before-after>
 
--   \*option\* (instance of Mage_Catalog_Model_Product_Option): This is
+-   <i>option</i> (instance of Mage_Catalog_Model_Product_Option): This is
     available to the block class associated with this template, i.e.
     Mage_Catalog_Block_Product_View_Options_Type_Date. Any methods accessible to
     the "option" instance are callable within the template, such as
-    \*isRequired\*.
+    <b>isRequired<b>.
 
--   \*createBlock / getSelectFromToHtml / viewFileUrl\*: These are defined as a
+-   <i>createBlock/getSelectFromToHtml/viewFileUrl</i>: These are defined as a
     Twig function in Mage_Core_Block_Template_Engine_TwigExtension; the latter
     is part of the template engine subsystem included with Magento 2.
     Incidentally, this template engine subsystem is responsible for ensuring
@@ -169,4 +167,3 @@ We hope you can see some of the flexibility and power the use of Twig will bring
 to your development efforts on Magento. Our aim is to make development fun for
 you again by separating front-end design from back-end work and ensuring that
 you are looking at clean, easy-to-read, and easy-to-debug code.
-
