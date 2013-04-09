@@ -179,8 +179,7 @@ For reference, you can review the product service call invocation here: [Product
 Service Call Invocation][4]
 
 [3]: <https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/etc/service-calls.xml>
-[4]:
-<https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/view/frontend/layout.xml>
+[4]: <https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/view/frontend/layout.xml>
 
 At this point, you should have a working extension that has both presentation
 and business logic implemented and working together.
