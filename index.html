@@ -33,92 +33,163 @@
       <div class="content">
     <h1 id="magento-2-extension-model-proposal-alpha-1">Magento 2 Extension Model Proposal: Alpha 1</h1>
 
-<p>As part of the overall push in Magento 2 for better modularity, we’re
-introducing support for a few new ideas in the recent push to the Github
-repository.   A major theme of these changes is the separation of
-responsibilities, primarily between business logic on one side and presentation
-logic and user experience on the other.</p>
+<p>As part of the overall goal of better modularity in Magento 2, we’re introducing
+support for a few new ideas in the recent push to the Github repository.  A
+major theme of these changes is the separation of responsibilities, primarily
+between business logic on one side and presentation logic and user experience on
+the other.</p>
 
 <p><img src="images/archExtensibility.png" alt=""></p>
 
-<p>The diagram above attempts to describe the ideas behind these changes visually. The source code for the proposed changes can be found in the recent github push <a href="https://github.com/magento/magento2">here</a>. There is also a VirtualBox image that contains the installation of recent Magento-2 code base <a href="https://ebay.box.com/s/a2k6twcsoappu4zv5lsq">here</a>. The instructions for using the virtualbox image can be found <a href="http://praveenck.github.io/docs/vmimage/">here</a></p>
+<p>The diagram above attempts to describe the ideas behind these changes visually.
+Business logic is confined to the service layer and encapsulated in service
+classes.</p>
+
+<p>The source code for the proposed changes can be found in the recent github push
+<a href="https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/view/frontend/layout.xml">here</a>. There is also a VirtualBox image that contains the installation of a
+recent Magento-2 code base <a href="http://praveenck.github.io/docs/option-list/">here</a>. You can find the instructions for using
+the virtualbox image <a href="http://praveenck.github.io/docs/vmimage/">here</a>.</p>
 
 <h2 id="services">Services</h2>
 
-<p>Services provide a single, common entry point for all interaction between different UIs,
-including Blocks, Controllers and web services; and it can even serve as an
-interface for business logic for other modules.</p>
+<p>Services provide a single, common entry point for all interaction between
+different UIs, including blocks, controllers and web services. A service can
+even serve as an interface for business logic for other modules.</p>
 
-<p>Services have well defined interfaces described using a service IDL. Service IDL
-documents the list of public methods available to templates, blocks, controllers
-and web services. For each method, the input and output data types are defined
-using XSDs.</p>
+<p>Services have well defined interfaces described in a service IDL. Service IDLs
+document the public methods available to templates, blocks, controllers and web
+services. For each method, the input and output data types are defined using
+XSDs.</p>
 
 <h2 id="webhooks-and-callbacks">Webhooks and Callbacks</h2>
 
-<p>As a nod to the desire to support better remote integrations with Magento, as
-well, we’re not only working on automatically exposing these Services as web
-services to external clients, but with this release, we’re also introducing
-support for real-time integrations with remote system using webhooks and
-callbacks.</p>
+<p>To support better remote integrations with Magento, we’re enabling the automatic
+exposure of these services as web services to external clients. This Alpha-1
+release also introduces support for real-time integrations with remote systems
+using webhooks and callbacks.</p>
 
-<p>Webhooks provide Event Observer-like behavior over HTTP and allow you to be
-notified when certain events occur with Magento and even get real-time data from
-the system.  Callbacks also support communication from your Magento installation
-out to a remote system, but callbacks trigger synchronously and use the response
-from the remote integration in the rest of the user request processing.  As an
-example, in this release we’re supporting the ability to define remote shipping
-carriers where the shipping rates and retrieved over an HTTP call.</p>
+<p>Webhooks provide Event Observer-like behavior over HTTP. They allow you to be
+notified when certain events occur in Magento and let you get real-time data
+from the system.  Callbacks also support communication from your Magento
+installation out to a remote system, but callbacks trigger synchronously and use
+the response from the remote integration in the rest of the user request
+processing.  As an example, in this release we’re supporting the ability to
+define remote shipping carriers where the shipping rates are retrieved over an
+HTTP call.</p>
 
 <h2 id="better-templating">Better Templating</h2>
 
 <p>On the presentation tier, we’re introducing support for Twig templating.  Theme
 development has always been a big part of Magento store customization, but
 templates written in PHP meant that business logic occasionally was written into
-the .phtml files.  This meant that the business logic was either lost or had to
-be duplicated from theme to theme.  With a templating language like Twig, which
+the .phtml files. This meant that business logic could be lost, and had to be
+duplicated from theme to theme.  With a templating language like Twig, which
 uses a restricted syntax, it is easier to ensure that your template files will
 only be concerned with the logic needed to render your data.</p>
 
-<p>Since templates need data to render and Services are designed to provide a
+<p>Because templates need data to render and services are designed to provide a
 well-managed, consistent view of the data a module can provide, we’ve introduced
 a syntax for binding templates to a service call directly from the layout file.</p>
 
 <h2 id="extension-configuration-improvement">Extension Configuration Improvement</h2>
 
-<p>There’s another small improvement that we’ve made to System Configuration that
+<p>There’s another small improvement that we’ve made to system configuration that
 we hope will make your life a little easier.  For most of the configuration
-fields you define, you can describe everything you need in XML – except for the
-values of a select box.  We’ve introduced a syntax with this push that will
+fields you define, you can describe everything you need in XML–except for the
+values of a select box.  We’ve introduced a syntax with this release that will
 allow you to describe static select options inline, and dynamic options can be
 extracted from the result of a service call.</p>
 
 <p>These concepts have been introduced in isolated parts of the Magento application
 so far in the hopes that you will comment on their value and help direct and
-refine how they work.  This is the first set of many ideas that we’re looking at
-to help improve the modularity of Magento, which should improve not only the
-compatibility of extensions within Magento, but also the upgradability of
-Magento itself.</p>
+refine how they work. This is only the first set of ideas we’re sharing–there
+are more to come, all aimed at improving compatibility among Magento extensions,
+and the modularity and upgradability of Magento.</p>
 
-<h2 id="new-approach-for-creating-extensionscustomizations">New Approach for Creating Extensions/Customizations</h2>
+<h2 id="new-approach-for-creating-extensions-and-customizations">New Approach for Creating Extensions and Customizations</h2>
 
-<p>Here’s an outline of how to create an extension that includes some business logic and associated presentation logic:</p>
+<p>Here’s an outline of how to create an extension that includes some business
+logic and associated presentation logic:</p>
 
 <ul>
 <li>
-    <p>Create a service that encapsulates the extensions business logic. As part of the service creation, define the service interface using the service IDL. List all methods whose output is need in the presentation tier. Define the method input and output using XSDs</p>
+    <p>Create a service that encapsulates the extension’s business logic. This
+involves defining the service interface using the service IDL, listing the
+methods whose output will be needed in the presentation tier, and defining
+the method input and output using XSD schemas.</p>
   </li>
   <li>
-    <p>Create a template that renders the visual aspects</p>
+    <p>Create a template that renders your extension’s visual appearance.</p>
   </li>
   <li>
-    <p>Associate the template’s required data to one or more service calls via configuration in layout.xml</p>
+    <p>Associate the template’s data to one or more service calls via configuration
+in layout.xml.</p>
   </li>
   <li>
-    <p>Optionally, accept configuration for your extension using option lists</p>
+    <p>Optionally, configure static and dynamic options lists for your extension.</p>
   </li>
 </ul>
-</div>
+<h3 id="create-the-service-that-serves-data-to-your-extension">1. Create the Service That Serves Data to Your Extension</h3>
+
+<p>You can start by looking at an existing service, such as the Product service. Not all extensions require a new service to be created. Extensions that modify the presentation logic or the look and feel only can use existing services to obtain the data required for rendering.</p>
+
+<p>Inorder to create a service, you need to first define the service using an IDL. The IDL specifies metadata for the service such as its name, version, list of methods and input/output of methods. Learn more about service IDL here: <a href="http://magento.github.io/magento2-developer-docs/service-idl/">http://magento.github.io/magento2-developer-docs/service-idl/</a></p>
+
+<p>Once you have defined your service IDL, you need to implement the service. A service is implemented using a php class. The public methods of this class become available for the presentation layer to access data. Learn more by refering to the implementation of Product Service as described here: <a href="http://magento.github.io/magento2-developer-docs/service-impl/">http://magento.github.io/magento2-developer-docs/service-impl/</a></p>
+
+<p>You can also expose your service over the web to REST and SOAP interfaces. There is no implementation in the Alpha-1 release for this feature yet. However, you can get an idea as to how this would work by refering to the documentation here: <a href="http://magento.github.io/magento2-developer-docs/web-api/">Web Services</a></p>
+
+<h3 id="create-the-template-for-your-extension">2. Create the Template for Your Extension</h3>
+
+<p>To build the presentation layer functionality for your extension, you will need to create twig based templates. Find out how to use the new Twig templates for your extensions here: <a href="http://magento.github.io/magento2-developer-docs/twig/">Twig
+Templates</a></p>
+
+<h3 id="associate-templates-data-to-service-methods">3. Associate Template’s Data to Service Methods</h3>
+
+<p>Once you have created a service and a template, you will need to associate the template’s data to one or more service methods. You do this using service calls. First, you need to declare service calls in service-calls.xml. </p>
+
+<pre><code>
+&lt;service-calls&gt;
+    &lt;service-call name="selectedProductDetails" service="Mage_Catalog_Service_Product" method="item"&gt;
+        &lt;arg name="productId"&gt;{{request.params.id}}&lt;/arg&gt;
+    &lt;/service-call&gt;
+
+    &lt;service-call name="selectedProductOptions" service="Mage_Catalog_Service_Product" method="getOptions"&gt;
+        &lt;arg name="productId"&gt;{{request.params.id}}&lt;/arg&gt;
+    &lt;/service-call&gt;
+
+
+    &lt;service-call name="relatedProducts" service="Mage_Catalog_Service_Product" method="getRelatedProducts"&gt;
+        &lt;arg name="productId"&gt;{{request.params.id}}&lt;/arg&gt;
+    &lt;/service-call&gt;
+&lt;/service-calls&gt;
+
+</code></pre>
+
+<p>For reference, you can review the product service calls declaration here: <a href="https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/etc/service-calls.xml">Product Service Calls Declaration</a></p>
+
+<p>Once you have declared the service calls, you need to invoke these service calls for corresponding templates in layout.xml. </p>
+
+<pre><code>
+&lt;block type="Mage_Catalog_Block_Product_Twig" module="Mage_Catalog" name="product.info"
+                   template="Mage_Catalog::product/view.twig"&gt;
+	&lt;data service-call="selectedProductDetails" alias="product" /&gt;
+	...
+	...
+&lt;/block&gt;
+
+</code></pre>
+
+<p>For reference, you can review the product service call invocation here: <a href="https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/view/frontend/layout.xml">Product Service Call Invocation</a></p>
+
+<p>At this point, you should have a working extension that has both presentation and business logic implemented and working together.</p>
+
+<h3 id="configure-your-extensions-option-lists">4. Configure Your Extension’s Option Lists</h3>
+
+<p>In addition to creating the presentation and business logic, you often need to accept configuration for your extension. This is ofcourse optional. To set up configuration, you can use static and dynamic options lists. Y can create these option lists by editing a system.xml file.</p>
+
+<p>Learn more about creating option lists here: <a href="http://praveenck.github.io/docs/option-list/">Extension Configuration</a></p>
+      </div>
 
     <div id="js-sidebar" class="sidebar-shell">
       <div class="js-toggle-list sidebar-module expandable">
