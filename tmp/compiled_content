@@ -4742,7 +4742,7 @@ method.</p>
 <td style="border:1px solid black;"> Contains the IDs of the upsell products. <b>Optional</b>. </td>
 <td style="border:1px solid black;"> 1 </td>
 </tr>
-</table>;T;@I"/twig/;T{;{	;I"Û0<!DOCTYPE html>
+</table>;T;@I"/twig/;T{;{	;I"¦0<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -4855,9 +4855,6 @@ few lookups in code.</p>
   </li>
 </ul>
 <h3 id="before-and-after">Before and After</h3>
-
-<pre><code>[1]: &lt;#before-after&gt;
-</code></pre>
 
 <p>PHTML</p>
 
@@ -5053,7 +5050,7 @@ you are looking at clean, easy-to-read, and easy-to-debug code.</p>
     </script>
 </body>
 </html>
-;T;	I"¦Twig Templates
+;T;	I"¢Twig Templates
 ==============
 
 This is a proposal to replace the .phtml templates used for earlier Magento
@@ -5122,7 +5119,7 @@ Twig vs. PHTML
 
 ### Before and After
 
-    [1]: <#before-after>
+[1]: <#before-after>
 
 PHTML
 
@@ -5221,7 +5218,7 @@ to your development efforts on Magento. Our aim is to make development fun for
 you again by separating front-end design from back-end work and ensuring that
 you are looking at clean, easy-to-read, and easy-to-debug code.
 ;T;
-I"5<h1 id="twig-templates">Twig Templates</h1>
+I" <h1 id="twig-templates">Twig Templates</h1>
 
 <p>This is a proposal to replace the .phtml templates used for earlier Magento
 extensions with a templating engine called Twig.</p>
@@ -5298,9 +5295,6 @@ tells you what is going on, while understanding the former will require a
 few lookups in code.</p>
   </li>
 </ul><h3 id="before-and-after">Before and After</h3>
-
-<pre><code>[1]: &lt;#before-after&gt;
-</code></pre>
 
 <p>PHTML</p>
 

@@ -1,13 +1,15 @@
 Service IDL
 ===========
 
-The proposed new architecture consolidates all of an extension's business into a
-service layer. Presented here is an Interface Definition Language specification
-that describes the services exposed through the service layer. An IDL formally
-describes the functionality a service provides (methods, inputs and outputs of
-methods) without exposing the details of how that functionality is implemented.
+This Interface Definition Language specification describes the interfaces and
+methods that a service implementation will expose to an extension's templates,
+blocks, controllers and web services.
 
-Some advantages of using an IDL:
+The data structure used in the payloads is defined in an XSD. Metadata about a
+service call, such as version, required permissions, and locations of XSDs, are
+carried by PHP annotations. Data structure and metadata are also specified.
+
+Some advantages of using an IDL to define service implementations:
 
 -   Allows for well-defined and versioned interfaces that the services and
     visual components depend on. This makes it simpler to control compatibility
@@ -17,17 +19,9 @@ Some advantages of using an IDL:
     running in the Magento instance at the same time, increasing backward
     compatibility.
 
-Overview
---------
-
-This document specifies the Interface Definition Language (IDL) that describes
-the operations permitted by the Service layer. To support REST and SOAP Web
-APIs, WADL and WSDL will be auto-generated from the IDL.
-
-The data structure used in the payloads is defined in an XSD. The metadata about
-a service call, such as version, required permissions, and locations of XSDs,
-are carried by PHP annotations. Data structure and metadata are described in
-what follows.
+-   To support REST and SOAP Web APIs, WADL and WSDL will be auto-generated from
+    the IDL.
+    
 
 PHP Annotations
 ---------------
@@ -77,9 +71,8 @@ PHP Annotations
 Service Calls
 ---
 
-A service operation is implemented as a class method. The class maps to the
-service via the requirement that operations from a service be grouped into a
-single class.
+A service operation is implemented as a class method. A class is mapped to a
+service because all operations from a service are grouped into a single class.
 
 **Example of a service call**
 
@@ -116,25 +109,23 @@ class Mage_Catalog_Service_Product
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Here, the input data structure is identified in the @Consumes annotation as
-belonging to the <id\> element in [input.xsd][1], and the
-output data structure is identified in the @Produces annotation as belonging to
-the <product\> element in [output.xsd][2]. The shipping/consumerux.xsd file is
-shown below.
+belonging to the <id\> element in [input.xsd][1], and the output data structure
+is identified in the @Produces annotation as belonging to the <product\>
+element in [output.xsd][2]. The shipping/consumerux.xsd file is shown below.
 
 [1]: <https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/etc/resources/product/item/input.xsd>
 [2]: <https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/etc/resources/product/item/output.xsd>
 
 The PHP function receives an associative array ($id function parameter)
-reflecting the structure described by the element <id\>. It returns
-another associative array reflecting the structure described by the element
-<product\>.
+reflecting the structure described by the element <id\>. It returns another
+associative array reflecting the structure described by the element <product\>.
 
 XSD
 ---
 
-The XSD is used to describe the data structure passed in during the service method call as
-well as the returned data. During runtime data is stored into a associative
-array.
+The XSD is used to describe the data structure passed in during the service
+method call as well as the returned data. During runtime data is stored into a
+associative array.
 
 **[etc/resources/product/item/input.xsd][1]**
 
@@ -175,7 +166,8 @@ array.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The sample input associative array that is passed to the service method and the sample output associative array returned by the service method are shown below.
+The sample input associative array that is passed to the service method and the
+sample output associative array returned by the service method are shown below.
 
 **Sample input**
 
