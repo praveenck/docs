@@ -104,26 +104,41 @@ logic and associated presentation logic:
 
 ### 1. Create the Service That Serves Data to Your Extension
 
-You can start by looking at an existing service, such as the Product service. Not all extensions require a new service to be created. Extensions that modify the presentation logic or the look and feel only can use existing services to obtain the data required for rendering.
+You can start by looking at an existing service, such as the Product service.
+Many extensions can just use an existing service. Extensions that modify only
+the presentation logic or the look and feel can use existing services to obtain
+the data to be rendered.
 
-Inorder to create a service, you need to first define the service using an IDL. The IDL specifies metadata for the service such as its name, version, list of methods and input/output of methods. Learn more about service IDL here: <http://magento.github.io/magento2-developer-docs/service-idl/>
+To create a service, you begin by defining the service using an IDL. The IDL
+specifies the metadata for the service such as its name, version, list of
+methods and input/output of methods. Learn more about service IDLs here:
+<http://magento.github.io/magento2-developer-docs/service-idl/>
 
-Once you have defined your service IDL, you need to implement the service. A service is implemented using a php class. The public methods of this class become available for the presentation layer to access data. Learn more by refering to the implementation of Product Service as described here: <http://magento.github.io/magento2-developer-docs/service-impl/>
+Once you have defined your service IDL, you implement the service. A service is
+implemented using a PHP class. The public methods of this class become available
+for the presentation layer to access data. You can learn more about this by
+reviewing the implementation of the Product service described here:
+<http://magento.github.io/magento2-developer-docs/service-impl/>
 
-You can also expose your service over the web to REST and SOAP interfaces. There is no implementation in the Alpha-1 release for this feature yet. However, you can get an idea as to how this would work by refering to the documentation here: [Web Services][1]
+You can also expose your service over the web to REST and SOAP interfaces. There
+is no implementation in the Alpha-1 release for this feature yet, but you can
+get an idea as to how this will work here: [Web Services][1]
 
 [1]: <http://magento.github.io/magento2-developer-docs/web-api/>
 
 ### 2. Create the Template for Your Extension
 
-To build the presentation layer functionality for your extension, you will need to create twig based templates. Find out how to use the new Twig templates for your extensions here: [Twig
-Templates][2]
+To build the presentation layer functionality for your extension, you create
+Twig templates. Find out how to use the new Twig templates for your extensions
+here: [Twig Templates][2]
 
 [2]: <http://magento.github.io/magento2-developer-docs/twig/>
 
 ### 3. Associate Template's Data to Service Methods
 
-Once you have created a service and a template, you will need to associate the template's data to one or more service methods. You do this using service calls. First, you need to declare service calls in service-calls.xml. 
+Once you have created a service and a template, you will need to associate the
+template's data to one or more service methods. You do this using service calls.
+First, you need to declare service calls in service-calls.xml.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -144,9 +159,11 @@ Once you have created a service and a template, you will need to associate the t
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-For reference, you can review the product service calls declaration here: [Product Service Calls Declaration][3]
+To see a fuller example, review the Product service calls declaration here:
+[Product Service Calls Declaration][3]
 
-Once you have declared the service calls, you need to invoke these service calls for corresponding templates in layout.xml. 
+Once you have declared a service call in service-calls.xml, you bind it with
+your extension's template in layout.xml.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -159,18 +176,20 @@ Once you have declared the service calls, you need to invoke these service calls
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-For reference, you can review the product service call invocation here: [Product Service Call Invocation][4]
+For reference, you can review the product service call invocation here: [Product
+Service Call Invocation][4]
 
 [3]: <https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/etc/service-calls.xml>
 [4]: <https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/view/frontend/layout.xml>
 
-At this point, you should have a working extension that has both presentation and business logic implemented and working together.
+At this point, you should have a working extension that has both presentation
+and business logic implemented and working together.
 
 ### 4. Configure Your Extension's Option Lists
 
-In addition to creating the presentation and business logic, you often need to accept configuration for your extension. This is ofcourse optional. To set up configuration, you can use static and dynamic options lists. Y can create these option lists by editing a system.xml file.
-
-Learn more about creating option lists here: [Extension Configuration][5]
+Your extension can now be configured. To set up configuration, you create static
+and dynamic option lists by editing a system.xml file. Learn more about setting
+up option lists here: [Extension Configuration][5]
 
 [5]: <http://praveenck.github.io/docs/option-list/>
 
