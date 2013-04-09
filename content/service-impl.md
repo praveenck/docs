@@ -42,7 +42,7 @@ The source code for Product service is [here][4]
 
 [4]: <https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/Service/Product.php>
 
-The service has a method, `item` (line 117</i>). The method takes a single
+The service has a method, `item` (<i>line 117</i>). The method takes a single
 parameter, which is the product ID, and retrieves product data in an array
 defined by the response schema.
 

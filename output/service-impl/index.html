@@ -33,8 +33,8 @@
       <div class="content">
     <h1 id="service-implementation">Service Implementation</h1>
 
-<p>This is the proposed model for implementing Magento services. Using
-a service layer with interfaces described by service IDLs provides the following
+<p>This is the proposed model for implementing Magento services. Using a service
+layer with interfaces described by service IDLs provides the following
 advantages for developing and maintaining Magento extensions:</p>
 
 <ul>
@@ -54,33 +54,41 @@ other components are restricted from directly modifying the implementation.</p>
 increases predictability and compatibility.</p>
   </li>
   <li>
-    <p>A service can be exposed as a Web API (see <a href="http://praveenck.github.io/docs/web-api/">Creating Web APIs</a>).</p>
+    <p>A service can be exposed as a Web API. To see how this is done, check out
+<a href="http://magento.github.io/magento2-developer-docs/web-api/">Creating Web APIs</a>.</p>
   </li>
 </ul>
 <ul>
 <li>The data are defined declaratively in schemas, rather than in PHP classes.</li>
 </ul>
-<h2 id="implementing-a-service">Implementing a service</h2>
+<h2 id="implementing-a-service">Implementing a Service</h2>
 
-<p>The first step in creating a service component is to define the service using the service IDL. The document <a href="http://praveenck.github.io/docs/service-idl/">here</a> describes how to define a service using the service IDL.</p>
+<p>The first step in creating a service component is to define the service using
+the service IDL.</p>
 
-<p>Assuming you have already defined a service IDL, implementing a service is very simple. A service is implemented using a php class. The public methods of this php class can be made available for the presentation layer to access data.</p>
+<p>Once you have defined a service IDL, you implement the service using a PHP
+class. You make the public methods of this PHP class available to your
+extension’s presentation layer, which uses the methods to access data.</p>
 
-<p>As an example, lets look at the Product service whose Service IDL is documented <a href="http://praveenck.github.io/docs/service-idl/">here</a>.</p>
+<p>As an example, the documentation for the Product service IDL <a href="http://magento.github.io/magento2-developer-docs/service-idl/">here</a> describes
+how to define a service using the service IDL.</p>
 
 <p>The source code for Product service is <a href="https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/Service/Product.php">here</a></p>
 
-<p>The service has a method, <code>item</code> (<i>line 117</i>). The method takes a single
+<p>The service has a method, <code>item</code> (line 117&lt;/i&gt;). The method takes a single
 parameter, which is the product ID, and retrieves product data in an array
 defined by the response schema.</p>
 
-<p>The <code>@Consumes</code> annotation names the schema for the request, and <code>@Produces</code> annotation names the schema for the response defined in the IDL.</p>
+<p>The <code>@Consumes</code> annotation names the schema for the request, and <code>@Produces</code>
+annotation names the schema for the response defined in the IDL. (By the way,
+<code>@Version</code> refers to the version of the service, not the individual call.)</p>
 
-<p><code>@Version</code> refers to the version of the service, not the individual call.</p>
+<p>The business logic for the service method is implemented using models and
+resource models.</p>
 
-<p>The business logic for the service method is implemented using models and resource models.</p>
-
-<p>Once the service has been implemented as a php class, we can make the public methods of the service available by declaring the service-calls in <a href="https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/etc/service-calls.xml">service-calls.xml</a>. Such a declaration will make the service calls available to the presentation tier components.</p>
+<p>Once you have implemented the service as a PHP class, you make the public
+methods of the service available to the presentation tier components by
+declaring the service-calls in <a href="https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/etc/service-calls.xml">service-calls.xml</a>.</p>
 
 <pre><code>
 &lt;service-calls&gt;
@@ -100,7 +108,9 @@ defined by the response schema.</p>
 
 </code></pre>
 
-<p>Once the service is implemented and its service methods are declared as service-calls, to invoke the service-call, we can include the following declaration in layout.xml</p>
+<p>Once the service is implemented and its service methods are declared as
+service-calls, you invoke the service-call by including the following
+declaration in layout.xml</p>
 
 <pre><code>
 &lt;block type="Mage_Catalog_Block_Product_Twig" module="Mage_Catalog" name="product.info"
@@ -112,9 +122,12 @@ defined by the response schema.</p>
 
 </code></pre>
 
-<p>The Product service-calls are invoked in the Catalog Product layout when rendering the templates associated with the Product View page. For details, you can refer to the <a href="https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/view/frontend/layout.xml">layout.xml</a> for Catalog Product.</p>
+<p>The Product service-calls are invoked in the Catalog Product layout when
+rendering the templates for the Product View page. For details, you can refer to
+the <a href="https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/view/frontend/layout.xml">layout.xml</a> for Catalog Product.</p>
 
-<p>Below are details of the input and output data schema for Product service item method.</p>
+<p>Below are details of the input and output data schema for Product service item
+method.</p>
 
 <h3 id="input-schema">Input Schema</h3>
 
@@ -136,7 +149,8 @@ defined by the response schema.</p>
 </table>
 <h3 id="output-schema">Output Schema</h3>
 
-<p>This schema defines the array to be returned  by the product service item method.</p>
+<p>This schema defines the array to be returned  by the product service item
+method.</p>
 
 <table style="border:1px solid black;border-collapse:collapse;">
 <tr>
