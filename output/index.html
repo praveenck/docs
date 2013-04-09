@@ -131,22 +131,37 @@ in layout.xml.</p>
 </ul>
 <h3 id="create-the-service-that-serves-data-to-your-extension">1. Create the Service That Serves Data to Your Extension</h3>
 
-<p>You can start by looking at an existing service, such as the Product service. Not all extensions require a new service to be created. Extensions that modify the presentation logic or the look and feel only can use existing services to obtain the data required for rendering.</p>
+<p>You can start by looking at an existing service, such as the Product service.
+Many extensions can just use an existing service. Extensions that modify only
+the presentation logic or the look and feel can use existing services to obtain
+the data to be rendered.</p>
 
-<p>Inorder to create a service, you need to first define the service using an IDL. The IDL specifies metadata for the service such as its name, version, list of methods and input/output of methods. Learn more about service IDL here: <a href="http://magento.github.io/magento2-developer-docs/service-idl/">http://magento.github.io/magento2-developer-docs/service-idl/</a></p>
+<p>To create a service, you begin by defining the service using an IDL. The IDL
+specifies the metadata for the service such as its name, version, list of
+methods and input/output of methods. Learn more about service IDLs here:
+<a href="http://magento.github.io/magento2-developer-docs/service-idl/">http://magento.github.io/magento2-developer-docs/service-idl/</a></p>
 
-<p>Once you have defined your service IDL, you need to implement the service. A service is implemented using a php class. The public methods of this class become available for the presentation layer to access data. Learn more by refering to the implementation of Product Service as described here: <a href="http://magento.github.io/magento2-developer-docs/service-impl/">http://magento.github.io/magento2-developer-docs/service-impl/</a></p>
+<p>Once you have defined your service IDL, you implement the service. A service is
+implemented using a PHP class. The public methods of this class become available
+for the presentation layer to access data. You can learn more about this by
+reviewing the implementation of the Product service described here:
+<a href="http://magento.github.io/magento2-developer-docs/service-impl/">http://magento.github.io/magento2-developer-docs/service-impl/</a></p>
 
-<p>You can also expose your service over the web to REST and SOAP interfaces. There is no implementation in the Alpha-1 release for this feature yet. However, you can get an idea as to how this would work by refering to the documentation here: <a href="http://magento.github.io/magento2-developer-docs/web-api/">Web Services</a></p>
+<p>You can also expose your service over the web to REST and SOAP interfaces. There
+is no implementation in the Alpha-1 release for this feature yet, but you can
+get an idea as to how this will work here: <a href="http://magento.github.io/magento2-developer-docs/web-api/">Web Services</a></p>
 
 <h3 id="create-the-template-for-your-extension">2. Create the Template for Your Extension</h3>
 
-<p>To build the presentation layer functionality for your extension, you will need to create twig based templates. Find out how to use the new Twig templates for your extensions here: <a href="http://magento.github.io/magento2-developer-docs/twig/">Twig
-Templates</a></p>
+<p>To build the presentation layer functionality for your extension, you create
+Twig templates. Find out how to use the new Twig templates for your extensions
+here: <a href="http://magento.github.io/magento2-developer-docs/twig/">Twig Templates</a></p>
 
 <h3 id="associate-templates-data-to-service-methods">3. Associate Template’s Data to Service Methods</h3>
 
-<p>Once you have created a service and a template, you will need to associate the template’s data to one or more service methods. You do this using service calls. First, you need to declare service calls in service-calls.xml. </p>
+<p>Once you have created a service and a template, you will need to associate the
+template’s data to one or more service methods. You do this using service calls.
+First, you need to declare service calls in service-calls.xml.</p>
 
 <pre><code>
 &lt;service-calls&gt;
@@ -166,9 +181,11 @@ Templates</a></p>
 
 </code></pre>
 
-<p>For reference, you can review the product service calls declaration here: <a href="https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/etc/service-calls.xml">Product Service Calls Declaration</a></p>
+<p>To see a fuller example, review the Product service calls declaration here:
+<a href="https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/etc/service-calls.xml">Product Service Calls Declaration</a></p>
 
-<p>Once you have declared the service calls, you need to invoke these service calls for corresponding templates in layout.xml. </p>
+<p>Once you have declared a service call in service-calls.xml, you bind it with
+your extension’s template in layout.xml.</p>
 
 <pre><code>
 &lt;block type="Mage_Catalog_Block_Product_Twig" module="Mage_Catalog" name="product.info"
@@ -180,15 +197,17 @@ Templates</a></p>
 
 </code></pre>
 
-<p>For reference, you can review the product service call invocation here: <a href="https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/view/frontend/layout.xml">Product Service Call Invocation</a></p>
+<p>For reference, you can review the product service call invocation here: <a href="https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/view/frontend/layout.xml">Product
+Service Call Invocation</a></p>
 
-<p>At this point, you should have a working extension that has both presentation and business logic implemented and working together.</p>
+<p>At this point, you should have a working extension that has both presentation
+and business logic implemented and working together.</p>
 
 <h3 id="configure-your-extensions-option-lists">4. Configure Your Extension’s Option Lists</h3>
 
-<p>In addition to creating the presentation and business logic, you often need to accept configuration for your extension. This is ofcourse optional. To set up configuration, you can use static and dynamic options lists. Y can create these option lists by editing a system.xml file.</p>
-
-<p>Learn more about creating option lists here: <a href="http://praveenck.github.io/docs/option-list/">Extension Configuration</a></p>
+<p>Your extension can now be configured. To set up configuration, you create static
+and dynamic option lists by editing a system.xml file. Learn more about setting
+up option lists here: <a href="http://praveenck.github.io/docs/option-list/">Extension Configuration</a></p>
       </div>
 
     <div id="js-sidebar" class="sidebar-shell">

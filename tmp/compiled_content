@@ -1,4 +1,4 @@
-{:	data{/I"/:ET{:default{	:	lastI"N:<!DOCTYPE html>
+{:	data{/I"/:ET{:default{	:	lastI"p9<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -131,22 +131,37 @@ in layout.xml.</p>
 </ul>
 <h3 id="create-the-service-that-serves-data-to-your-extension">1. Create the Service That Serves Data to Your Extension</h3>
 
-<p>You can start by looking at an existing service, such as the Product service. Not all extensions require a new service to be created. Extensions that modify the presentation logic or the look and feel only can use existing services to obtain the data required for rendering.</p>
+<p>You can start by looking at an existing service, such as the Product service.
+Many extensions can just use an existing service. Extensions that modify only
+the presentation logic or the look and feel can use existing services to obtain
+the data to be rendered.</p>
 
-<p>Inorder to create a service, you need to first define the service using an IDL. The IDL specifies metadata for the service such as its name, version, list of methods and input/output of methods. Learn more about service IDL here: <a href="http://magento.github.io/magento2-developer-docs/service-idl/">http://magento.github.io/magento2-developer-docs/service-idl/</a></p>
+<p>To create a service, you begin by defining the service using an IDL. The IDL
+specifies the metadata for the service such as its name, version, list of
+methods and input/output of methods. Learn more about service IDLs here:
+<a href="http://magento.github.io/magento2-developer-docs/service-idl/">http://magento.github.io/magento2-developer-docs/service-idl/</a></p>
 
-<p>Once you have defined your service IDL, you need to implement the service. A service is implemented using a php class. The public methods of this class become available for the presentation layer to access data. Learn more by refering to the implementation of Product Service as described here: <a href="http://magento.github.io/magento2-developer-docs/service-impl/">http://magento.github.io/magento2-developer-docs/service-impl/</a></p>
+<p>Once you have defined your service IDL, you implement the service. A service is
+implemented using a PHP class. The public methods of this class become available
+for the presentation layer to access data. You can learn more about this by
+reviewing the implementation of the Product service described here:
+<a href="http://magento.github.io/magento2-developer-docs/service-impl/">http://magento.github.io/magento2-developer-docs/service-impl/</a></p>
 
-<p>You can also expose your service over the web to REST and SOAP interfaces. There is no implementation in the Alpha-1 release for this feature yet. However, you can get an idea as to how this would work by refering to the documentation here: <a href="http://magento.github.io/magento2-developer-docs/web-api/">Web Services</a></p>
+<p>You can also expose your service over the web to REST and SOAP interfaces. There
+is no implementation in the Alpha-1 release for this feature yet, but you can
+get an idea as to how this will work here: <a href="http://magento.github.io/magento2-developer-docs/web-api/">Web Services</a></p>
 
 <h3 id="create-the-template-for-your-extension">2. Create the Template for Your Extension</h3>
 
-<p>To build the presentation layer functionality for your extension, you will need to create twig based templates. Find out how to use the new Twig templates for your extensions here: <a href="http://magento.github.io/magento2-developer-docs/twig/">Twig
-Templates</a></p>
+<p>To build the presentation layer functionality for your extension, you create
+Twig templates. Find out how to use the new Twig templates for your extensions
+here: <a href="http://magento.github.io/magento2-developer-docs/twig/">Twig Templates</a></p>
 
 <h3 id="associate-templates-data-to-service-methods">3. Associate Template’s Data to Service Methods</h3>
 
-<p>Once you have created a service and a template, you will need to associate the template’s data to one or more service methods. You do this using service calls. First, you need to declare service calls in service-calls.xml. </p>
+<p>Once you have created a service and a template, you will need to associate the
+template’s data to one or more service methods. You do this using service calls.
+First, you need to declare service calls in service-calls.xml.</p>
 
 <pre><code>
 &lt;service-calls&gt;
@@ -166,9 +181,11 @@ Templates</a></p>
 
 </code></pre>
 
-<p>For reference, you can review the product service calls declaration here: <a href="https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/etc/service-calls.xml">Product Service Calls Declaration</a></p>
+<p>To see a fuller example, review the Product service calls declaration here:
+<a href="https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/etc/service-calls.xml">Product Service Calls Declaration</a></p>
 
-<p>Once you have declared the service calls, you need to invoke these service calls for corresponding templates in layout.xml. </p>
+<p>Once you have declared a service call in service-calls.xml, you bind it with
+your extension’s template in layout.xml.</p>
 
 <pre><code>
 &lt;block type="Mage_Catalog_Block_Product_Twig" module="Mage_Catalog" name="product.info"
@@ -180,15 +197,17 @@ Templates</a></p>
 
 </code></pre>
 
-<p>For reference, you can review the product service call invocation here: <a href="https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/view/frontend/layout.xml">Product Service Call Invocation</a></p>
+<p>For reference, you can review the product service call invocation here: <a href="https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/view/frontend/layout.xml">Product
+Service Call Invocation</a></p>
 
-<p>At this point, you should have a working extension that has both presentation and business logic implemented and working together.</p>
+<p>At this point, you should have a working extension that has both presentation
+and business logic implemented and working together.</p>
 
 <h3 id="configure-your-extensions-option-lists">4. Configure Your Extension’s Option Lists</h3>
 
-<p>In addition to creating the presentation and business logic, you often need to accept configuration for your extension. This is ofcourse optional. To set up configuration, you can use static and dynamic options lists. Y can create these option lists by editing a system.xml file.</p>
-
-<p>Learn more about creating option lists here: <a href="http://praveenck.github.io/docs/option-list/">Extension Configuration</a></p>
+<p>Your extension can now be configured. To set up configuration, you create static
+and dynamic option lists by editing a system.xml file. Learn more about setting
+up option lists here: <a href="http://praveenck.github.io/docs/option-list/">Extension Configuration</a></p>
       </div>
 
     <div id="js-sidebar" class="sidebar-shell">
@@ -285,7 +304,7 @@ Templates</a></p>
     </script>
 </body>
 </html>
-;T:rawI"X#Magento 2 Extension Model Proposal: Alpha 1
+;T:rawI""Magento 2 Extension Model Proposal: Alpha 1
 ===========================================
 
 As part of the overall goal of better modularity in Magento 2, we're introducing
@@ -391,26 +410,41 @@ logic and associated presentation logic:
 
 ### 1. Create the Service That Serves Data to Your Extension
 
-You can start by looking at an existing service, such as the Product service. Not all extensions require a new service to be created. Extensions that modify the presentation logic or the look and feel only can use existing services to obtain the data required for rendering.
+You can start by looking at an existing service, such as the Product service.
+Many extensions can just use an existing service. Extensions that modify only
+the presentation logic or the look and feel can use existing services to obtain
+the data to be rendered.
 
-Inorder to create a service, you need to first define the service using an IDL. The IDL specifies metadata for the service such as its name, version, list of methods and input/output of methods. Learn more about service IDL here: <http://magento.github.io/magento2-developer-docs/service-idl/>
+To create a service, you begin by defining the service using an IDL. The IDL
+specifies the metadata for the service such as its name, version, list of
+methods and input/output of methods. Learn more about service IDLs here:
+<http://magento.github.io/magento2-developer-docs/service-idl/>
 
-Once you have defined your service IDL, you need to implement the service. A service is implemented using a php class. The public methods of this class become available for the presentation layer to access data. Learn more by refering to the implementation of Product Service as described here: <http://magento.github.io/magento2-developer-docs/service-impl/>
+Once you have defined your service IDL, you implement the service. A service is
+implemented using a PHP class. The public methods of this class become available
+for the presentation layer to access data. You can learn more about this by
+reviewing the implementation of the Product service described here:
+<http://magento.github.io/magento2-developer-docs/service-impl/>
 
-You can also expose your service over the web to REST and SOAP interfaces. There is no implementation in the Alpha-1 release for this feature yet. However, you can get an idea as to how this would work by refering to the documentation here: [Web Services][1]
+You can also expose your service over the web to REST and SOAP interfaces. There
+is no implementation in the Alpha-1 release for this feature yet, but you can
+get an idea as to how this will work here: [Web Services][1]
 
 [1]: <http://magento.github.io/magento2-developer-docs/web-api/>
 
 ### 2. Create the Template for Your Extension
 
-To build the presentation layer functionality for your extension, you will need to create twig based templates. Find out how to use the new Twig templates for your extensions here: [Twig
-Templates][2]
+To build the presentation layer functionality for your extension, you create
+Twig templates. Find out how to use the new Twig templates for your extensions
+here: [Twig Templates][2]
 
 [2]: <http://magento.github.io/magento2-developer-docs/twig/>
 
 ### 3. Associate Template's Data to Service Methods
 
-Once you have created a service and a template, you will need to associate the template's data to one or more service methods. You do this using service calls. First, you need to declare service calls in service-calls.xml. 
+Once you have created a service and a template, you will need to associate the
+template's data to one or more service methods. You do this using service calls.
+First, you need to declare service calls in service-calls.xml.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -431,9 +465,11 @@ Once you have created a service and a template, you will need to associate the t
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-For reference, you can review the product service calls declaration here: [Product Service Calls Declaration][3]
+To see a fuller example, review the Product service calls declaration here:
+[Product Service Calls Declaration][3]
 
-Once you have declared the service calls, you need to invoke these service calls for corresponding templates in layout.xml. 
+Once you have declared a service call in service-calls.xml, you bind it with
+your extension's template in layout.xml.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -446,22 +482,24 @@ Once you have declared the service calls, you need to invoke these service calls
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-For reference, you can review the product service call invocation here: [Product Service Call Invocation][4]
+For reference, you can review the product service call invocation here: [Product
+Service Call Invocation][4]
 
 [3]: <https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/etc/service-calls.xml>
 [4]: <https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/view/frontend/layout.xml>
 
-At this point, you should have a working extension that has both presentation and business logic implemented and working together.
+At this point, you should have a working extension that has both presentation
+and business logic implemented and working together.
 
 ### 4. Configure Your Extension's Option Lists
 
-In addition to creating the presentation and business logic, you often need to accept configuration for your extension. This is ofcourse optional. To set up configuration, you can use static and dynamic options lists. Y can create these option lists by editing a system.xml file.
-
-Learn more about creating option lists here: [Extension Configuration][5]
+Your extension can now be configured. To set up configuration, you create static
+and dynamic option lists by editing a system.xml file. Learn more about setting
+up option lists here: [Extension Configuration][5]
 
 [5]: <http://praveenck.github.io/docs/option-list/>
 
-;T:preI"�%<h1 id="magento-2-extension-model-proposal-alpha-1">Magento 2 Extension Model Proposal: Alpha 1</h1>
+;T:preI"�$<h1 id="magento-2-extension-model-proposal-alpha-1">Magento 2 Extension Model Proposal: Alpha 1</h1>
 
 <p>As part of the overall goal of better modularity in Magento 2, we’re introducing
 support for a few new ideas in the recent push to the Github repository.  A
@@ -560,22 +598,37 @@ in layout.xml.</p>
   </li>
 </ul><h3 id="create-the-service-that-serves-data-to-your-extension">1. Create the Service That Serves Data to Your Extension</h3>
 
-<p>You can start by looking at an existing service, such as the Product service. Not all extensions require a new service to be created. Extensions that modify the presentation logic or the look and feel only can use existing services to obtain the data required for rendering.</p>
+<p>You can start by looking at an existing service, such as the Product service.
+Many extensions can just use an existing service. Extensions that modify only
+the presentation logic or the look and feel can use existing services to obtain
+the data to be rendered.</p>
 
-<p>Inorder to create a service, you need to first define the service using an IDL. The IDL specifies metadata for the service such as its name, version, list of methods and input/output of methods. Learn more about service IDL here: <a href="http://magento.github.io/magento2-developer-docs/service-idl/">http://magento.github.io/magento2-developer-docs/service-idl/</a></p>
+<p>To create a service, you begin by defining the service using an IDL. The IDL
+specifies the metadata for the service such as its name, version, list of
+methods and input/output of methods. Learn more about service IDLs here:
+<a href="http://magento.github.io/magento2-developer-docs/service-idl/">http://magento.github.io/magento2-developer-docs/service-idl/</a></p>
 
-<p>Once you have defined your service IDL, you need to implement the service. A service is implemented using a php class. The public methods of this class become available for the presentation layer to access data. Learn more by refering to the implementation of Product Service as described here: <a href="http://magento.github.io/magento2-developer-docs/service-impl/">http://magento.github.io/magento2-developer-docs/service-impl/</a></p>
+<p>Once you have defined your service IDL, you implement the service. A service is
+implemented using a PHP class. The public methods of this class become available
+for the presentation layer to access data. You can learn more about this by
+reviewing the implementation of the Product service described here:
+<a href="http://magento.github.io/magento2-developer-docs/service-impl/">http://magento.github.io/magento2-developer-docs/service-impl/</a></p>
 
-<p>You can also expose your service over the web to REST and SOAP interfaces. There is no implementation in the Alpha-1 release for this feature yet. However, you can get an idea as to how this would work by refering to the documentation here: <a href="http://magento.github.io/magento2-developer-docs/web-api/">Web Services</a></p>
+<p>You can also expose your service over the web to REST and SOAP interfaces. There
+is no implementation in the Alpha-1 release for this feature yet, but you can
+get an idea as to how this will work here: <a href="http://magento.github.io/magento2-developer-docs/web-api/">Web Services</a></p>
 
 <h3 id="create-the-template-for-your-extension">2. Create the Template for Your Extension</h3>
 
-<p>To build the presentation layer functionality for your extension, you will need to create twig based templates. Find out how to use the new Twig templates for your extensions here: <a href="http://magento.github.io/magento2-developer-docs/twig/">Twig
-Templates</a></p>
+<p>To build the presentation layer functionality for your extension, you create
+Twig templates. Find out how to use the new Twig templates for your extensions
+here: <a href="http://magento.github.io/magento2-developer-docs/twig/">Twig Templates</a></p>
 
 <h3 id="associate-templates-data-to-service-methods">3. Associate Template’s Data to Service Methods</h3>
 
-<p>Once you have created a service and a template, you will need to associate the template’s data to one or more service methods. You do this using service calls. First, you need to declare service calls in service-calls.xml. </p>
+<p>Once you have created a service and a template, you will need to associate the
+template’s data to one or more service methods. You do this using service calls.
+First, you need to declare service calls in service-calls.xml.</p>
 
 <pre><code>
 &lt;service-calls&gt;
@@ -595,9 +648,11 @@ Templates</a></p>
 
 </code></pre>
 
-<p>For reference, you can review the product service calls declaration here: <a href="https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/etc/service-calls.xml">Product Service Calls Declaration</a></p>
+<p>To see a fuller example, review the Product service calls declaration here:
+<a href="https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/etc/service-calls.xml">Product Service Calls Declaration</a></p>
 
-<p>Once you have declared the service calls, you need to invoke these service calls for corresponding templates in layout.xml. </p>
+<p>Once you have declared a service call in service-calls.xml, you bind it with
+your extension’s template in layout.xml.</p>
 
 <pre><code>
 &lt;block type="Mage_Catalog_Block_Product_Twig" module="Mage_Catalog" name="product.info"
@@ -609,15 +664,17 @@ Templates</a></p>
 
 </code></pre>
 
-<p>For reference, you can review the product service call invocation here: <a href="https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/view/frontend/layout.xml">Product Service Call Invocation</a></p>
+<p>For reference, you can review the product service call invocation here: <a href="https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/view/frontend/layout.xml">Product
+Service Call Invocation</a></p>
 
-<p>At this point, you should have a working extension that has both presentation and business logic implemented and working together.</p>
+<p>At this point, you should have a working extension that has both presentation
+and business logic implemented and working together.</p>
 
 <h3 id="configure-your-extensions-option-lists">4. Configure Your Extension’s Option Lists</h3>
 
-<p>In addition to creating the presentation and business logic, you often need to accept configuration for your extension. This is ofcourse optional. To set up configuration, you can use static and dynamic options lists. Y can create these option lists by editing a system.xml file.</p>
-
-<p>Learn more about creating option lists here: <a href="http://praveenck.github.io/docs/option-list/">Extension Configuration</a></p>;T:	post@
+<p>Your extension can now be configured. To set up configuration, you create static
+and dynamic option lists by editing a system.xml file. Learn more about setting
+up option lists here: <a href="http://praveenck.github.io/docs/option-list/">Extension Configuration</a></p>;T:	post@
 I"/option-list/;T{;{	;I"*2<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1489,7 +1546,7 @@ groups: {
 &lt;option value="2"&gt;Wholesale&lt;/option&gt;
 &lt;option value="3"&gt;Retailer&lt;/option&gt;
 
-</code></pre>;T;@I"/service-idl/;T{;{	;I"�B<!DOCTYPE html>
+</code></pre>;T;@I"/service-idl/;T{;{	;I"O/<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -1604,39 +1661,45 @@ single class.</p>
 
 <pre><code>
 /**
-@Service shipping
- * @Version 2
-*/
-
-class ShippingService extends MageService 
+ * @Service product
+ * @Version 1.0
+ * @Path /products
+ */
+class Mage_Catalog_Service_Product
 {
-
-    /**
-     * @Permissions [shipping, inventory]
-     * @Consumes (schema="shipping.xsd", element="getCarriersRequest")
-     * @Produces (schema="shipping.xsd", element="getCarriersResponse")
-     */
-
-    public function getCarriers ($params)
-    {
-
-    ...
-
-    }
+	/**
+     * Returns info about one particular product.
+     *
+     * @Type call
+     * @Method GET
+     * @Path /:id
+     * @Bindings [REST]
+     * @Consumes (schema="etc/resources/product/item/input.xsd", element="id")
+     * @Produces (schema="etc/resources/product/item/output.xsd", element="product")
+     * @param int $id
+     * @return array
+     */
+    public function item($id)
+    {
+        $this-&gt;_getObject($id);
+        $data = $this-&gt;getProduct($id);
+        $data = array_merge($data, $this-&gt;getAdditionalDetails($id));
+        return $data;
+    }
 }
 
 </code></pre>
 
 <p>Here, the input data structure is identified in the @Consumes annotation as
-belonging to the &lt;getCarriersRequest&gt; element in shipping/consumerux.xsd, and the
+belonging to the &lt;id&gt; element in <a href="https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/etc/resources/product/item/input.xsd">input.xsd</a>, and the
 output data structure is identified in the @Produces annotation as belonging to
-the &lt;getCarriersResponse&gt; element in shipping/consumerux.xsd. The shipping/consumerux.xsd file is
+the &lt;product&gt; element in <a href="https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/etc/resources/product/item/output.xsd">output.xsd</a>. The shipping/consumerux.xsd file is
 shown below.</p>
 
-<p>The PHP function receives an associative array ($params function parameter)
-reflecting the structure described by the element &lt;getCarriersRequest&gt;. It returns
+<p>The PHP function receives an associative array ($id function parameter)
+reflecting the structure described by the element &lt;id&gt;. It returns
 another associative array reflecting the structure described by the element
-&lt;getCarriersResponse&gt;.</p>
+&lt;product&gt;.</p>
 
 <h2 id="xsd">XSD</h2>
 
@@ -1644,119 +1707,56 @@ another associative array reflecting the structure described by the element
 well as the returned data. During runtime data is stored into a associative
 array.</p>
 
-<p><strong>shipping/consumerux.xsd</strong></p>
+<p><strong><a href="https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/etc/resources/product/item/input.xsd">etc/resources/product/item/input.xsd</a></strong></p>
 
 <pre><code>
-&lt;?xml version="1.0"?&gt;
 &lt;xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"&gt;
-
-    &lt;xs:complexType name="address_type"&gt;
-        &lt;xs:sequence&gt;
-            &lt;xs:element name="street" type="xs:string"/&gt;
-            &lt;xs:element name="city" type="xs:string"/&gt;
-            &lt;xs:element name="region_id" type="xs:integer"/&gt;
-            &lt;xs:element name="country_id" type="xs:string"/&gt;
-            &lt;xs:element name="postcode" type="xs:integer"/&gt;
-            &lt;xs:element name="meta_data" minOccurs="0"&gt;
-                &lt;xs:complexType&gt;
-                    &lt;xs:sequence&gt;
-                        &lt;xs:element name="lift_gate_required" type="xs:boolean" minOccurs="0"/&gt;
-                    &lt;/xs:sequence&gt;
-                &lt;/xs:complexType&gt;
-            &lt;/xs:element&gt;
-        &lt;/xs:sequence&gt;
-    &lt;/xs:complexType&gt;
-
-    &lt;xs:complexType name="item_type"&gt;
-        &lt;xs:sequence&gt;
-            &lt;xs:element name="sku" type="xs:integer"/&gt;
-            &lt;xs:element name="name" type="xs:string"/&gt;
-            &lt;xs:element name="value" type="xs:string"/&gt;
-            &lt;xs:element name="weight" type="xs:string"/&gt;
-            &lt;xs:element name="height" type="xs:string"/&gt;
-            &lt;xs:element name="width" type="xs:string"/&gt;
-            &lt;xs:element name="depth" type="xs:string"/&gt;
-            &lt;xs:element name="qty" type="xs:integer"/&gt;
-            &lt;xs:element name="free_shipping" type="xs:boolean"/&gt;
-            &lt;xs:element name="meta_data"&gt;
-                &lt;xs:complexType&gt;
-                    &lt;xs:sequence&gt;
-                        &lt;xs:element name="hazard" type="xs:boolean" minOccurs="0"/&gt;
-                    &lt;/xs:sequence&gt;
-                &lt;/xs:complexType&gt;
-            &lt;/xs:element&gt;
-            &lt;xs:element name="parent" minOccurs="0"&gt;
-                &lt;xs:complexType&gt;
-                    &lt;xs:sequence&gt;
-                        &lt;xs:element name="item" type="item_type"/&gt;
-                    &lt;/xs:sequence&gt;
-                &lt;/xs:complexType&gt;
-            &lt;/xs:element&gt;
-            &lt;xs:element name="children" minOccurs="0"&gt;
-                &lt;xs:complexType&gt;
-                    &lt;xs:sequence&gt;
-                        &lt;xs:element name="item" type="item_type" /&gt;
-                    &lt;/xs:sequence&gt;
-                &lt;/xs:complexType&gt;
-            &lt;/xs:element&gt;
-        &lt;/xs:sequence&gt;
-    &lt;/xs:complexType&gt;
-
-    &lt;xs:element name="getCarriersRequest"&gt;
-        &lt;xs:complexType&gt;
-            &lt;xs:sequence&gt;
-                &lt;xs:element name="rate_request"&gt;
-                    &lt;xs:complexType&gt;
-                        &lt;xs:sequence&gt;
-                            &lt;xs:element name="orig" type="address_type"/&gt;
-                            &lt;xs:element name="dest" type="address_type"/&gt;
-                            &lt;xs:element name="list_of_items"&gt;
-                                &lt;xs:complexType&gt;
-                                    &lt;xs:sequence maxOccurs="unbounded"&gt;
-                                        &lt;xs:element name="item" type="item_type" /&gt;
-                                    &lt;/xs:sequence&gt;
-                                &lt;/xs:complexType&gt;
-                            &lt;/xs:element&gt;
-                            &lt;xs:element name="carrier_configuration" maxOccurs="1"&gt;
-                                &lt;xs:complexType&gt;
-                                    &lt;xs:sequence&gt;
-                                        &lt;xs:element name="insurance" type="xs:boolean"/&gt;
-                                        &lt;xs:element name="handling" type="xs:string"/&gt;
-                                        &lt;xs:element name="pickup" type="xs:string"/&gt;
-                                    &lt;/xs:sequence&gt;
-                                &lt;/xs:complexType&gt;
-                            &lt;/xs:element&gt;
-                        &lt;/xs:sequence&gt;
-                    &lt;/xs:complexType&gt;
-                &lt;/xs:element&gt;
-            &lt;/xs:sequence&gt;
-        &lt;/xs:complexType&gt;
-    &lt;/xs:element&gt;
-
-    &lt;xs:complexType name="method_type"&gt;
-        &lt;xs:sequence&gt;
-            &lt;xs:element name="carrier" type="xs:string"/&gt;
-            &lt;xs:element name="carrier_title" type="xs:string"/&gt;
-            &lt;xs:element name="method" type="xs:string"/&gt;
-            &lt;xs:element name="method_title" type="xs:string"/&gt;
-            &lt;xs:element name="price" type="xs:string"/&gt;
-        &lt;/xs:sequence&gt;
-    &lt;/xs:complexType&gt;
-
-    &lt;xs:element name="getCarriersResponse"&gt;
-        &lt;xs:complexType&gt;
-            &lt;xs:sequence&gt;
-                &lt;xs:element name="shipping_methods"&gt;
-                    &lt;xs:complexType&gt;
-                        &lt;xs:sequence maxOccurs="unbounded"&gt;
-                            &lt;xs:element name="method" type="method_type" /&gt;
-                        &lt;/xs:sequence&gt;
-                    &lt;/xs:complexType&gt;
-                &lt;/xs:element&gt;
-            &lt;/xs:sequence&gt;
-        &lt;/xs:complexType&gt;
-    &lt;/xs:element&gt;
+    &lt;xs:element name="id" type="xs:integer"/&gt;
 &lt;/xs:schema&gt;
+
+</code></pre>
+
+<p><strong><a href="https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/etc/resources/product/item/output.xsd">etc/resources/product/item/output.xsd</a></strong></p>
+
+<pre><code>
+&lt;xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:mage="http://www.magento.com"&gt;
+    &lt;xs:complexType name="product"&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:element name="entityId" type="xs:integer" /&gt;
+            &lt;xs:element name="sku"&gt;
+                &lt;xs:simpleType&gt;
+                    &lt;xs:restriction base="xs:string"&gt;
+                        &lt;xs:maxLength value="64"/&gt;
+                    &lt;/xs:restriction&gt;
+                &lt;/xs:simpleType&gt;
+            &lt;/xs:element&gt;
+            &lt;xs:element name="name" type="xs:string"/&gt;
+            &lt;xs:element name="description" type="xs:string"/&gt;
+            &lt;xs:element name="shortDescription" type="xs:string"/&gt;
+            &lt;xs:element name="price" type="mage:price"/&gt;
+        &lt;/xs:sequence&gt;
+        ...
+        ...
+        ...
+    &lt;/xs:complexType&gt;
+&lt;/xs:schema&gt;
+
+</code></pre>
+
+<p>The sample input associative array that is passed to the service method and the sample output associative array returned by the service method are shown below.</p>
+
+<p>** Sample input **</p>
+
+<pre><code>
+
+
+</code></pre>
+
+<p>** Sample output **</p>
+
+<pre><code>
+
 
 </code></pre>
       </div>
@@ -1855,7 +1855,7 @@ array.</p>
     </script>
 </body>
 </html>
-;T;	I",Service IDL
+;T;	I"�Service IDL
 ===========
 
 The proposed new architecture consolidates all of an extension's business into a
@@ -1943,39 +1943,48 @@ single class.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 /**
-@Service shipping
- * @Version 2
-*/
-
-class ShippingService extends MageService 
+ * @Service product
+ * @Version 1.0
+ * @Path /products
+ */
+class Mage_Catalog_Service_Product
 {
-
-    /**
-     * @Permissions [shipping, inventory]
-     * @Consumes (schema="shipping.xsd", element="getCarriersRequest")
-     * @Produces (schema="shipping.xsd", element="getCarriersResponse")
-     */
-
-    public function getCarriers ($params)
-    {
-
-    ...
-
-    }
+	/**
+     * Returns info about one particular product.
+     *
+     * @Type call
+     * @Method GET
+     * @Path /:id
+     * @Bindings [REST]
+     * @Consumes (schema="etc/resources/product/item/input.xsd", element="id")
+     * @Produces (schema="etc/resources/product/item/output.xsd", element="product")
+     * @param int $id
+     * @return array
+     */
+    public function item($id)
+    {
+        $this->_getObject($id);
+        $data = $this->getProduct($id);
+        $data = array_merge($data, $this->getAdditionalDetails($id));
+        return $data;
+    }
 }
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Here, the input data structure is identified in the @Consumes annotation as
-belonging to the <getCarriersRequest\> element in shipping/consumerux.xsd, and the
+belonging to the <id\> element in [input.xsd][1], and the
 output data structure is identified in the @Produces annotation as belonging to
-the <getCarriersResponse\> element in shipping/consumerux.xsd. The shipping/consumerux.xsd file is
+the <product\> element in [output.xsd][2]. The shipping/consumerux.xsd file is
 shown below.
 
-The PHP function receives an associative array ($params function parameter)
-reflecting the structure described by the element <getCarriersRequest\>. It returns
+[1]: <https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/etc/resources/product/item/input.xsd>
+[2]: <https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/etc/resources/product/item/output.xsd>
+
+The PHP function receives an associative array ($id function parameter)
+reflecting the structure described by the element <id\>. It returns
 another associative array reflecting the structure described by the element
-<getCarriersResponse\>.
+<product\>.
 
 XSD
 ---
@@ -1984,125 +1993,65 @@ The XSD is used to describe the data structure passed in during the API call as
 well as the returned data. During runtime data is stored into a associative
 array.
 
-**shipping/consumerux.xsd**
+**[etc/resources/product/item/input.xsd][1]**
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-<?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
-
-    <xs:complexType name="address_type">
-        <xs:sequence>
-            <xs:element name="street" type="xs:string"/>
-            <xs:element name="city" type="xs:string"/>
-            <xs:element name="region_id" type="xs:integer"/>
-            <xs:element name="country_id" type="xs:string"/>
-            <xs:element name="postcode" type="xs:integer"/>
-            <xs:element name="meta_data" minOccurs="0">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="lift_gate_required" type="xs:boolean" minOccurs="0"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-        </xs:sequence>
-    </xs:complexType>
-
-    <xs:complexType name="item_type">
-        <xs:sequence>
-            <xs:element name="sku" type="xs:integer"/>
-            <xs:element name="name" type="xs:string"/>
-            <xs:element name="value" type="xs:string"/>
-            <xs:element name="weight" type="xs:string"/>
-            <xs:element name="height" type="xs:string"/>
-            <xs:element name="width" type="xs:string"/>
-            <xs:element name="depth" type="xs:string"/>
-            <xs:element name="qty" type="xs:integer"/>
-            <xs:element name="free_shipping" type="xs:boolean"/>
-            <xs:element name="meta_data">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="hazard" type="xs:boolean" minOccurs="0"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="parent" minOccurs="0">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="item" type="item_type"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="children" minOccurs="0">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="item" type="item_type" />
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-        </xs:sequence>
-    </xs:complexType>
-
-    <xs:element name="getCarriersRequest">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element name="rate_request">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element name="orig" type="address_type"/>
-                            <xs:element name="dest" type="address_type"/>
-                            <xs:element name="list_of_items">
-                                <xs:complexType>
-                                    <xs:sequence maxOccurs="unbounded">
-                                        <xs:element name="item" type="item_type" />
-                                    </xs:sequence>
-                                </xs:complexType>
-                            </xs:element>
-                            <xs:element name="carrier_configuration" maxOccurs="1">
-                                <xs:complexType>
-                                    <xs:sequence>
-                                        <xs:element name="insurance" type="xs:boolean"/>
-                                        <xs:element name="handling" type="xs:string"/>
-                                        <xs:element name="pickup" type="xs:string"/>
-                                    </xs:sequence>
-                                </xs:complexType>
-                            </xs:element>
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
-
-    <xs:complexType name="method_type">
-        <xs:sequence>
-            <xs:element name="carrier" type="xs:string"/>
-            <xs:element name="carrier_title" type="xs:string"/>
-            <xs:element name="method" type="xs:string"/>
-            <xs:element name="method_title" type="xs:string"/>
-            <xs:element name="price" type="xs:string"/>
-        </xs:sequence>
-    </xs:complexType>
-
-    <xs:element name="getCarriersResponse">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element name="shipping_methods">
-                    <xs:complexType>
-                        <xs:sequence maxOccurs="unbounded">
-                            <xs:element name="method" type="method_type" />
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
+    <xs:element name="id" type="xs:integer"/>
 </xs:schema>
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+**[etc/resources/product/item/output.xsd][2]**
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:mage="http://www.magento.com">
+    <xs:complexType name="product">
+        <xs:sequence>
+            <xs:element name="entityId" type="xs:integer" />
+            <xs:element name="sku">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:maxLength value="64"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="description" type="xs:string"/>
+            <xs:element name="shortDescription" type="xs:string"/>
+            <xs:element name="price" type="mage:price"/>
+        </xs:sequence>
+        ...
+        ...
+        ...
+    </xs:complexType>
+</xs:schema>
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The sample input associative array that is passed to the service method and the sample output associative array returned by the service method are shown below.
+
+** Sample input **
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+** Sample output **
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 ;T;
-I"!.<h1 id="service-idl">Service IDL</h1>
+I"�<h1 id="service-idl">Service IDL</h1>
 
 <p>The proposed new architecture consolidates all of an extension’s business into a
 service layer. Presented here is an Interface Definition Language specification
@@ -2182,39 +2131,45 @@ single class.</p>
 
 <pre><code>
 /**
-@Service shipping
- * @Version 2
-*/
-
-class ShippingService extends MageService 
+ * @Service product
+ * @Version 1.0
+ * @Path /products
+ */
+class Mage_Catalog_Service_Product
 {
-
-    /**
-     * @Permissions [shipping, inventory]
-     * @Consumes (schema="shipping.xsd", element="getCarriersRequest")
-     * @Produces (schema="shipping.xsd", element="getCarriersResponse")
-     */
-
-    public function getCarriers ($params)
-    {
-
-    ...
-
-    }
+	/**
+     * Returns info about one particular product.
+     *
+     * @Type call
+     * @Method GET
+     * @Path /:id
+     * @Bindings [REST]
+     * @Consumes (schema="etc/resources/product/item/input.xsd", element="id")
+     * @Produces (schema="etc/resources/product/item/output.xsd", element="product")
+     * @param int $id
+     * @return array
+     */
+    public function item($id)
+    {
+        $this-&gt;_getObject($id);
+        $data = $this-&gt;getProduct($id);
+        $data = array_merge($data, $this-&gt;getAdditionalDetails($id));
+        return $data;
+    }
 }
 
 </code></pre>
 
 <p>Here, the input data structure is identified in the @Consumes annotation as
-belonging to the &lt;getCarriersRequest&gt; element in shipping/consumerux.xsd, and the
+belonging to the &lt;id&gt; element in <a href="https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/etc/resources/product/item/input.xsd">input.xsd</a>, and the
 output data structure is identified in the @Produces annotation as belonging to
-the &lt;getCarriersResponse&gt; element in shipping/consumerux.xsd. The shipping/consumerux.xsd file is
+the &lt;product&gt; element in <a href="https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/etc/resources/product/item/output.xsd">output.xsd</a>. The shipping/consumerux.xsd file is
 shown below.</p>
 
-<p>The PHP function receives an associative array ($params function parameter)
-reflecting the structure described by the element &lt;getCarriersRequest&gt;. It returns
+<p>The PHP function receives an associative array ($id function parameter)
+reflecting the structure described by the element &lt;id&gt;. It returns
 another associative array reflecting the structure described by the element
-&lt;getCarriersResponse&gt;.</p>
+&lt;product&gt;.</p>
 
 <h2 id="xsd">XSD</h2>
 
@@ -2222,119 +2177,56 @@ another associative array reflecting the structure described by the element
 well as the returned data. During runtime data is stored into a associative
 array.</p>
 
-<p><strong>shipping/consumerux.xsd</strong></p>
+<p><strong><a href="https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/etc/resources/product/item/input.xsd">etc/resources/product/item/input.xsd</a></strong></p>
 
 <pre><code>
-&lt;?xml version="1.0"?&gt;
 &lt;xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"&gt;
-
-    &lt;xs:complexType name="address_type"&gt;
-        &lt;xs:sequence&gt;
-            &lt;xs:element name="street" type="xs:string"/&gt;
-            &lt;xs:element name="city" type="xs:string"/&gt;
-            &lt;xs:element name="region_id" type="xs:integer"/&gt;
-            &lt;xs:element name="country_id" type="xs:string"/&gt;
-            &lt;xs:element name="postcode" type="xs:integer"/&gt;
-            &lt;xs:element name="meta_data" minOccurs="0"&gt;
-                &lt;xs:complexType&gt;
-                    &lt;xs:sequence&gt;
-                        &lt;xs:element name="lift_gate_required" type="xs:boolean" minOccurs="0"/&gt;
-                    &lt;/xs:sequence&gt;
-                &lt;/xs:complexType&gt;
-            &lt;/xs:element&gt;
-        &lt;/xs:sequence&gt;
-    &lt;/xs:complexType&gt;
-
-    &lt;xs:complexType name="item_type"&gt;
-        &lt;xs:sequence&gt;
-            &lt;xs:element name="sku" type="xs:integer"/&gt;
-            &lt;xs:element name="name" type="xs:string"/&gt;
-            &lt;xs:element name="value" type="xs:string"/&gt;
-            &lt;xs:element name="weight" type="xs:string"/&gt;
-            &lt;xs:element name="height" type="xs:string"/&gt;
-            &lt;xs:element name="width" type="xs:string"/&gt;
-            &lt;xs:element name="depth" type="xs:string"/&gt;
-            &lt;xs:element name="qty" type="xs:integer"/&gt;
-            &lt;xs:element name="free_shipping" type="xs:boolean"/&gt;
-            &lt;xs:element name="meta_data"&gt;
-                &lt;xs:complexType&gt;
-                    &lt;xs:sequence&gt;
-                        &lt;xs:element name="hazard" type="xs:boolean" minOccurs="0"/&gt;
-                    &lt;/xs:sequence&gt;
-                &lt;/xs:complexType&gt;
-            &lt;/xs:element&gt;
-            &lt;xs:element name="parent" minOccurs="0"&gt;
-                &lt;xs:complexType&gt;
-                    &lt;xs:sequence&gt;
-                        &lt;xs:element name="item" type="item_type"/&gt;
-                    &lt;/xs:sequence&gt;
-                &lt;/xs:complexType&gt;
-            &lt;/xs:element&gt;
-            &lt;xs:element name="children" minOccurs="0"&gt;
-                &lt;xs:complexType&gt;
-                    &lt;xs:sequence&gt;
-                        &lt;xs:element name="item" type="item_type" /&gt;
-                    &lt;/xs:sequence&gt;
-                &lt;/xs:complexType&gt;
-            &lt;/xs:element&gt;
-        &lt;/xs:sequence&gt;
-    &lt;/xs:complexType&gt;
-
-    &lt;xs:element name="getCarriersRequest"&gt;
-        &lt;xs:complexType&gt;
-            &lt;xs:sequence&gt;
-                &lt;xs:element name="rate_request"&gt;
-                    &lt;xs:complexType&gt;
-                        &lt;xs:sequence&gt;
-                            &lt;xs:element name="orig" type="address_type"/&gt;
-                            &lt;xs:element name="dest" type="address_type"/&gt;
-                            &lt;xs:element name="list_of_items"&gt;
-                                &lt;xs:complexType&gt;
-                                    &lt;xs:sequence maxOccurs="unbounded"&gt;
-                                        &lt;xs:element name="item" type="item_type" /&gt;
-                                    &lt;/xs:sequence&gt;
-                                &lt;/xs:complexType&gt;
-                            &lt;/xs:element&gt;
-                            &lt;xs:element name="carrier_configuration" maxOccurs="1"&gt;
-                                &lt;xs:complexType&gt;
-                                    &lt;xs:sequence&gt;
-                                        &lt;xs:element name="insurance" type="xs:boolean"/&gt;
-                                        &lt;xs:element name="handling" type="xs:string"/&gt;
-                                        &lt;xs:element name="pickup" type="xs:string"/&gt;
-                                    &lt;/xs:sequence&gt;
-                                &lt;/xs:complexType&gt;
-                            &lt;/xs:element&gt;
-                        &lt;/xs:sequence&gt;
-                    &lt;/xs:complexType&gt;
-                &lt;/xs:element&gt;
-            &lt;/xs:sequence&gt;
-        &lt;/xs:complexType&gt;
-    &lt;/xs:element&gt;
-
-    &lt;xs:complexType name="method_type"&gt;
-        &lt;xs:sequence&gt;
-            &lt;xs:element name="carrier" type="xs:string"/&gt;
-            &lt;xs:element name="carrier_title" type="xs:string"/&gt;
-            &lt;xs:element name="method" type="xs:string"/&gt;
-            &lt;xs:element name="method_title" type="xs:string"/&gt;
-            &lt;xs:element name="price" type="xs:string"/&gt;
-        &lt;/xs:sequence&gt;
-    &lt;/xs:complexType&gt;
-
-    &lt;xs:element name="getCarriersResponse"&gt;
-        &lt;xs:complexType&gt;
-            &lt;xs:sequence&gt;
-                &lt;xs:element name="shipping_methods"&gt;
-                    &lt;xs:complexType&gt;
-                        &lt;xs:sequence maxOccurs="unbounded"&gt;
-                            &lt;xs:element name="method" type="method_type" /&gt;
-                        &lt;/xs:sequence&gt;
-                    &lt;/xs:complexType&gt;
-                &lt;/xs:element&gt;
-            &lt;/xs:sequence&gt;
-        &lt;/xs:complexType&gt;
-    &lt;/xs:element&gt;
+    &lt;xs:element name="id" type="xs:integer"/&gt;
 &lt;/xs:schema&gt;
+
+</code></pre>
+
+<p><strong><a href="https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/etc/resources/product/item/output.xsd">etc/resources/product/item/output.xsd</a></strong></p>
+
+<pre><code>
+&lt;xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:mage="http://www.magento.com"&gt;
+    &lt;xs:complexType name="product"&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:element name="entityId" type="xs:integer" /&gt;
+            &lt;xs:element name="sku"&gt;
+                &lt;xs:simpleType&gt;
+                    &lt;xs:restriction base="xs:string"&gt;
+                        &lt;xs:maxLength value="64"/&gt;
+                    &lt;/xs:restriction&gt;
+                &lt;/xs:simpleType&gt;
+            &lt;/xs:element&gt;
+            &lt;xs:element name="name" type="xs:string"/&gt;
+            &lt;xs:element name="description" type="xs:string"/&gt;
+            &lt;xs:element name="shortDescription" type="xs:string"/&gt;
+            &lt;xs:element name="price" type="mage:price"/&gt;
+        &lt;/xs:sequence&gt;
+        ...
+        ...
+        ...
+    &lt;/xs:complexType&gt;
+&lt;/xs:schema&gt;
+
+</code></pre>
+
+<p>The sample input associative array that is passed to the service method and the sample output associative array returned by the service method are shown below.</p>
+
+<p>** Sample input **</p>
+
+<pre><code>
+
+
+</code></pre>
+
+<p>** Sample output **</p>
+
+<pre><code>
+
 
 </code></pre>;T;@I"/service-impl/;T{;{	;I"<!DOCTYPE html>
 <html lang="en">
