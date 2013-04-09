@@ -1,12 +1,12 @@
 Twig Templates
 ==============
 
-We see good reasons for replacing the .phtml templates used for earlier Magento
+This is a proposal to replace the .phtml templates used for earlier Magento
 extensions with a templating engine called Twig.
 
 The move to a templating engine will help enforce a desirable isolation of the
 presentation layer from domain and business logic and data, which is a
-fundamental goal of our new extension approach. Current .phtml templates allow
+fundamental goal of Extension Model Improvements. Current .phtml templates allow
 inclusion of business logic and SQL queries within the presentation layer, which
 can create serious challenges for maintenance and upgrades. We see the following
 additional benefits from separating the presentation logic:
@@ -49,23 +49,21 @@ Learn more about [Twig][2].
 Twig vs. PHTML
 --------------
 
-
-
 -   Twig has cleaner code: you can focus on what your page does without needing
     to also parse the business logic embedded in the .phtml code
 
--   With the separation of font-end concerns, your front-end developer can focus
-    completely on the page look-and-feel.
+-   The separation of font-end concerns lets your front-end developer focus
+    completely on page look-and-feel.
 
 -   Twig is integrated with IDEs. Twig files are handled cleanly by IDEs,
     ensuring that your front-end developer is able to spot mistakes in this file
     with the help of the IDE instead of repeatedly running to code to see if
     anything is wrong. This will result in more productivity.
 
--   Code that intuitively makes sense: compare the line “\$this-\>__..” with
+-   Twig's code intuitively makes sense. Compare the line “\$this-\>__..” with
     “..|translate”. Both of them do the same thing but the latter instantly
-    tells you what is going on whereas the former will require a few lookups in
-    code.
+    tells you what is going on, while understanding the former will require a
+    few lookups in code.
 
 ### Before and After
 
@@ -105,7 +103,7 @@ How to Get Started
 ------------------
 
 This section describes how to begin using Twig in your existing Magento
-extension or to build your new Magento extension with Twig. Our reference
+extension, and how to build your new Magento extension with Twig. Our reference
 implementation is in the Mage/Catalog extension.
 
 -   Start by looking at our sample implementation in Mage/Catalog. You will see
@@ -133,13 +131,13 @@ available to it. This section will try to show you how.
 
 [1]: <#before-after>
 
--   <i>option</i> (instance of Mage_Catalog_Model_Product_Option): This is
+-   \*option\* (instance of Mage_Catalog_Model_Product_Option): This is
     available to the block class associated with this template, i.e.
     Mage_Catalog_Block_Product_View_Options_Type_Date. Any methods accessible to
     the "option" instance are callable within the template, such as
-    <b>isRequired<b>.
+    \*isRequired\*.
 
--   <i>createBlock/getSelectFromToHtml/viewFileUrl</i>: These are defined as a
+-   \*createBlock / getSelectFromToHtml / viewFileUrl\*: These are defined as a
     Twig function in Mage_Core_Block_Template_Engine_TwigExtension; the latter
     is part of the template engine subsystem included with Magento 2.
     Incidentally, this template engine subsystem is responsible for ensuring
