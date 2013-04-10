@@ -350,7 +350,7 @@ div.sidebar-module ul ul li span {
 }
 
 #footer .upper_footer {
-  min-height: 160px;
+  min-height: 80px;
   overflow: hidden;
   background: url(../images/bg_footer_top.png) #f8f8f8 repeat-x;
 }
@@ -359,7 +359,7 @@ div.sidebar-module ul ul li span {
   height:130px;
   width:164px;
   float:left;
-  background: url(../images/blacktocat.png) top left no-repeat;
+  background: url(../images/mage_logo.png) top left no-repeat;
   text-indent: -5000px;
   margin: 15px 20px 0 0;
 }
