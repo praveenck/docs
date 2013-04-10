@@ -33,13 +33,15 @@
       <div class="content">
     <h1 id="service-idl">Service IDL</h1>
 
-<p>The proposed new architecture consolidates all of an extension’s business into a
-service layer. Presented here is an Interface Definition Language specification
-that describes the services exposed through the service layer. An IDL formally
-describes the functionality a service provides (methods, inputs and outputs of
-methods) without exposing the details of how that functionality is implemented.</p>
+<p>This Interface Definition Language specification describes the interfaces and
+methods that a service implementation will expose to an extension’s templates,
+blocks, controllers and web services.</p>
 
-<p>Some advantages of using an IDL:</p>
+<p>The data structure used in the payloads is defined in an XSD. Metadata about a
+service call, such as version, required permissions, and locations of XSDs, are
+carried by PHP annotations. Data structure and metadata are also specified.</p>
+
+<p>Some advantages of using an IDL to define service implementations:</p>
 
 <ul>
 <li>
@@ -52,18 +54,11 @@ issues during upgrades.</p>
 running in the Magento instance at the same time, increasing backward
 compatibility.</p>
   </li>
+  <li>
+    <p>To support REST and SOAP Web APIs, WADL and WSDL will be auto-generated from
+the IDL.</p>
+  </li>
 </ul>
-<h2 id="overview">Overview</h2>
-
-<p>This document specifies the Interface Definition Language (IDL) that describes
-the operations permitted by the Service layer. To support REST and SOAP Web
-APIs, WADL and WSDL will be auto-generated from the IDL.</p>
-
-<p>The data structure used in the payloads is defined in an XSD. The metadata about
-a service call, such as version, required permissions, and locations of XSDs,
-are carried by PHP annotations. Data structure and metadata are described in
-what follows.</p>
-
 <h2 id="php-annotations">PHP Annotations</h2>
 
 <table style="border:1px solid black;border-collapse:collapse;">
@@ -105,9 +100,8 @@ what follows.</p>
 </table>
 <h2 id="service-calls">Service Calls</h2>
 
-<p>A service operation is implemented as a class method. The class maps to the
-service via the requirement that operations from a service be grouped into a
-single class.</p>
+<p>A service operation is implemented as a class method. A class is mapped to a
+service because all operations from a service are grouped into a single class.</p>
 
 <p><strong>Example of a service call</strong></p>
 
@@ -143,21 +137,19 @@ class Mage_Catalog_Service_Product
 </code></pre>
 
 <p>Here, the input data structure is identified in the @Consumes annotation as
-belonging to the &lt;id&gt; element in <a href="https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/etc/resources/product/item/input.xsd">input.xsd</a>, and the
-output data structure is identified in the @Produces annotation as belonging to
-the &lt;product&gt; element in <a href="https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/etc/resources/product/item/output.xsd">output.xsd</a>. The shipping/consumerux.xsd file is
-shown below.</p>
+belonging to the &lt;id&gt; element in <a href="https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/etc/resources/product/item/input.xsd">input.xsd</a>, and the output data structure
+is identified in the @Produces annotation as belonging to the &lt;product&gt;
+element in <a href="https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/etc/resources/product/item/output.xsd">output.xsd</a>. The shipping/consumerux.xsd file is shown below.</p>
 
 <p>The PHP function receives an associative array ($id function parameter)
-reflecting the structure described by the element &lt;id&gt;. It returns
-another associative array reflecting the structure described by the element
-&lt;product&gt;.</p>
+reflecting the structure described by the element &lt;id&gt;. It returns another
+associative array reflecting the structure described by the element &lt;product&gt;.</p>
 
 <h2 id="xsd">XSD</h2>
 
-<p>The XSD is used to describe the data structure passed in during the service method call as
-well as the returned data. During runtime data is stored into a associative
-array.</p>
+<p>The XSD is used to describe the data structure passed in during the service
+method call as well as the returned data. During runtime data is stored into a
+associative array.</p>
 
 <p><strong><a href="https://github.com/magento/magento2/blob/master/app/code/Mage/Catalog/etc/resources/product/item/input.xsd">etc/resources/product/item/input.xsd</a></strong></p>
 
@@ -196,7 +188,8 @@ array.</p>
 
 </code></pre>
 
-<p>The sample input associative array that is passed to the service method and the sample output associative array returned by the service method are shown below.</p>
+<p>The sample input associative array that is passed to the service method and the
+sample output associative array returned by the service method are shown below.</p>
 
 <p><strong>Sample input</strong></p>
 

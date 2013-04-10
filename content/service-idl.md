@@ -166,22 +166,244 @@ associative array.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The sample input associative array that is passed to the service method and the
-sample output associative array returned by the service method are shown below.
+The sample output associative array returned by the service method is shown below. The input is an integer id (e.g: 1234).
 
-**Sample input**
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Sample output**
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-
+Array
+(
+    [StoreId] => 1
+    [EntityId] => 1
+    [EntityTypeId] => 4
+    [AttributeSetId] => 4
+    [TypeId] => simple
+    [Sku] => Simple1
+    [HasOptions] => 0
+    [RequiredOptions] => 0
+    [CreatedAt] => 2013-03-20 16:35:27
+    [UpdatedAt] => 2013-04-04 18:31:26
+    [Description] => 
+    [ShortDescription] => 
+    [MetaKeyword] => Simple1,Simple1
+    [CustomLayoutUpdate] => 
+    [Status] => 1
+    [IsRecurring] => 0
+    [Visibility] => 4
+    [QuantityAndStockStatus] => Array
+        (
+            [is_in_stock] => 1
+            [qty] => 999.0000
+        )
+ 
+    [TaxClassId] => 2
+    [EnableGooglecheckout] => 1
+    [Name] => Simple1
+    [MetaTitle] => Simple1
+    [MetaDescription] => Simple1 
+    [Image] => /e/b/ebay.png
+    [SmallImage] => /e/b/ebay.png
+    [Thumbnail] => /e/b/ebay.png
+    [MediaGallery] => Array
+        (
+            [images] => Array
+                (
+                    [0] => Array
+                        (
+                            [value_id] => 1
+                            [file] => /e/b/ebay.png
+                            [label] => ebay.png
+                            [position] => 1
+                            [disabled] => 0
+                            [label_default] => ebay.png
+                            [position_default] => 1
+                            [disabled_default] => 0
+                        )
+ 
+                )
+ 
+            [values] => Array
+                (
+                )
+ 
+        )
+ 
+    [UrlKey] => simple1
+    [UrlPath] => simple1.html
+    [CustomDesign] => 
+    [PageLayout] => 
+    [OptionsContainer] => container2
+    [ImageLabel] => ebay.png
+    [SmallImageLabel] => ebay.png
+    [ThumbnailLabel] => ebay.png
+    [CountryOfManufacture] => 
+    [MsrpEnabled] => 2
+    [MsrpDisplayActualPriceType] => 4
+    [GiftMessageAvailable] => 
+    [GiftWrappingAvailable] => 
+    [IsReturnable] => 2
+    [Price] => 12.0000
+    [SpecialPrice] => 
+    [Weight] => 
+    [TierPrice] => Array
+        (
+            [32000-2] => Array
+                (
+                    [price_id] => 1
+                    [website_id] => 1
+                    [all_groups] => 1
+                    [cust_group] => 32000
+                    [price] => 11
+                    [price_qty] => 2.0000
+                    [website_price] => 11
+                )
+ 
+        )
+ 
+    [Msrp] => 
+    [GiftWrappingPrice] => 
+    [SpecialFromDate] => 
+    [SpecialToDate] => 
+    [NewsFromDate] => 
+    [NewsToDate] => 
+    [CustomDesignFrom] => 
+    [CustomDesignTo] => 
+    [GroupPrice] => Array
+        (
+        )
+ 
+    [GroupPriceChanged] => 0
+    [TierPriceChanged] => 0
+    [CategoryIds] => Array
+        (
+        )
+ 
+    [IsInStock] => 1
+    [IsSalable] => 1
+    [WebsiteIds] => Array
+        (
+            [0] => 1
+        )
+ 
+    [name] => Simple1
+    [sku] => Simple1
+    [description] => 
+    [shortDescription] => 
+    [price] => Array
+        (
+            [amount] => 12.0000
+            [currencyCode] => USD
+            [formattedPrice] => $12.00
+        )
+ 
+    [weight] => 
+    [metaTitle] => Simple1
+    [metaKeyword] => Simple1,Simple1
+    [metaDescription] => Simple1 
+    [images] => Array
+        (
+            [image] => /e/b/ebay.png
+            [smallImage] => /e/b/ebay.png
+            [thumbnail] => /e/b/ebay.png
+        )
+ 
+    [mediaGallery] => Array
+        (
+            [images] => Array
+                (
+                    [0] => Array
+                        (
+                            [image] => Array
+                                (
+                                    [valueId] => 1
+                                    [file] => /e/b/ebay.png
+                                    [label] => ebay.png
+                                    [position] => 1
+                                    [isDisabled] => 
+                                    [labelDefault] => ebay.png
+                                    [positionDefault] => 1
+                                    [isDisabledDefault] => 
+                                    [url] => http://vagrant.vm/api/pub/media/catalog/product/e/b/ebay.png
+                                    [id] => 1
+                                    [path] => /var/www/api/pub/media/catalog/product/e/b/ebay.png
+                                )
+ 
+                        )
+ 
+                )
+ 
+        )
+ 
+    [groupPrice] => Array
+        (
+            [amount] => 12.0000
+            [currencyCode] => USD
+            [formattedPrice] => $12.00
+        )
+ 
+    [tierPrice] => Array
+        (
+            [0] => Array
+                (
+                    [tierPrice] => Array
+                        (
+                            [priceId] => 1
+                            [websiteId] => 1
+                            [allGroups] => 1
+                            [customerGroup] => 32000
+                            [price] => Array
+                                (
+                                    [amount] => 11
+                                    [currencyCode] => USD
+                                    [formattedPrice] => $11.00
+                                )
+ 
+                            [priceQty] => 2.0000
+                            [websitePrice] => Array
+                                (
+                                    [amount] => 11
+                                    [currencyCode] => USD
+                                    [formattedPrice] => $11.00
+                                )
+ 
+                        )
+ 
+                )
+ 
+        )
+ 
+    [status] => 1
+    [urlKey] => simple1
+    [urlPath] => simple1.html
+    [isRecurring] => 0
+    [visibility] => 4
+    [categoryIds] => Array
+        (
+        )
+ 
+    [optionsContainer] => container2
+    [requiredOptions] => 0
+    [hasOptions] => 0
+    [createdAt] => 2013-03-20 16:35:27
+    [updatedAt] => 2013-04-04 18:31:26
+    [msrpEnabled] => 2
+    [msrpDisplayActualPriceType] => 4
+    [taxClassId] => 2
+    [isReturnable] => 2
+    [isInStock] => 1
+    [qty] => 999.0000
+    [websiteIds] => Array
+        (
+            [0] => Array
+                (
+                    [id] => 1
+                )
+ 
+        )
+ 
+)
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
