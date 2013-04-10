@@ -188,20 +188,242 @@ associative array.</p>
 
 </code></pre>
 
-<p>The sample input associative array that is passed to the service method and the
-sample output associative array returned by the service method are shown below.</p>
-
-<p><strong>Sample input</strong></p>
-
-<pre><code>
-
-
-</code></pre>
+<p>The sample output associative array returned by the service method is shown below. The input is an integer id (e.g: 1234).</p>
 
 <p><strong>Sample output</strong></p>
 
 <pre><code>
-
+Array
+(
+    [StoreId] =&gt; 1
+    [EntityId] =&gt; 1
+    [EntityTypeId] =&gt; 4
+    [AttributeSetId] =&gt; 4
+    [TypeId] =&gt; simple
+    [Sku] =&gt; Simple1
+    [HasOptions] =&gt; 0
+    [RequiredOptions] =&gt; 0
+    [CreatedAt] =&gt; 2013-03-20 16:35:27
+    [UpdatedAt] =&gt; 2013-04-04 18:31:26
+    [Description] =&gt; 
+    [ShortDescription] =&gt; 
+    [MetaKeyword] =&gt; Simple1,Simple1
+    [CustomLayoutUpdate] =&gt; 
+    [Status] =&gt; 1
+    [IsRecurring] =&gt; 0
+    [Visibility] =&gt; 4
+    [QuantityAndStockStatus] =&gt; Array
+        (
+            [is_in_stock] =&gt; 1
+            [qty] =&gt; 999.0000
+        )
+ 
+    [TaxClassId] =&gt; 2
+    [EnableGooglecheckout] =&gt; 1
+    [Name] =&gt; Simple1
+    [MetaTitle] =&gt; Simple1
+    [MetaDescription] =&gt; Simple1 
+    [Image] =&gt; /e/b/ebay.png
+    [SmallImage] =&gt; /e/b/ebay.png
+    [Thumbnail] =&gt; /e/b/ebay.png
+    [MediaGallery] =&gt; Array
+        (
+            [images] =&gt; Array
+                (
+                    [0] =&gt; Array
+                        (
+                            [value_id] =&gt; 1
+                            [file] =&gt; /e/b/ebay.png
+                            [label] =&gt; ebay.png
+                            [position] =&gt; 1
+                            [disabled] =&gt; 0
+                            [label_default] =&gt; ebay.png
+                            [position_default] =&gt; 1
+                            [disabled_default] =&gt; 0
+                        )
+ 
+                )
+ 
+            [values] =&gt; Array
+                (
+                )
+ 
+        )
+ 
+    [UrlKey] =&gt; simple1
+    [UrlPath] =&gt; simple1.html
+    [CustomDesign] =&gt; 
+    [PageLayout] =&gt; 
+    [OptionsContainer] =&gt; container2
+    [ImageLabel] =&gt; ebay.png
+    [SmallImageLabel] =&gt; ebay.png
+    [ThumbnailLabel] =&gt; ebay.png
+    [CountryOfManufacture] =&gt; 
+    [MsrpEnabled] =&gt; 2
+    [MsrpDisplayActualPriceType] =&gt; 4
+    [GiftMessageAvailable] =&gt; 
+    [GiftWrappingAvailable] =&gt; 
+    [IsReturnable] =&gt; 2
+    [Price] =&gt; 12.0000
+    [SpecialPrice] =&gt; 
+    [Weight] =&gt; 
+    [TierPrice] =&gt; Array
+        (
+            [32000-2] =&gt; Array
+                (
+                    [price_id] =&gt; 1
+                    [website_id] =&gt; 1
+                    [all_groups] =&gt; 1
+                    [cust_group] =&gt; 32000
+                    [price] =&gt; 11
+                    [price_qty] =&gt; 2.0000
+                    [website_price] =&gt; 11
+                )
+ 
+        )
+ 
+    [Msrp] =&gt; 
+    [GiftWrappingPrice] =&gt; 
+    [SpecialFromDate] =&gt; 
+    [SpecialToDate] =&gt; 
+    [NewsFromDate] =&gt; 
+    [NewsToDate] =&gt; 
+    [CustomDesignFrom] =&gt; 
+    [CustomDesignTo] =&gt; 
+    [GroupPrice] =&gt; Array
+        (
+        )
+ 
+    [GroupPriceChanged] =&gt; 0
+    [TierPriceChanged] =&gt; 0
+    [CategoryIds] =&gt; Array
+        (
+        )
+ 
+    [IsInStock] =&gt; 1
+    [IsSalable] =&gt; 1
+    [WebsiteIds] =&gt; Array
+        (
+            [0] =&gt; 1
+        )
+ 
+    [name] =&gt; Simple1
+    [sku] =&gt; Simple1
+    [description] =&gt; 
+    [shortDescription] =&gt; 
+    [price] =&gt; Array
+        (
+            [amount] =&gt; 12.0000
+            [currencyCode] =&gt; USD
+            [formattedPrice] =&gt; $12.00
+        )
+ 
+    [weight] =&gt; 
+    [metaTitle] =&gt; Simple1
+    [metaKeyword] =&gt; Simple1,Simple1
+    [metaDescription] =&gt; Simple1 
+    [images] =&gt; Array
+        (
+            [image] =&gt; /e/b/ebay.png
+            [smallImage] =&gt; /e/b/ebay.png
+            [thumbnail] =&gt; /e/b/ebay.png
+        )
+ 
+    [mediaGallery] =&gt; Array
+        (
+            [images] =&gt; Array
+                (
+                    [0] =&gt; Array
+                        (
+                            [image] =&gt; Array
+                                (
+                                    [valueId] =&gt; 1
+                                    [file] =&gt; /e/b/ebay.png
+                                    [label] =&gt; ebay.png
+                                    [position] =&gt; 1
+                                    [isDisabled] =&gt; 
+                                    [labelDefault] =&gt; ebay.png
+                                    [positionDefault] =&gt; 1
+                                    [isDisabledDefault] =&gt; 
+                                    [url] =&gt; http://vagrant.vm/api/pub/media/catalog/product/e/b/ebay.png
+                                    [id] =&gt; 1
+                                    [path] =&gt; /var/www/api/pub/media/catalog/product/e/b/ebay.png
+                                )
+ 
+                        )
+ 
+                )
+ 
+        )
+ 
+    [groupPrice] =&gt; Array
+        (
+            [amount] =&gt; 12.0000
+            [currencyCode] =&gt; USD
+            [formattedPrice] =&gt; $12.00
+        )
+ 
+    [tierPrice] =&gt; Array
+        (
+            [0] =&gt; Array
+                (
+                    [tierPrice] =&gt; Array
+                        (
+                            [priceId] =&gt; 1
+                            [websiteId] =&gt; 1
+                            [allGroups] =&gt; 1
+                            [customerGroup] =&gt; 32000
+                            [price] =&gt; Array
+                                (
+                                    [amount] =&gt; 11
+                                    [currencyCode] =&gt; USD
+                                    [formattedPrice] =&gt; $11.00
+                                )
+ 
+                            [priceQty] =&gt; 2.0000
+                            [websitePrice] =&gt; Array
+                                (
+                                    [amount] =&gt; 11
+                                    [currencyCode] =&gt; USD
+                                    [formattedPrice] =&gt; $11.00
+                                )
+ 
+                        )
+ 
+                )
+ 
+        )
+ 
+    [status] =&gt; 1
+    [urlKey] =&gt; simple1
+    [urlPath] =&gt; simple1.html
+    [isRecurring] =&gt; 0
+    [visibility] =&gt; 4
+    [categoryIds] =&gt; Array
+        (
+        )
+ 
+    [optionsContainer] =&gt; container2
+    [requiredOptions] =&gt; 0
+    [hasOptions] =&gt; 0
+    [createdAt] =&gt; 2013-03-20 16:35:27
+    [updatedAt] =&gt; 2013-04-04 18:31:26
+    [msrpEnabled] =&gt; 2
+    [msrpDisplayActualPriceType] =&gt; 4
+    [taxClassId] =&gt; 2
+    [isReturnable] =&gt; 2
+    [isInStock] =&gt; 1
+    [qty] =&gt; 999.0000
+    [websiteIds] =&gt; Array
+        (
+            [0] =&gt; Array
+                (
+                    [id] =&gt; 1
+                )
+ 
+        )
+ 
+)
 
 </code></pre>
       </div>
