@@ -1,4 +1,4 @@
-{:	data{0I"/:ET{:default{	:	lastI"⁄2<!DOCTYPE html>
+{:	data{0I"/:ET{:default{	:	lastI"3<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -21,7 +21,7 @@
           <ul class="nav">
 <li><a href="./">Home</a></li>
             <li><a href="vmimage">VM Image</a></li>
-            <li><a href="https://getsatisfaction.com/magento-2-prerelease">Feedback</a></li>
+            <li><a href="https://getsatisfaction.com/magento-2-prerelease/topics" target="_blank"><font color="#FF0A00">LEAVE FEEDBACK HERE!</font></a></li>
           </ul>
 </div>
       </div>
@@ -637,7 +637,7 @@ and business logic implemented and working together.</p>
 <p>Your extension can now be configured. To set up configuration, you create static
 and dynamic option lists by editing a system.xml file. Learn more about setting
 up option lists here: <a href="http://praveenck.github.io/docs/option-list/">Extension Configuration</a></p>;T:	post@
-I"/option-list/;T{;{	;I"¢+<!DOCTYPE html>
+I"/option-list/;T{;{	;I"‚+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -660,7 +660,7 @@ I"/option-list/;T{;{	;I"¢+<!DOCTYPE html>
           <ul class="nav">
 <li><a href="../">Home</a></li>
             <li><a href="../vmimage">VM Image</a></li>
-            <li><a href="https://getsatisfaction.com/magento-2-prerelease">Feedback</a></li>
+            <li><a href="https://getsatisfaction.com/magento-2-prerelease/topics" target="_blank"><font color="#FF0A00">LEAVE FEEDBACK HERE!</font></a></li>
           </ul>
 </div>
       </div>
@@ -1472,7 +1472,7 @@ groups: {
 &lt;option value="2"&gt;Wholesale&lt;/option&gt;
 &lt;option value="3"&gt;Retailer&lt;/option&gt;
 
-</code></pre>;T;@I"/service-idl/;T{;{	;I"·@<!DOCTYPE html>
+</code></pre>;T;@I"/service-idl/;T{;{	;I"!A<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -1495,7 +1495,7 @@ groups: {
           <ul class="nav">
 <li><a href="../">Home</a></li>
             <li><a href="../vmimage">VM Image</a></li>
-            <li><a href="https://getsatisfaction.com/magento-2-prerelease">Feedback</a></li>
+            <li><a href="https://getsatisfaction.com/magento-2-prerelease/topics" target="_blank"><font color="#FF0A00">LEAVE FEEDBACK HERE!</font></a></li>
           </ul>
 </div>
       </div>
@@ -2762,7 +2762,7 @@ Array
  
 )
 
-</code></pre>;T;@I"/service-impl/;T{;{	;I"Xò<!DOCTYPE html>
+</code></pre>;T;@I"/service-impl/;T{;{	;I"òò<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -2785,7 +2785,7 @@ Array
           <ul class="nav">
 <li><a href="../">Home</a></li>
             <li><a href="../vmimage">VM Image</a></li>
-            <li><a href="https://getsatisfaction.com/magento-2-prerelease">Feedback</a></li>
+            <li><a href="https://getsatisfaction.com/magento-2-prerelease/topics" target="_blank"><font color="#FF0A00">LEAVE FEEDBACK HERE!</font></a></li>
           </ul>
 </div>
       </div>
@@ -5242,7 +5242,7 @@ method.</p>
 <td style="border:1px solid black;"> Contains the IDs of the upsell products. <b>Optional</b>. </td>
 <td style="border:1px solid black;"> 1 </td>
 </tr>
-</table>;T;@I"/twig/;T{;{	;I"*<!DOCTYPE html>
+</table>;T;@I"/twig/;T{;{	;I"ı*<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -5265,7 +5265,7 @@ method.</p>
           <ul class="nav">
 <li><a href="../">Home</a></li>
             <li><a href="../vmimage">VM Image</a></li>
-            <li><a href="https://getsatisfaction.com/magento-2-prerelease">Feedback</a></li>
+            <li><a href="https://getsatisfaction.com/magento-2-prerelease/topics" target="_blank"><font color="#FF0A00">LEAVE FEEDBACK HERE!</font></a></li>
           </ul>
 </div>
       </div>
@@ -5454,6 +5454,8 @@ bytecache scheme.</p>
 to your development efforts on Magento. Our aim is to make development fun for
 you again by separating front-end design from back-end work and ensuring that
 you are looking at clean, easy-to-read, and easy-to-debug code.</p>
+
+<p>Please leave any comments/feedback about the use of Twig in Magento <a href="https://getsatisfaction.com/magento-2-prerelease/topics">here</a></p>
       </div>
 
     <div id="js-sidebar" class="sidebar-shell">
@@ -5514,7 +5516,7 @@ you are looking at clean, easy-to-read, and easy-to-debug code.</p>
     </script>
 </body>
 </html>
-;T;	I"¢Twig Templates
+;T;	I"1Twig Templates
 ==============
 
 This is a proposal to replace the .phtml templates used for earlier Magento
@@ -5681,8 +5683,12 @@ We hope you can see some of the flexibility and power the use of Twig will bring
 to your development efforts on Magento. Our aim is to make development fun for
 you again by separating front-end design from back-end work and ensuring that
 you are looking at clean, easy-to-read, and easy-to-debug code.
+
+Please leave any comments/feedback about the use of Twig in Magento [here][9]
+
+[9]: <https://getsatisfaction.com/magento-2-prerelease/topics>
 ;T;
-I" <h1 id="twig-templates">Twig Templates</h1>
+I"ó<h1 id="twig-templates">Twig Templates</h1>
 
 <p>This is a proposal to replace the .phtml templates used for earlier Magento
 extensions with a templating engine called Twig.</p>
@@ -5854,7 +5860,9 @@ bytecache scheme.</p>
 <p>We hope you can see some of the flexibility and power the use of Twig will bring
 to your development efforts on Magento. Our aim is to make development fun for
 you again by separating front-end design from back-end work and ensuring that
-you are looking at clean, easy-to-read, and easy-to-debug code.</p>;T;@"I"/web-api/;T{;{	;I"v<!DOCTYPE html>
+you are looking at clean, easy-to-read, and easy-to-debug code.</p>
+
+<p>Please leave any comments/feedback about the use of Twig in Magento <a href="https://getsatisfaction.com/magento-2-prerelease/topics">here</a></p>;T;@"I"/web-api/;T{;{	;I"∂<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -5877,7 +5885,7 @@ you are looking at clean, easy-to-read, and easy-to-debug code.</p>;T;@"I"/w
           <ul class="nav">
 <li><a href="../">Home</a></li>
             <li><a href="../vmimage">VM Image</a></li>
-            <li><a href="https://getsatisfaction.com/magento-2-prerelease">Feedback</a></li>
+            <li><a href="https://getsatisfaction.com/magento-2-prerelease/topics" target="_blank"><font color="#FF0A00">LEAVE FEEDBACK HERE!</font></a></li>
           </ul>
 </div>
       </div>
@@ -6166,7 +6174,7 @@ level1.level2.sort
 
 ))
 
-</code></pre>;T;@(I"/static/css/960.css/;T{;{ I"/static/css/reset.css/;T{;{ I"!/static/css/uv_active4d.css/;T{;{ I"/static/favicon.ico/;T{;{ I"&/static/images/background-v2.png/;T{;{ I")/static/images/background-white.png/;T{;{ I"'/static/images/logo_developer.png/;T{;{ I"!/static/images/nav-rule.png/;T{;{ I"*/static/shared/css/documentation.css/;T{;{ I"%/static/shared/css/pygments.css/;T{;{ I",/static/shared/images/active-arrow.png/;T{;{ I"-/static/shared/images/background-v2.png/;T{;{ I"0/static/shared/images/background-white.png/;T{;{ I""/static/shared/images/bg.png/;T{;{ I"0/static/shared/images/bg_footer_bottom.png/;T{;{ I"-/static/shared/images/bg_footer_top.png/;T{;{ I"*/static/shared/images/blacktocat.png/;T{;{ I"*/static/shared/images/blacktocat.svg/;T{;{ I"+/static/shared/images/crud-sprite.png/;T{;{ I"0/static/shared/images/dropdown_sprites.jpg/;T{;{ I"-/static/shared/images/expand-arrows.png/;T{;{ I"+/static/shared/images/footer-logo.png/;T{;{ I"+/static/shared/images/footer-logo.svg/;T{;{ I"+/static/shared/images/footer_logo.png/;T{;{ I"(/static/shared/images/nav-rule.png/;T{;{ I"//static/shared/images/next_step_arrow.gif/;T{;{ I"%/static/shared/images/qmark.png/;T{;{ I"./static/shared/images/rackspace_logo.png/;T{;{ I"(/static/shared/js/documentation.js/;T{;{ I"!/static/shared/js/jquery.js/;T{;{ I" /static/images/ExtArch.jpg/;T{;{ I"4/static/shared/images/background-white-old.png/;T{;{ I" /static/images/ExtArch.png/;T{;{ I"*/static/images/archExtensibility.png/;T{;{ I"/webhooks/;T{;{	;I"X<!DOCTYPE html>
+</code></pre>;T;@(I"/static/css/960.css/;T{;{ I"/static/css/reset.css/;T{;{ I"!/static/css/uv_active4d.css/;T{;{ I"/static/favicon.ico/;T{;{ I"&/static/images/background-v2.png/;T{;{ I")/static/images/background-white.png/;T{;{ I"'/static/images/logo_developer.png/;T{;{ I"!/static/images/nav-rule.png/;T{;{ I"*/static/shared/css/documentation.css/;T{;{ I"%/static/shared/css/pygments.css/;T{;{ I",/static/shared/images/active-arrow.png/;T{;{ I"-/static/shared/images/background-v2.png/;T{;{ I"0/static/shared/images/background-white.png/;T{;{ I""/static/shared/images/bg.png/;T{;{ I"0/static/shared/images/bg_footer_bottom.png/;T{;{ I"-/static/shared/images/bg_footer_top.png/;T{;{ I"*/static/shared/images/blacktocat.png/;T{;{ I"*/static/shared/images/blacktocat.svg/;T{;{ I"+/static/shared/images/crud-sprite.png/;T{;{ I"0/static/shared/images/dropdown_sprites.jpg/;T{;{ I"-/static/shared/images/expand-arrows.png/;T{;{ I"+/static/shared/images/footer-logo.png/;T{;{ I"+/static/shared/images/footer-logo.svg/;T{;{ I"+/static/shared/images/footer_logo.png/;T{;{ I"(/static/shared/images/nav-rule.png/;T{;{ I"//static/shared/images/next_step_arrow.gif/;T{;{ I"%/static/shared/images/qmark.png/;T{;{ I"./static/shared/images/rackspace_logo.png/;T{;{ I"(/static/shared/js/documentation.js/;T{;{ I"!/static/shared/js/jquery.js/;T{;{ I" /static/images/ExtArch.jpg/;T{;{ I"4/static/shared/images/background-white-old.png/;T{;{ I" /static/images/ExtArch.png/;T{;{ I"*/static/images/archExtensibility.png/;T{;{ I"/webhooks/;T{;{	;I"ò<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -6189,7 +6197,7 @@ level1.level2.sort
           <ul class="nav">
 <li><a href="../">Home</a></li>
             <li><a href="../vmimage">VM Image</a></li>
-            <li><a href="https://getsatisfaction.com/magento-2-prerelease">Feedback</a></li>
+            <li><a href="https://getsatisfaction.com/magento-2-prerelease/topics" target="_blank"><font color="#FF0A00">LEAVE FEEDBACK HERE!</font></a></li>
           </ul>
 </div>
       </div>
@@ -6261,7 +6269,7 @@ level1.level2.sort
 </body>
 </html>
 ;T;	I"# Webhooks - Coming Soon!;T;
-I"A<h1 id="webhooks---coming-soon">Webhooks - Coming Soon!</h1>;T;@èI"/vmimage/;T{;{	;I"; <!DOCTYPE html>
+I"A<h1 id="webhooks---coming-soon">Webhooks - Coming Soon!</h1>;T;@èI"/vmimage/;T{;{	;I"{ <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -6284,7 +6292,7 @@ I"A<h1 id="webhooks---coming-soon">Webhooks - Coming Soon!</h1>;T;@èI"/vmim
           <ul class="nav">
 <li><a href="../">Home</a></li>
             <li><a href=".">VM Image</a></li>
-            <li><a href="https://getsatisfaction.com/magento-2-prerelease">Feedback</a></li>
+            <li><a href="https://getsatisfaction.com/magento-2-prerelease/topics" target="_blank"><font color="#FF0A00">LEAVE FEEDBACK HERE!</font></a></li>
           </ul>
 </div>
       </div>

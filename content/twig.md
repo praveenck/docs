@@ -165,3 +165,7 @@ We hope you can see some of the flexibility and power the use of Twig will bring
 to your development efforts on Magento. Our aim is to make development fun for
 you again by separating front-end design from back-end work and ensuring that
 you are looking at clean, easy-to-read, and easy-to-debug code.
+
+Please leave any comments/feedback about the use of Twig in Magento [here][9]
+
+[9]: <https://getsatisfaction.com/magento-2-prerelease/topics>
