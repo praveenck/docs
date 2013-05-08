@@ -182,8 +182,10 @@ a img {
 ------------------------------------------------------------------------------*/
 
 div.sidebar-shell {
-  position: relative;
+  /*position: relative;*/
+  position: fixed;
   float: right;
+  right: 20em;
   margin: 35px 0 0;
 }
 
